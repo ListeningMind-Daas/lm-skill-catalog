@@ -6,12 +6,16 @@ import Icon from "./ui/Icon";
 
 type Meta = { seed: string; gl: string; date: string; server: string; credits: number; calls: string };
 
-/** public/examples/<스킬>.html 이 있으면 그 스킬의 산출물 예시를 보인다 (빌드 시점 확인). */
+/**
+ * public/examples/<스킬>/index.html 이 있으면 그 스킬의 산출물 예시를 보인다 (빌드 시점 확인).
+ * 주소는 /examples/<스킬>/ — Vercel(Next.js 프리셋)은 public 의 .html 을 확장자 없는 주소로만 내주고,
+ * 로컬 정적 서버는 폴더 주소에서 index.html 을 내준다. 두 곳에서 같은 주소가 되게 폴더형으로 둔다(2026-09-29 첫 배포에서 확인).
+ */
 export function exampleOf(folder: string): { src: string; meta: Meta | null } | null {
-  const file = path.join(process.cwd(), "public", "examples", `${folder}.html`);
+  const file = path.join(process.cwd(), "public", "examples", folder, "index.html");
   if (!fs.existsSync(file)) return null;
   const meta = (examples as Record<string, unknown>)[folder] as Meta | undefined;
-  return { src: `/examples/${folder}.html`, meta: meta ?? null };
+  return { src: `/examples/${folder}/`, meta: meta ?? null };
 }
 
 /**

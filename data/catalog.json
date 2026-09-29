@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-29T14:33:36+00:00",
+ "generatedAt": "2026-09-29T14:41:00+00:00",
  "groups": [
   {
    "id": "reports",
@@ -15,7 +15,7 @@
    "source": {
     "kind": "local",
     "repo": "lm-agent-plugins · LM Reports",
-    "commit": "1f7579e",
+    "commit": "d715fbf",
     "version": null,
     "url": null,
     "private": null,

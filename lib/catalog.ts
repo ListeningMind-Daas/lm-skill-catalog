@@ -95,7 +95,7 @@ export function toCard(s: Skill): CardSkill {
     kitVersion: kitVersionOf(s),
     connectors: s.connectors,
     landing: s.landing,
-    hasExample: fs.existsSync(path.join(process.cwd(), "public", "examples", `${s.folder}.html`)),
+    hasExample: fs.existsSync(path.join(process.cwd(), "public", "examples", s.folder, "index.html")),
     bandLabel: band,
     search: [s.name, s.landing?.title ?? "", band ?? "", s.description, s.triggers.join(" "), s.connectors.join(" "), s.group]
       .join(" ")
