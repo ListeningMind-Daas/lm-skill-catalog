@@ -1,0 +1,22 @@
+{
+  "package": "lm-skill-catalog",
+  "version": "0.1.0",
+  "dev_commit": "9d0a5fb",
+  "suites": [
+    "reports(4)",
+    "lm-skills(13)"
+  ],
+  "sources": {
+    "reports": {
+      "repo": "lm-agent-plugins · LM Reports",
+      "commit": "9d0a5fb",
+      "version": null
+    },
+    "lm-skills": {
+      "repo": "ListeningMind-Daas/lm-skills",
+      "commit": "56a1f6a",
+      "version": "1.6.0"
+    }
+  },
+  "catalog_generated_at": "2026-09-29T14:30:58+00:00"
+}

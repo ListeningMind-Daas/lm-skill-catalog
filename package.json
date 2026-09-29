@@ -1,0 +1,29 @@
+{
+  "name": "skill-catalog-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "catalog": "node scripts/prebuild.mjs",
+    "predev": "npm run catalog",
+    "dev": "next dev -p ${PORT:-3100}",
+    "prebuild": "npm run catalog",
+    "build": "next build",
+    "start": "python3 -m http.server ${PORT:-3100} -d out",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run catalog && npm run typecheck && next build"
+  },
+  "dependencies": {
+    "marked": "14.1.2",
+    "next": "14.2.35",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.0",
+    "@types/react": "18.3.3",
+    "autoprefixer": "10.4.20",
+    "postcss": "8.4.49",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.5.4"
+  }
+}

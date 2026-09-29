@@ -1,0 +1,44 @@
+[
+  {
+    "id": "reports",
+    "title": "리포트형",
+    "sub": "조사 결과를 리포트로 만들어 내는 스킬",
+    "kind": "local",
+    "path": ".claude/skills",
+    "skills": [
+      "queryfinder-report",
+      "pathfinder-report",
+      "clusterfinder-report",
+      "total-report"
+    ],
+    "install": "/plugin install lm-reports@lm-agent-plugins",
+    "installNote": "lm-agent-plugins 마켓플레이스의 LM Reports 플러그인",
+    "sourceLabel": "lm-agent-plugins · LM Reports",
+    "licenseFrom": "packaging/manifests/internal-plugins.toml"
+  },
+  {
+    "id": "lm-skills",
+    "title": "lm-skills",
+    "sub": "검색 데이터로 시장을 읽는 공개 스킬 모음 (MIT)",
+    "kind": "git",
+    "repo": "ListeningMind-Daas/lm-skills",
+    "ref": "main",
+    "path": "skills",
+    "fallback": "oss/lm-skill-kit",
+    "install": [
+      "[ -d lm-skills ] || git clone --depth 1 --branch {tag} https://github.com/ListeningMind-Daas/lm-skills",
+      "mkdir -p ~/.claude/skills && cp -r lm-skills/skills/{name} ~/.claude/skills/"
+    ],
+    "installNote": "ListeningMind-Daas/lm-skills 저장소 — 이미 받아 둔 lm-skills 폴더가 있으면 다시 받지 않는다",
+    "installOverrides": {
+      "lm-skill-creator": [
+        "[ -d lm-skills ] || git clone --branch {tag} https://github.com/ListeningMind-Daas/lm-skills",
+        "cd lm-skills   # lm-skill-creator 는 폴더만 복사하면 shared/ 를 못 찾는다 — 클론 루트에서 실행한다"
+      ]
+    },
+    "overlay": {
+      "path": "packaging/landing/catalog-overlay.json",
+      "note": "카드 번호·효용 제목·밴드 — 랜딩 #/catalog 과 같은 정본(dev)"
+    }
+  }
+]
