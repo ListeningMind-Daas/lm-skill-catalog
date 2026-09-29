@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="flex min-h-screen flex-col">
-        <AppHeader product="Skills Catalog" nav={NAV} right={kit ? <MetaText>{kit.title} v{kit.source.version}</MetaText> : undefined} />
+        <AppHeader product="Skills Catalog" nav={NAV} right={kit ? <MetaText>{kit.source.repo.split("/").pop()} v{kit.source.version}</MetaText> : undefined} />
         {children}
         <AppFooter>
           <span>© Ascent AI · ListeningMind Skills Catalog</span>

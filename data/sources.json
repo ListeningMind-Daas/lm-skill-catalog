@@ -17,9 +17,33 @@
     "licenseFrom": "packaging/manifests/internal-plugins.toml"
   },
   {
-    "id": "lm-skills",
-    "title": "lm-skills",
-    "sub": "검색 데이터로 시장을 읽는 공개 스킬 모음 (MIT)",
+    "id": "market",
+    "title": "시장 분석",
+    "sub": "검색 데이터로 시장 규모·의도·여정·점유율·트렌드를 읽는 분석 스킬 (공개 스킬 모음 lm-skills · MIT)",
+    "kind": "git",
+    "repo": "ListeningMind-Daas/lm-skills",
+    "ref": "main",
+    "path": "skills",
+    "fallback": "oss/lm-skill-kit",
+    "install": [
+      "[ -d lm-skills ] || git clone --depth 1 --branch {tag} https://github.com/ListeningMind-Daas/lm-skills",
+      "mkdir -p ~/.claude/skills && cp -r lm-skills/skills/{name} ~/.claude/skills/"
+    ],
+    "installNote": "ListeningMind-Daas/lm-skills 저장소 — 이미 받아 둔 lm-skills 폴더가 있으면 다시 받지 않는다",
+    "installOverrides": {},
+    "overlay": {
+      "path": "packaging/landing/catalog-overlay.json",
+      "note": "카드 번호·효용 제목·밴드 — 랜딩 #/catalog 과 같은 정본(dev)"
+    },
+    "exclude": [
+      "plug-into-your-ai-agents",
+      "lm-skill-creator"
+    ]
+  },
+  {
+    "id": "tools",
+    "title": "연동·개발 도구",
+    "sub": "AI 에이전트에 API 를 연결하고 새 스킬을 만드는 도구 (공개 스킬 모음 lm-skills · MIT)",
     "kind": "git",
     "repo": "ListeningMind-Daas/lm-skills",
     "ref": "main",
@@ -39,6 +63,10 @@
     "overlay": {
       "path": "packaging/landing/catalog-overlay.json",
       "note": "카드 번호·효용 제목·밴드 — 랜딩 #/catalog 과 같은 정본(dev)"
-    }
+    },
+    "skills": [
+      "plug-into-your-ai-agents",
+      "lm-skill-creator"
+    ]
   }
 ]
