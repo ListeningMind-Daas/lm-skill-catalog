@@ -1,7 +1,7 @@
 {
   "package": "lm-skill-catalog",
-  "version": "0.1.0",
-  "dev_commit": "9d0a5fb",
+  "version": "0.1.1",
+  "dev_commit": "1f7579e",
   "suites": [
     "reports(4)",
     "lm-skills(13)"
@@ -9,7 +9,7 @@
   "sources": {
     "reports": {
       "repo": "lm-agent-plugins · LM Reports",
-      "commit": "9d0a5fb",
+      "commit": "1f7579e",
       "version": null
     },
     "lm-skills": {
@@ -18,5 +18,5 @@
       "version": "1.6.0"
     }
   },
-  "catalog_generated_at": "2026-09-29T14:30:58+00:00"
+  "catalog_generated_at": "2026-09-29T14:33:36+00:00"
 }
