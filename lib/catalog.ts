@@ -1,6 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import raw from "@/data/catalog.json";
+import demo from "@/data/demo.json";
+import examples from "@/data/examples.json";
+import { SITE_URL } from "./site";
 import type { Band, CardGroup, CardSkill, LandingCard } from "./labels";
 
 export type Skill = {
@@ -104,4 +107,27 @@ export function toCard(s: Skill): CardSkill {
 }
 export function toCardGroup(g: Group): CardGroup {
   return { id: g.id, title: g.title, sub: g.sub, skills: g.skills };
+}
+
+/**
+ * «테스트 실행» 프롬프트 — Claude 앱에 붙여 넣으면 이 페이지를 브라우저 패널로 열고 스킬을 실행한다.
+ * 웹 페이지는 앱 패널을 직접 열 수 없어서, 실행 지시문을 복사해 붙여 넣는 방식이다.
+ * 요청 문장: data/demo.json(안전한 요청으로 바꾼 스킬) → 산출물 예시 시드 + 첫 발화 → 자리표시자 없는 첫 발화.
+ */
+export function testRunOf(s: Skill): { request: string; prompt: string } {
+  const override = (demo as Record<string, string>)[s.folder];
+  const seed = ((examples as Record<string, { seed?: string }>)[s.folder] || {}).seed;
+  const plain = s.triggers.find((t) => !/[○{]/.test(t)) ?? s.triggers[0] ?? s.name;
+  const request = override ?? (seed ? `«${seed}» ${plain}` : plain);
+  const page = `${SITE_URL}/skills/${s.folder}/`;
+  const hasExample = fs.existsSync(path.join(process.cwd(), "public", "examples", s.folder, "index.html"));
+  const lines = [
+    `${page} 를 브라우저 패널로 열어 줘.`,
+    ...(hasExample ? [`이 스킬의 산출물 예시(${SITE_URL}/examples/${s.folder}/)도 브라우저 패널로 보여 줘.`] : []),
+    `그다음 ${s.name} 스킬로 테스트 실행해 줘 — 요청: "${request}"`,
+    "- 스킬이 설치돼 있지 않으면 이 페이지의 설치 명령부터 안내해 줘",
+    "- API 를 부르기 전에 예상 크레딧을 먼저 알려 주고 내 확인을 받아 줘",
+    "- 결과물이 HTML 이면 브라우저 패널로 열어 줘",
+  ];
+  return { request, prompt: lines.join("\n") };
 }

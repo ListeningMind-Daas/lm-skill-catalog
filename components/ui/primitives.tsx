@@ -185,10 +185,10 @@ export function BackLink({ href, children }: { href: string; children: ReactNode
 }
 
 /** 코드 한 줄 + 복사 — 설치 명령 등 */
-export function CodeLine({ children, action }: { children: ReactNode; action?: ReactNode }) {
+export function CodeLine({ children, action, id }: { children: ReactNode; action?: ReactNode; id?: string }) {
   return (
     <div className="flex items-start gap-2 rounded-lg border border-line bg-surface-muted/40 py-1.5 pl-3 pr-1.5">
-      <code className="min-w-0 flex-1 whitespace-pre-wrap break-all py-1 font-mono text-[13px] leading-5 text-ink">{children}</code>
+      <code id={id} className="min-w-0 flex-1 whitespace-pre-wrap break-all py-1 font-mono text-[13px] leading-5 text-ink">{children}</code>
       {action}
     </div>
   );

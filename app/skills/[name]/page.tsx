@@ -11,6 +11,7 @@ import {
   groupOf,
   skillByName,
   summaryOf,
+  testRunOf,
   kitVersionOf,
   bandLabel,
 } from "@/lib/catalog";
@@ -35,6 +36,7 @@ export default function SkillPage({ params }: { params: { name: string } }) {
   const version = s.version ? (kit ? `${s.version} (키트 v${kit})` : s.version) : kit ? `키트 v${kit} (스킬 판 표기 없음)` : "—";
   // 날짜의 뜻이 출처마다 다르다 — git 출처는 발행 저장소에 반영된 날, local 은 dev 저장소 마지막 커밋
   const updatedKey = src?.kind === "git" ? "Published" : "Last commit";
+  const test = testRunOf(s);
   const html = renderSkillMarkdown(s.body);
   const toc = tocOf(s.body);
   const siblings = group ? group.skills.filter((n) => n !== s.folder) : [];
@@ -58,6 +60,7 @@ export default function SkillPage({ params }: { params: { name: string } }) {
             <ButtonLink href={repoUrl} external icon="github" trailing="external">저장소</ButtonLink>
           )}
           <CopyButton src={`/raw/${s.folder}/SKILL.md`} label="SKILL.md 복사" variant="outline" title="frontmatter 포함 · 변경 이력 제외" />
+          <CopyButton text={test.prompt} label="테스트 실행" variant="brand" title="Claude 앱에 붙여 넣는 실행 프롬프트를 복사합니다" fallbackTarget="test-run-prompt" />
         </div>
       </div>
       <p className="mt-3 whitespace-pre-line text-base leading-7 text-ink-muted">{s.description.replace(/\*\*/g, "")}</p>
@@ -81,6 +84,15 @@ export default function SkillPage({ params }: { params: { name: string } }) {
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_260px]">
         <article className="min-w-0">
+          <section id="test-run" className="mb-8 scroll-mt-28 md:scroll-mt-20">
+            <SectionHeader title="테스트 실행" sub="Claude 앱에 붙여 넣으면 이 페이지를 오른쪽 브라우저 패널로 열고 스킬을 실행합니다" />
+            <CodeLine id="test-run-prompt" action={<CopyButton text={test.prompt} fallbackTarget="test-run-prompt" />}>{test.prompt}</CodeLine>
+            <p className="mt-2 text-[13px] leading-5 text-ink-muted">
+              웹 페이지는 앱의 브라우저 패널을 직접 열 수 없어 실행 지시문을 복사해 붙여 넣는 방식입니다. API 를 부르기 전에 예상 크레딧을 먼저 보여 주고
+              확인을 받습니다 — 실행하는 컴퓨터에 스킬 설치와 ListeningMind API 키가 필요합니다.
+            </p>
+          </section>
+
           <section className="mb-8">
             <SectionHeader title="설치" sub={group?.installNote ?? undefined} />
             <CodeLine action={<CopyButton text={s.install} />}>{s.install}</CodeLine>
