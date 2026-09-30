@@ -40,5 +40,59 @@
     "credits": 8464,
     "request": "선크림 키워드 유니버스 만들어줘",
     "calls": "시드 all 100 · intent_finder 3회 5,600(절단 확인용 1회 포함) · ads_metrics 1,444 · 추세 all 1,320"
+  },
+  "separate-buyers-from-browsers": {
+    "seed": "선크림",
+    "gl": "kr",
+    "date": "2026-09-30",
+    "server": "운영",
+    "credits": 1984,
+    "request": "선크림 검색 중 살 사람 비중 알려줘",
+    "calls": "keyword_info 3회 1,984"
+  },
+  "spot-trends": {
+    "seed": "선크림",
+    "gl": "kr",
+    "date": "2026-09-30",
+    "server": "운영",
+    "credits": 120,
+    "request": "선크림 요즘 뜨는 키워드 찾아줘",
+    "calls": "trend_finder 1회 80 · keyword_info 2회 40"
+  },
+  "compare-markets-across-countries": {
+    "seed": "선크림",
+    "gl": "kr·us·jp",
+    "date": "2026-09-30",
+    "server": "운영",
+    "credits": 189,
+    "request": "선크림 한국·미국·일본 시장 비교해줘",
+    "calls": "keyword_info 6회 189"
+  },
+  "benchmark-competitors": {
+    "seed": "선크림",
+    "gl": "kr",
+    "date": "2026-09-30",
+    "server": "운영",
+    "credits": 715,
+    "request": "선크림 브랜드 5개 월별 점유율 비교해줘",
+    "calls": "keyword_info 2회 715"
+  },
+  "validate-product-ideas": {
+    "seed": "무기자차 톤업 선스틱",
+    "gl": "kr",
+    "date": "2026-09-30",
+    "server": "운영",
+    "credits": 574,
+    "request": "\"무기자차 톤업 선스틱\" 수요 있을까?",
+    "calls": "keyword_info 3회 300 · intent_finder 6회 274"
+  },
+  "decode-search-intent": {
+    "seed": "선크림",
+    "gl": "kr",
+    "date": "2026-09-30",
+    "server": "운영",
+    "credits": 1739,
+    "request": "선크림 검색 의도 분석해줘",
+    "calls": "intent_finder 3회 690 · keyword_info 2회 1,049"
   }
 }
