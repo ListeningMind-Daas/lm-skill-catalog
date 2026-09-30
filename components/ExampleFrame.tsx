@@ -4,7 +4,7 @@ import examples from "@/data/examples.json";
 import { SectionHeader } from "./ui/primitives";
 import Icon from "./ui/Icon";
 
-type Meta = { seed: string; gl: string; date: string; server: string; credits: number; calls: string };
+type Meta = { seed: string; gl: string; date: string; server: string; credits: number; calls: string; request?: string };
 
 /**
  * public/examples/<스킬>/index.html 이 있으면 그 스킬의 산출물 예시를 보인다 (빌드 시점 확인).
@@ -50,7 +50,7 @@ export default function ExampleFrame({ folder }: { folder: string }) {
       </div>
       {m && (
         <p className="mt-2 text-xs leading-5 text-ink-muted">
-          시드 «{m.seed}» · {m.gl.toUpperCase()} · {m.date} · {m.server} 서버 실측 · 이번 생성 크레딧 {m.credits.toLocaleString("ko-KR")} ({m.calls})
+          {m.request ? <>질의 «{m.request}» · </> : <>시드 «{m.seed}» · </>}{m.gl.toUpperCase()} · {m.date} · {m.server} 서버 실측 · 이번 생성 크레딧 {m.credits.toLocaleString("ko-KR")} ({m.calls})
         </p>
       )}
     </section>

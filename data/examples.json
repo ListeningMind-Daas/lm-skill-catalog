@@ -31,5 +31,14 @@
     "server": "운영",
     "credits": 0,
     "calls": "세 파인더·keyword_info 모두 같은 세션 캐시 재사용 · 여정 172·클러스터 718개 키워드의 검색량은 각 파인더 수집분으로 보강(생성 당시 스킬 0.2.1 은 keyword_info 1,000개 상한으로 이 값이 비었다 — 0.2.2 부터 스킬이 직접 채운다)"
+  },
+  "map-your-market": {
+    "seed": "선크림",
+    "gl": "kr",
+    "date": "2026-09-30",
+    "server": "운영",
+    "credits": 8464,
+    "request": "선크림 키워드 유니버스 만들어줘",
+    "calls": "시드 all 100 · intent_finder 3회 5,600(절단 확인용 1회 포함) · ads_metrics 1,444 · 추세 all 1,320"
   }
 }

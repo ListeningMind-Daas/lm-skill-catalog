@@ -116,9 +116,10 @@ export function toCardGroup(g: Group): CardGroup {
  */
 export function testRunOf(s: Skill): { request: string; prompt: string } {
   const override = (demo as Record<string, string>)[s.folder];
-  const seed = ((examples as Record<string, { seed?: string }>)[s.folder] || {}).seed;
+  const ex = (examples as Record<string, { seed?: string; request?: string }>)[s.folder] || {};
+  const seed = ex.seed;
   const plain = s.triggers.find((t) => !/[○{]/.test(t)) ?? s.triggers[0] ?? s.name;
-  const request = override ?? (seed ? `«${seed}» ${plain}` : plain);
+  const request = override ?? ex.request ?? (seed ? `«${seed}» ${plain}` : plain);
   const page = `${SITE_URL}/skills/${s.folder}/`;
   const hasExample = fs.existsSync(path.join(process.cwd(), "public", "examples", s.folder, "index.html"));
   const lines = [
