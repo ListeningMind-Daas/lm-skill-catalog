@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>선크림 고객 니즈 3축 (기능·속성·불편) · 선크림 고객 불편·니즈 찾아줘</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{--page:#fbfafb;--surface:#fff;--muted:#eae8ee;--line:#eae8ee;--ink:#3d3a46;--soft:#5d596a;--mute:#6a6773;--brand:#5e2cc9;--brand50:#e2e0f8;--link:#4d62dc;--linkbg:#eef0fc}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:14px/1.6 "Noto Sans KR",-apple-system,system-ui,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 16px 56px}
+.eyebrow{font-size:12px;font-weight:700;color:var(--brand);letter-spacing:.04em}
+h1{font-size:24px;margin:6px 0 4px;font-weight:700}.q{display:inline-block;background:var(--brand50);color:var(--brand);border-radius:8px;padding:6px 12px;font-weight:500;margin:6px 0 10px}
+.meta{font-size:13px;color:var(--mute)}.meta b{color:var(--ink);font-weight:600}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--line);margin-top:18px}.tabs button{font:inherit;border:0;background:none;padding:10px 14px;color:var(--soft);font-weight:500;border-bottom:2px solid transparent;cursor:pointer}
+.tabs button[aria-selected=true]{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;padding:18px 20px;overflow-wrap:anywhere}
+.md h1{font-size:19px}.md h2{font-size:16px;margin:26px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}.md h3{font-size:14.5px}.md p,.md li{color:var(--soft)}
+.md table{border-collapse:collapse;width:100%;font-size:12.5px;margin:10px 0;display:block;overflow-x:auto}.md th{text-align:left;background:#f7f6f8;color:var(--mute);font-weight:500;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.md td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}.md code{background:#f3f2f5;border-radius:4px;padding:0 4px;font-size:12px}
+.md pre{background:#f7f6f8;border-radius:8px;padding:10px 12px;overflow-x:auto;font-size:12px}.md pre code{background:none;padding:0}
+.md blockquote{margin:10px 0;padding:8px 14px;border-left:3px solid var(--brand50);background:#f8f7fd;color:var(--soft)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.tools input,.tools select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:#fff;color:var(--ink);max-width:100%}
+.tools input{flex:1;min-width:160px}.count{font-size:12px;color:var(--mute)}
+table.u{border-collapse:collapse;width:100%;font-size:12.5px}table.u th{position:sticky;top:0;background:#f7f6f8;color:var(--mute);font-weight:500;text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap}
+table.u td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}table.u .n{text-align:right}
+.scroll{max-height:620px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.tag{display:inline-block;border-radius:5px;padding:0 6px;font-size:11.5px;background:var(--muted);color:var(--soft)}
+.up{color:#2f7d32}.down{color:#b3261e}
+.foot{margin-top:14px;font-size:12px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<div class="eyebrow">find-customer-needs · 실행 결과</div>
+<h1>선크림 고객 니즈 3축 (기능·속성·불편)</h1>
+<div class="q">“선크림 고객 불편·니즈 찾아줘”</div>
+<div class="meta">운영 서버 실측 · 이번 생성 크레딧 <b>3,023</b> (응답 cost_detail 합) · 호출 17건</div>
+<div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-tab="r0">니즈 리포트</button><button role="tab" aria-selected="false" data-tab="r1">스킬 원문 리포트</button><button role="tab" aria-selected="false" data-tab="t0">니즈 우선순위 (31)</button><button role="tab" aria-selected="false" data-tab="t1">검색어 분해 (533)</button></div>
+<section class="panel md" id="p-r0"><h1>선크림 고객 불편·니즈 — 검색어 3축 분해 (한국)</h1>
+<blockquote>
+<p>질의: «선크림 고객 불편·니즈 찾아줘» · 스킬 find-customer-needs v1.2.1 · 시장 한국(gl=kr) · 운영 서버
+순위는 로드맵 결정이 아니라 <strong>검토 후보</strong>다. 검색은 관심 신호이지 만족도·구매가 아니며, 검색량 단위는 건(사람 수 아님)이다.</p>
+</blockquote>
+<h2>읽기 전에</h2>
+<ul>
+<li><strong>데이터 기준월 2026-08 · 조회일 2026-09-30 · 지연 약 1개월</strong> — 기준월은 응답의 월별 검색량 최신 월에서 읽었다 [실제 데이터]</li>
+<li>추세 = 전년 동기 3개월 비교 (2026-05<del>2026-07 vs 2025-05</del>2025-07) · 마지막 달(2026-08)은 아직 채워지는 중일 수 있어 제외 · 마지막 달 미완결 의심 3건 [추정]</li>
+<li>카테고리 기준선(«선크림» 대표 검색어) 전년 동기 <strong>-10.9%</strong> [실제 데이터 계산] — 항목 추세는 이 값과 함께 읽는다</li>
+<li><strong>수집 범위: 보류</strong> — 확장 호출 13건 중 4건(선크림, 선스틱, 무기자차 선크림, 톤업 선크림)이 반환 상한 100에 닿았다(절단). 더 받을 수 있었는데 받지 않은 검색어가 있을 수 있어 «수집이 충분하다»고 판정하지 않는다 [데이터 공백]</li>
+<li>분류율(검색량 기준) 하한 기준 45.1% ~ 상한 기준 41.8% · 논브랜드 비중 하한 기준 27.7% ~ 상한 기준 31.3% [추정]</li>
+<li>이번 분석 소진 <strong>3,023 크레딧</strong> (호출 17건 · 응답 cost_detail 합산 · 사전 추정 합 4,579) [실제 데이터]</li>
+</ul>
+<h2>핵심 결과</h2>
+<ol>
+<li>논브랜드 불편(Pain) 검색 중 12개월 검색량이 가장 큰 항목은 <strong>세안·지우기 부담</strong>(66,772<del>102,412건 · Pain 논브랜드 내 30%</del>39%) [추정]. 그다음은 백탁 61,276건 · 눈시림 51,559건 · 트러블·모공 막힘 15,238건 (하한 기준) [추정].</li>
+<li>논브랜드 검색량 합(하한)은 Pain 225,288건 · Feature 1,540,032건 · Attribute 407,992건이다 [추정]. 불편을 직접 말하는 검색은 기능 검색의 약 1/7 규모다 — 긴 꼬리에 있어 탐침어로 따로 모았다.</li>
+<li>추세가 계산된 Pain 항목 7개 중 5개가 카테고리 기준선(-10.9%)보다 더 줄었고, 2개(백탁, 단점·불만)는 기준선과 같이 움직였다 [추정]. 불편 검색이 줄었다고 불편이 해소됐다고 단정하지 않는다 — 제품 개선·표현 변화·검색 채널 이동을 이 데이터로 가를 수 없다.</li>
+<li>기준선보다 강하게 움직인 기능·속성 항목: 자차 방식(무기·유기)(논브랜드 +0%) · 톤업·커버(브랜드 -1%) · 사용 대상(아기·남성·임산부)(논브랜드 +2%) · 수분·촉촉(논브랜드 +16%) · 순한·진정(브랜드 +24%) · 피부 타입(지성·건성)(브랜드 +21%) [추정].</li>
+</ol>
+<p><strong>판정</strong>: 불편 항목의 <strong>상대 크기 순서</strong>는 검토 후보로 쓸 수 있다. 다만 수집 범위가 «보류»(절단)이고 분류율이 절반 아래라 «선크림 불편은 이것뿐»이라는 결론은 내리지 않는다. 왜 그 불편이 검색되는지(특정 제품·계절·성분 이슈)는 검색결과 화면으로 따로 확인해야 한다.</p>
+<h2>축별 니즈 순위</h2>
+<p>라벨: 검색량·월별 검색량 원값 [실제 데이터] · 축·항목 분류와 하한/상한 합산·비중·기준선 대비 [추정] · 게이트·판정 임계(±20%, 기준선 대비 ±10%) [가정] · 추세 «—» [데이터 공백]. 판정 «잠정»은 추세가 잡힌 검색량이 항목의 50% 미만이라는 뜻이다.</p>
+<h3>불편(Pain) · 논브랜드 — 카테고리 일반 불편</h3>
+<table>
+<thead>
+<tr>
+<th align="right">순위</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 (하한~상한)</th>
+<th align="right">축 내 비중</th>
+<th align="right">전년 동기</th>
+<th>판정</th>
+<th>기준선 대비</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>세안·지우기 부담</td>
+<td align="right">66,772 ~ 102,412</td>
+<td align="right">30% / 39%</td>
+<td align="right">-29%</td>
+<td>하락</td>
+<td>-20% 기준선보다 약함</td>
+<td>선크림 세안 · 무기자차 선크림 세안 · 무기자차 선크림 클렌징</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>백탁</td>
+<td align="right">61,276 ~ 61,276</td>
+<td align="right">27% / 23%</td>
+<td align="right">-15%</td>
+<td>보합</td>
+<td>-5% 기준선과 같이 움직임</td>
+<td>백탁없는 선크림 · 선크림 백탁 · 선크림 백탁현상</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>눈시림</td>
+<td align="right">51,559 ~ 51,559</td>
+<td align="right">23% / 20%</td>
+<td align="right">-45%</td>
+<td>하락</td>
+<td>-38% 기준선보다 약함</td>
+<td>눈시림 없는 선크림 · 선크림 눈시림 · 선크림 눈 시림 성분</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td>트러블·모공 막힘</td>
+<td align="right">15,238 ~ 15,238</td>
+<td align="right">7% / 6%</td>
+<td align="right">-41%</td>
+<td>하락</td>
+<td>-34% 기준선보다 약함</td>
+<td>선크림 트러블 · 모공 안막는 선크림 · 논코메도제닉 무기자차 선크림</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td>끈적임</td>
+<td align="right">14,926 ~ 14,926</td>
+<td align="right">7% / 6%</td>
+<td align="right">-31%</td>
+<td>하락</td>
+<td>-22% 기준선보다 약함</td>
+<td>끈적임 없는 선크림 · 끈적임 없는 선스틱 · 끈적임 없는 선크림 추천</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td>밀림</td>
+<td align="right">7,746 ~ 7,746</td>
+<td align="right">3% / 3%</td>
+<td align="right">-37%</td>
+<td>하락</td>
+<td>-29% 기준선보다 약함</td>
+<td>선크림 밀림 · 선크림 때밀림 · 선크림 화장 밀림</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td>단점·불만</td>
+<td align="right">4,250 ~ 4,250</td>
+<td align="right">2% / 2%</td>
+<td align="right">-16%</td>
+<td>보합</td>
+<td>-6% 기준선과 같이 움직임</td>
+<td>선스틱 단점 · 무기자차 선크림 단점 · 유기자차 선크림 단점</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td>건조함</td>
+<td align="right">3,521 ~ 3,521</td>
+<td align="right">2% / 1%</td>
+<td align="right">— (시계열 없음 8)</td>
+<td>—</td>
+<td>—</td>
+<td>선크림 건조 · 선크림 건조함 · 선크림 바르면 건조</td>
+</tr>
+</tbody></table>
+<h3>기능(Feature) · 논브랜드</h3>
+<table>
+<thead>
+<tr>
+<th align="right">순위</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 (하한~상한)</th>
+<th align="right">축 내 비중</th>
+<th align="right">전년 동기</th>
+<th>판정</th>
+<th>기준선 대비</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>톤업·커버</td>
+<td align="right">568,496 ~ 711,436</td>
+<td align="right">37% / 41%</td>
+<td align="right">-15%</td>
+<td>보합</td>
+<td>-4% 기준선과 같이 움직임</td>
+<td>톤업 선크림 · 파데프리 선크림 · 톤업 선크림 추천</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>자차 방식(무기·유기)</td>
+<td align="right">441,597 ~ 503,247</td>
+<td align="right">29% / 29%</td>
+<td align="right">+0%</td>
+<td>보합</td>
+<td>+13% 기준선보다 강함</td>
+<td>무기자차 선크림 · 유기자차 선크림 · 무기자차 선크림 추천</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>제형(스틱·쿠션 등)</td>
+<td align="right">430,829 ~ 430,829</td>
+<td align="right">28% / 25%</td>
+<td align="right">-20%</td>
+<td>하락</td>
+<td>-10% 기준선보다 약함</td>
+<td>선스틱 · 선스틱 추천 · 아기 선스틱</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td>워터프루프</td>
+<td align="right">99,110 ~ 99,110</td>
+<td align="right">6% / 6%</td>
+<td align="right">-19%</td>
+<td>보합</td>
+<td>-9% 기준선과 같이 움직임</td>
+<td>워터프루프 선크림</td>
+</tr>
+</tbody></table>
+<h3>속성(Attribute) · 논브랜드</h3>
+<table>
+<thead>
+<tr>
+<th align="right">순위</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 (하한~상한)</th>
+<th align="right">축 내 비중</th>
+<th align="right">전년 동기</th>
+<th>판정</th>
+<th>기준선 대비</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>사용 대상(아기·남성·임산부)</td>
+<td align="right">222,680 ~ 331,900</td>
+<td align="right">55% / 56%</td>
+<td align="right">+2%</td>
+<td>보합</td>
+<td>+15% 기준선보다 강함</td>
+<td>남자 썬크림 · 아기 선크림 · 남자 선크림 추천</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>해외 제품</td>
+<td align="right">60,990 ~ 104,110</td>
+<td align="right">15% / 18%</td>
+<td align="right">-7%</td>
+<td>보합</td>
+<td>+4% 기준선과 같이 움직임</td>
+<td>일본 선크림</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>사용 부위(바디·얼굴)</td>
+<td align="right">50,910 ~ 81,010</td>
+<td align="right">12% / 14%</td>
+<td align="right">-18%</td>
+<td>보합</td>
+<td>-8% 기준선과 같이 움직임</td>
+<td>바디 선크림</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td>화장 궁합</td>
+<td align="right">37,670 ~ 37,670</td>
+<td align="right">9% / 6%</td>
+<td align="right">-7%</td>
+<td>보합</td>
+<td>+5% 기준선과 같이 움직임</td>
+<td>화잘먹 선크림</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td>수분·촉촉</td>
+<td align="right">31,460 ~ 31,460</td>
+<td align="right">8% / 5%</td>
+<td align="right">+16%</td>
+<td>보합</td>
+<td>+30% 기준선보다 강함</td>
+<td>수분 선크림</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td>모공 케어</td>
+<td align="right">4,282 ~ 4,282</td>
+<td align="right">1% / 1%</td>
+<td align="right">— (시계열 없음 5)</td>
+<td>—</td>
+<td>—</td>
+<td>모공 선크림 · 선크림 모공 · 선크림 모공 디시</td>
+</tr>
+</tbody></table>
+<p>브랜드 범위 표는 <strong>그 브랜드 제품에 대한</strong> 니즈다. 카테고리 일반 니즈로 옮겨 말하지 않는다.</p>
+<h3>불편(Pain) · 브랜드 포함</h3>
+<table>
+<thead>
+<tr>
+<th align="right">순위</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 (하한~상한)</th>
+<th align="right">축 내 비중</th>
+<th align="right">전년 동기</th>
+<th>판정</th>
+<th>기준선 대비</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>눈시림</td>
+<td align="right">9,417 ~ 9,417</td>
+<td align="right">56% / 56%</td>
+<td align="right">— (게이트 미달 1 · 시계열 없음 17 (합산 게이트 미달 · 전년 창 890))</td>
+<td>—</td>
+<td>—</td>
+<td>달바 선크림 눈시림 · 비오레 선크림 눈시림 · 닥터지 선크림 눈시림</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>트러블·모공 막힘</td>
+<td align="right">4,762 ~ 4,762</td>
+<td align="right">29% / 29%</td>
+<td align="right">+22%</td>
+<td>상승</td>
+<td>+37% 기준선보다 강함</td>
+<td>후시다인 더마 트러블 징크 카밍 선크림 · 후시다인 더마 트러블 선크림</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>백탁</td>
+<td align="right">2,513 ~ 2,513</td>
+<td align="right">15% / 15%</td>
+<td align="right">— (시계열 없음 7)</td>
+<td>—</td>
+<td>—</td>
+<td>다이 소 백탁 없는 선크림 · 닥터지 선크림 백탁 · 올리브영 백탁 없는 선크림</td>
+</tr>
+</tbody></table>
+<h3>기능(Feature) · 브랜드 포함</h3>
+<table>
+<thead>
+<tr>
+<th align="right">순위</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 (하한~상한)</th>
+<th align="right">축 내 비중</th>
+<th align="right">전년 동기</th>
+<th>판정</th>
+<th>기준선 대비</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>제형(스틱·쿠션 등)</td>
+<td align="right">1,348,946 ~ 1,348,946</td>
+<td align="right">49% / 49%</td>
+<td align="right">-22%</td>
+<td>하락</td>
+<td>-12% 기준선보다 약함</td>
+<td>ahc 선스틱 · 덱스 선스틱 · 오브제 선스틱</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>톤업·커버</td>
+<td align="right">1,149,210 ~ 1,149,210</td>
+<td align="right">41% / 41%</td>
+<td align="right">-1%</td>
+<td>보합</td>
+<td>+11% 기준선보다 강함</td>
+<td>달바 톤업 선크림 · 헤라 톤업 선크림 · 이니스프리 톤업 선크림</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>자차 방식(무기·유기)</td>
+<td align="right">234,664 ~ 234,664</td>
+<td align="right">8% / 8%</td>
+<td align="right">+27%</td>
+<td>잠정</td>
+<td>+43% 잠정</td>
+<td>에스트라 무기자차 선크림 · 자작나무 무기자차 선크림 · 구달 무기자차 선크림</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td>차단 지수(SPF·PA)</td>
+<td align="right">37,710 ~ 37,710</td>
+<td align="right">1% / 1%</td>
+<td align="right">-34%</td>
+<td>하락</td>
+<td>-26% 기준선보다 약함</td>
+<td>바나나보트 선크림 100</td>
+</tr>
+</tbody></table>
+<h3>속성(Attribute) · 브랜드 포함</h3>
+<table>
+<thead>
+<tr>
+<th align="right">순위</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 (하한~상한)</th>
+<th align="right">축 내 비중</th>
+<th align="right">전년 동기</th>
+<th>판정</th>
+<th>기준선 대비</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>수분·촉촉</td>
+<td align="right">283,980 ~ 283,980</td>
+<td align="right">79% / 79%</td>
+<td align="right">-14%</td>
+<td>보합</td>
+<td>-4% 기준선과 같이 움직임</td>
+<td>자작나무 수분 선크림 · 라운드랩 자작나무 수분 선크림</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>순한·진정</td>
+<td align="right">40,020 ~ 40,020</td>
+<td align="right">11% / 11%</td>
+<td align="right">+24%</td>
+<td>상승</td>
+<td>+39% 기준선보다 강함</td>
+<td>구달 어성초 선크림</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>피부 타입(지성·건성)</td>
+<td align="right">34,140 ~ 34,140</td>
+<td align="right">10% / 10%</td>
+<td align="right">+21%</td>
+<td>상승</td>
+<td>+35% 기준선보다 강함</td>
+<td>이니스프리 노세범 선크림</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td>모공 케어</td>
+<td align="right">508 ~ 508</td>
+<td align="right">0% / 0%</td>
+<td align="right">— (시계열 없음 1)</td>
+<td>—</td>
+<td>—</td>
+<td>오드로이 모공수축 선크림</td>
+</tr>
+</tbody></table>
+<h2>교차확인 — 키워드 단위 재계산</h2>
+<p>추세가 계산된 그룹 대표 검색어의 전년 동기 값을 trend_yoy.py(마지막 달 제외 열)로 다시 계산해 대조했다: 일치 81건 · 불일치 0건 [실제 데이터 계산].</p>
+<h2>어떻게 모았나</h2>
+<ul>
+<li>시드 7개(카테고리어·기능/속성어·불편 탐침어 3축) → 연관 검색어 확장(시드당 1호출 · 반환 상한 100) → 불편 탐침어 6개로 보완 라운드 1회<ul>
+<li>1차 시드: 선크림 · 선스틱 · 무기자차 선크림 · 톤업 선크림 · 선크림 백탁 · 선크림 눈시림 · 선크림 트러블</li>
+<li>보완 라운드 불편 탐침어: 선크림 끈적임 · 선크림 밀림 · 선크림 단점 · 선크림 건조 · 선스틱 단점 · 선크림 모공</li>
+<li>불편 탐침어는 검색량 하한 10으로, 나머지는 50으로 불렀다 [가정]. 불편이 0건이면 «불편이 없다»가 아니라 «탐침하지 않았다»일 수 있다.</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>라운드</th>
+<th>시드</th>
+<th align="right">반환 수 / 상한</th>
+<th>절단</th>
+<th align="right">크레딧</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1차</td>
+<td>선크림</td>
+<td align="right">100 / 100</td>
+<td>절단</td>
+<td align="right">230</td>
+</tr>
+<tr>
+<td>1차</td>
+<td>선스틱</td>
+<td align="right">100 / 100</td>
+<td>절단</td>
+<td align="right">230</td>
+</tr>
+<tr>
+<td>1차</td>
+<td>무기자차 선크림</td>
+<td align="right">100 / 100</td>
+<td>절단</td>
+<td align="right">230</td>
+</tr>
+<tr>
+<td>1차</td>
+<td>톤업 선크림</td>
+<td align="right">100 / 100</td>
+<td>절단</td>
+<td align="right">230</td>
+</tr>
+<tr>
+<td>1차</td>
+<td>선크림 백탁</td>
+<td align="right">34 / 100</td>
+<td>—</td>
+<td align="right">98</td>
+</tr>
+<tr>
+<td>1차</td>
+<td>선크림 눈시림</td>
+<td align="right">34 / 100</td>
+<td>—</td>
+<td align="right">98</td>
+</tr>
+<tr>
+<td>1차</td>
+<td>선크림 트러블</td>
+<td align="right">15 / 100</td>
+<td>—</td>
+<td align="right">60</td>
+</tr>
+<tr>
+<td>보완</td>
+<td>선크림 끈적임</td>
+<td align="right">4 / 100</td>
+<td>—</td>
+<td align="right">38</td>
+</tr>
+<tr>
+<td>보완</td>
+<td>선크림 밀림</td>
+<td align="right">7 / 100</td>
+<td>—</td>
+<td align="right">44</td>
+</tr>
+<tr>
+<td>보완</td>
+<td>선크림 단점</td>
+<td align="right">3 / 100</td>
+<td>—</td>
+<td align="right">36</td>
+</tr>
+<tr>
+<td>보완</td>
+<td>선크림 건조</td>
+<td align="right">8 / 100</td>
+<td>—</td>
+<td align="right">46</td>
+</tr>
+<tr>
+<td>보완</td>
+<td>선스틱 단점</td>
+<td align="right">2 / 100</td>
+<td>—</td>
+<td align="right">34</td>
+</tr>
+<tr>
+<td>보완</td>
+<td>선크림 모공</td>
+<td align="right">15 / 100</td>
+<td>—</td>
+<td align="right">60</td>
+</tr>
+</tbody></table>
+<p>라운드별 신규 발견 기여(수집 범위 판정 입력):</p>
+<pre><code>S1·시드                    7    2,108,162    2,108,162 100.0%       100.0%
+R1·확장1                 459   11,540,559   13,648,721  88.5%        58.3%   ⚠️ limit
+R2·보완(불편 탐침)            39       40,652   13,689,373   0.3%         1.1%
+</code></pre>
+<ul>
+<li>유니버스 533행 → 표기변형 묶음 506그룹 · 그룹 검색량 합 하한 11,790,069 ~ 상한 13,737,893건 [추정]</li>
+<li>시계열(월별 검색량) 조회 대상 107개 = 카테고리 기준선 1 + 축 분류 그룹 중 12개월 검색량 12,000건 이상 81 + 불편 긴 꼬리(1,200~12,000건) 25 [가정: 게이트]. 나머지 399개 검색어는 추세가 «시계열 없음»으로 남는다 [데이터 공백]</li>
+<li>브랜드 사전 보강(오타 표기 «가희»·«라로제» 추가)과 오탐 수정은 모두 조회가 끝난 뒤 0크레딧으로 다시 조립했다</li>
+<li>조회 후 사전 보정으로 2개(이지워시 선크림, 이지워시 무기자차 선크림)가 미분류로 옮겨졌다(«이지워시»가 «지워»에 걸린 오탐). 이 20크레딧의 시계열은 순위에 쓰이지 않았다</li>
+<li>추세 상태(그룹 수): 게이트 미달 25 · 결측 월 1 · 계산됨 81 · 시계열 없음 399</li>
+<li>브랜드 사전: 같은 날 선크림 키워드 지도 분석의 브랜드 목록에 이번 상위 검색어의 브랜드와 판매 채널(다이소·올리브영·알리)을 더했다. 채널 검색(«다이소 선크림»)은 카테고리 일반 니즈가 아니어서 브랜드 범위로 분리했다 [가정]</li>
+<li>«~없는 선크림»(백탁없는·눈시림 없는·끈적임 없는)처럼 불편을 피하려는 검색은 해당 불편(Pain)으로 셌다 [가정]</li>
+</ul>
+<h2>한계</h2>
+<ul>
+<li>월 단위 데이터이며 1개월 이상 늦다 — 이번 달 이슈의 불편은 아직 없다</li>
+<li>분류는 정규식 사전이 정한다. 제품명에 속성어가 들어간 검색(«자작나무 수분 선크림»·«구달 어성초 선크림»)은 브랜드 범위 속성으로 잡혀, 브랜드 속성 표는 사실상 대표 제품의 검색량이다</li>
+<li>«세안·지우기 부담»에는 «무기자차 선크림 세안»처럼 지우는 방법을 묻는 검색이 섞여 있다 — 불편 호소와 사용법 질문을 사전 규칙으로 가르지 못한다</li>
+<li>«선크림 추천»·«바르는 법»·«유통기한» 같은 구매·사용 정보 검색은 니즈가 아니어서 미분류로 두었다 — 분류율이 절반 아래인 이유다</li>
+<li>검색으로 표현되지 않는 불편(말로 설명하기 어려운 사용감)은 잡히지 않는다. 인구통계로 니즈를 나누지 않았다</li>
+<li>절단된 확장 호출 4건의 반환 상한을 올려 다시 부르면 순위가 바뀔 수 있다</li>
+</ul>
+<h2>크레딧 원장</h2>
+<table>
+<thead>
+<tr>
+<th align="right">#</th>
+<th>커넥터</th>
+<th>내용</th>
+<th align="right">추정</th>
+<th align="right">실제</th>
+<th align="right">반환</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>keyword_info</td>
+<td>STEP 1 시드 존재 검증 (ads_metrics · 7)</td>
+<td align="right">7</td>
+<td align="right">7</td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R1 선크림 (limit 100 · 문턱 50)</td>
+<td align="right">230</td>
+<td align="right">230</td>
+<td align="right">100</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R1 선스틱 (limit 100 · 문턱 50)</td>
+<td align="right">230</td>
+<td align="right">230</td>
+<td align="right">100</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R1 무기자차 선크림 (limit 100 · 문턱 50)</td>
+<td align="right">230</td>
+<td align="right">230</td>
+<td align="right">100</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R1 톤업 선크림 (limit 100 · 문턱 50)</td>
+<td align="right">230</td>
+<td align="right">230</td>
+<td align="right">100</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R1 선크림 백탁 (limit 100 · 문턱 10)</td>
+<td align="right">230</td>
+<td align="right">98</td>
+<td align="right">34</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R1 선크림 눈시림 (limit 100 · 문턱 10)</td>
+<td align="right">230</td>
+<td align="right">98</td>
+<td align="right">34</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R1 선크림 트러블 (limit 100 · 문턱 10)</td>
+<td align="right">230</td>
+<td align="right">60</td>
+<td align="right">15</td>
+</tr>
+<tr>
+<td align="right">9</td>
+<td>keyword_info</td>
+<td>보완 라운드 불편 탐침어 존재 검증 (ads_metrics · 6)</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">6</td>
+</tr>
+<tr>
+<td align="right">10</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R2 보완(불편 탐침) 선크림 끈적임 (limit 100 · 문턱 10)</td>
+<td align="right">230</td>
+<td align="right">38</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="right">11</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R2 보완(불편 탐침) 선크림 밀림 (limit 100 · 문턱 10)</td>
+<td align="right">230</td>
+<td align="right">44</td>
+<td align="right">7</td>
+</tr>
+<tr>
+<td align="right">12</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R2 보완(불편 탐침) 선크림 단점 (limit 100 · 문턱 10)</td>
+<td align="right">230</td>
+<td align="right">36</td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td align="right">13</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R2 보완(불편 탐침) 선크림 건조 (limit 100 · 문턱 10)</td>
+<td align="right">230</td>
+<td align="right">46</td>
+<td align="right">8</td>
+</tr>
+<tr>
+<td align="right">14</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R2 보완(불편 탐침) 선스틱 단점 (limit 100 · 문턱 10)</td>
+<td align="right">230</td>
+<td align="right">34</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td align="right">15</td>
+<td>intent_finder/keyword_list</td>
+<td>STEP 2 R2 보완(불편 탐침) 선크림 모공 (limit 100 · 문턱 10)</td>
+<td align="right">230</td>
+<td align="right">60</td>
+<td align="right">15</td>
+</tr>
+<tr>
+<td align="right">16</td>
+<td>keyword_info</td>
+<td>STEP 4 유니버스 전량 ads_metrics (506)</td>
+<td align="right">506</td>
+<td align="right">506</td>
+<td align="right">533</td>
+</tr>
+<tr>
+<td align="right">17</td>
+<td>keyword_info</td>
+<td>STEP 5 2단 all (M=107 · select_stage2.py)</td>
+<td align="right">1,070</td>
+<td align="right">1,070</td>
+<td align="right">115</td>
+</tr>
+<tr>
+<td align="right"></td>
+<td></td>
+<td><strong>합계</strong></td>
+<td align="right">4,579</td>
+<td align="right"><strong>3,023</strong></td>
+<td align="right"></td>
+</tr>
+</tbody></table>
+<p>이번 분석 소진은 응답 cost_detail.total_cost 합산이다. 계정의 월간 누적 사용량(잔여량 아님)은 마지막 호출 시점 95,374이다 [실제 데이터].</p>
+<h2>산출 파일</h2>
+<ul>
+<li><code>roadmap_priority_선크림.csv</code> — 축 × 브랜드 범위별 니즈 항목 순위(31행). 비율 열(volume_share_*, yoy*, baseline_yoy)은 0~1 소수</li>
+<li><code>voc_decomposition_선크림.csv</code> — 검색어별 축·항목·그룹 검색량·추세(533행)</li>
+<li><code>roadmap_priority_선크림.md</code> — 스킬 스크립트가 낸 원본 리포트</li>
+<li><code>keyword_universe.csv</code> · <code>trend.csv</code> · <code>axes.json</code>(3축 사전) · <code>ledger.json</code>(크레딧 원장)</li>
+</ul>
+</section>
+<section class="panel md" id="p-r1" hidden><h1>고객 니즈 3축 분해 — 선크림</h1>
+<ul>
+<li>데이터 기준월: <strong>2026-08</strong> · 조회일: <strong>2026-09-30</strong> · 지연: <strong>1개월</strong> (기준월은 응답에서 읽는다)</li>
+<li>추세 비교 창: 2026-05<del>2026-07 vs 2025-05</del>2025-07 · 마지막 달 제외(기본) · 게이트(전년 창) 그룹 3,000건 · 항목 합산 1,000건 [가정]</li>
+<li>마지막 달 미완결 의심: 3/115행 (최신 월 MoM이 전년 같은 구간보다 30%p 이상 나쁨 · check_refmonth.py와 같은 규칙) [추정]</li>
+<li>카테고리 기준선(선크림) 전년 동기: <strong>-11%</strong> [실제 데이터 계산] — 항목 추세를 이 값과 함께 읽는다(«기준선 대비» 열)</li>
+<li>수집 범위 판정: 보류(R1 절단 — 카테고리어·기능어 시드 4건이 limit 100에 도달)</li>
+<li>분류율(canonical 그룹 볼륨 기준 [추정]): 하한 기준 45.1% ~ 상한 기준 41.8% · 논브랜드 비중 하한 기준 27.7% ~ 상한 기준 31.3% · 검색량 미반환 그룹 0개</li>
+<li>그룹 볼륨 합 [추정]: 하한 11,790,069 ~ 상한 13,737,893 — 하한 = 표기변형 그룹 최댓값(변형이 같은 검색의 중복) · 상한 = 그룹 합(변형이 서로 다른 검색). 응답만으로 어느 쪽인지 알 수 없어 둘 다 싣는다</li>
+<li>같은 검색의 중복 행(시계열·지표 일치, build_universe <code>dup_of</code>) 0행은 한 번만 셌다 [추정]</li>
+<li>카테고리 경계: 경계 밖(exclude) 0행 · 0건 집계 제외 · 경계 점검 대상 0그룹 [가정]</li>
+<li>순위·판정은 하한 기준 · 상한 기준에서 순위·판정이 뒤집히는 항목 0개(표의 «상한 시 뒤집힘»)</li>
+<li>전년 동기 추세는 그룹 대표 검색어의 시계열로 계산했다 — 하한 기준이며 상한 시계열은 없다</li>
+<li>추세 상태(그룹 수): 게이트 미달 25 · 결측 월 1 · 계산됨 81 · 시계열 없음 399</li>
+</ul>
+<blockquote>
+<p>검색량 단위는 건(사람 수 아님). 검색은 관심 신호이며 구매·사용·만족도가 아니다.
+불편 검색이 줄었다고 불만이 줄었다고 단정하지 않는다 — 카테고리 전체 검색이 함께 줄었는지 기준선과 비교한다.
+순위는 검색량 순이며 로드맵 결정이 아니라 <strong>검토 후보</strong>다.</p>
+</blockquote>
+<h2>Pain · 논브랜드</h2>
+<table>
+<thead>
+<tr>
+<th align="right">순위(하한)</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 [추정 · 하한 ~ 상한]</th>
+<th align="right">축 내 비중 [추정 · 하한 / 상한]</th>
+<th align="right">전년 동기 [실제 데이터 계산 · 대표 검색어 합산 = 하한 기준]</th>
+<th>판정</th>
+<th>기준선 대비 [추정]</th>
+<th>상한 시 뒤집힘</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>세안·지우기 부담 [추정·분류]</td>
+<td align="right">하한 66,772 ~ 상한 102,412</td>
+<td align="right">30% / 39%</td>
+<td align="right">-29%</td>
+<td>하락</td>
+<td>-20% 기준선보다 약함</td>
+<td>—</td>
+<td>선크림 세안 · 무기자차 선크림 세안 · 무기자차 선크림 클렌징</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>백탁 [추정·분류]</td>
+<td align="right">하한 61,276 ~ 상한 61,276</td>
+<td align="right">27% / 23%</td>
+<td align="right">-15%</td>
+<td>보합</td>
+<td>-5% 기준선과 같이 움직임</td>
+<td>—</td>
+<td>백탁없는 선크림 · 선크림 백탁 · 선크림 백탁현상</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>눈시림 [추정·분류]</td>
+<td align="right">하한 51,559 ~ 상한 51,559</td>
+<td align="right">23% / 20%</td>
+<td align="right">-45%</td>
+<td>하락</td>
+<td>-38% 기준선보다 약함</td>
+<td>—</td>
+<td>눈시림 없는 선크림 · 선크림 눈시림 · 선크림 눈 시림 성분</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td>트러블·모공 막힘 [추정·분류]</td>
+<td align="right">하한 15,238 ~ 상한 15,238</td>
+<td align="right">7% / 6%</td>
+<td align="right">-41%</td>
+<td>하락</td>
+<td>-34% 기준선보다 약함</td>
+<td>—</td>
+<td>선크림 트러블 · 모공 안막는 선크림 · 논코메도제닉 무기자차 선크림</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td>끈적임 [추정·분류]</td>
+<td align="right">하한 14,926 ~ 상한 14,926</td>
+<td align="right">7% / 6%</td>
+<td align="right">-31%</td>
+<td>하락</td>
+<td>-22% 기준선보다 약함</td>
+<td>—</td>
+<td>끈적임 없는 선크림 · 끈적임 없는 선스틱 · 끈적임 없는 선크림 추천</td>
+</tr>
+</tbody></table>
+<h2>Pain · 브랜드</h2>
+<table>
+<thead>
+<tr>
+<th align="right">순위(하한)</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 [추정 · 하한 ~ 상한]</th>
+<th align="right">축 내 비중 [추정 · 하한 / 상한]</th>
+<th align="right">전년 동기 [실제 데이터 계산 · 대표 검색어 합산 = 하한 기준]</th>
+<th>판정</th>
+<th>기준선 대비 [추정]</th>
+<th>상한 시 뒤집힘</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>눈시림 [추정·분류]</td>
+<td align="right">하한 9,417 ~ 상한 9,417</td>
+<td align="right">56% / 56%</td>
+<td align="right">— (계산 불가: 게이트 미달 1 · 시계열 없음 17 (합산 게이트 미달 · 전년 창 890))</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>달바 선크림 눈시림 · 비오레 선크림 눈시림 · 닥터지 선크림 눈시림</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>트러블·모공 막힘 [추정·분류]</td>
+<td align="right">하한 4,762 ~ 상한 4,762</td>
+<td align="right">29% / 29%</td>
+<td align="right">+22%</td>
+<td>상승</td>
+<td>+37% 기준선보다 강함</td>
+<td>—</td>
+<td>후시다인 더마 트러블 징크 카밍 선크림 · 후시다인 더마 트러블 선크림</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>백탁 [추정·분류]</td>
+<td align="right">하한 2,513 ~ 상한 2,513</td>
+<td align="right">15% / 15%</td>
+<td align="right">— (계산 불가: 시계열 없음 7)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>다이 소 백탁 없는 선크림 · 닥터지 선크림 백탁 · 올리브영 백탁 없는 선크림</td>
+</tr>
+</tbody></table>
+<h2>Feature · 논브랜드</h2>
+<table>
+<thead>
+<tr>
+<th align="right">순위(하한)</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 [추정 · 하한 ~ 상한]</th>
+<th align="right">축 내 비중 [추정 · 하한 / 상한]</th>
+<th align="right">전년 동기 [실제 데이터 계산 · 대표 검색어 합산 = 하한 기준]</th>
+<th>판정</th>
+<th>기준선 대비 [추정]</th>
+<th>상한 시 뒤집힘</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>톤업·커버 [추정·분류]</td>
+<td align="right">하한 568,496 ~ 상한 711,436</td>
+<td align="right">37% / 41%</td>
+<td align="right">-15%</td>
+<td>보합</td>
+<td>-4% 기준선과 같이 움직임</td>
+<td>—</td>
+<td>톤업 선크림 · 파데프리 선크림 · 톤업 선크림 추천</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>자차 방식(무기·유기) [추정·분류]</td>
+<td align="right">하한 441,597 ~ 상한 503,247</td>
+<td align="right">29% / 29%</td>
+<td align="right">+0%</td>
+<td>보합</td>
+<td>+13% 기준선보다 강함</td>
+<td>—</td>
+<td>무기자차 선크림 · 유기자차 선크림 · 무기자차 선크림 추천</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>제형(스틱·쿠션 등) [추정·분류]</td>
+<td align="right">하한 430,829 ~ 상한 430,829</td>
+<td align="right">28% / 25%</td>
+<td align="right">-20%</td>
+<td>하락</td>
+<td>-10% 기준선보다 약함</td>
+<td>—</td>
+<td>선스틱 · 선스틱 추천 · 아기 선스틱</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td>워터프루프 [추정·분류]</td>
+<td align="right">하한 99,110 ~ 상한 99,110</td>
+<td align="right">6% / 6%</td>
+<td align="right">-19%</td>
+<td>보합</td>
+<td>-9% 기준선과 같이 움직임</td>
+<td>—</td>
+<td>워터프루프 선크림</td>
+</tr>
+</tbody></table>
+<h2>Feature · 브랜드</h2>
+<table>
+<thead>
+<tr>
+<th align="right">순위(하한)</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 [추정 · 하한 ~ 상한]</th>
+<th align="right">축 내 비중 [추정 · 하한 / 상한]</th>
+<th align="right">전년 동기 [실제 데이터 계산 · 대표 검색어 합산 = 하한 기준]</th>
+<th>판정</th>
+<th>기준선 대비 [추정]</th>
+<th>상한 시 뒤집힘</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>제형(스틱·쿠션 등) [추정·분류]</td>
+<td align="right">하한 1,348,946 ~ 상한 1,348,946</td>
+<td align="right">49% / 49%</td>
+<td align="right">-22%</td>
+<td>하락</td>
+<td>-12% 기준선보다 약함</td>
+<td>—</td>
+<td>ahc 선스틱 · 덱스 선스틱 · 오브제 선스틱</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>톤업·커버 [추정·분류]</td>
+<td align="right">하한 1,149,210 ~ 상한 1,149,210</td>
+<td align="right">41% / 41%</td>
+<td align="right">-1%</td>
+<td>보합</td>
+<td>+11% 기준선보다 강함</td>
+<td>—</td>
+<td>달바 톤업 선크림 · 헤라 톤업 선크림 · 이니스프리 톤업 선크림</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>자차 방식(무기·유기) [추정·분류]</td>
+<td align="right">하한 234,664 ~ 상한 234,664</td>
+<td align="right">8% / 8%</td>
+<td align="right">+27%</td>
+<td>잠정</td>
+<td>+43% 잠정</td>
+<td>—</td>
+<td>에스트라 무기자차 선크림 · 자작나무 무기자차 선크림 · 구달 무기자차 선크림</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td>차단 지수(SPF·PA) [추정·분류]</td>
+<td align="right">하한 37,710 ~ 상한 37,710</td>
+<td align="right">1% / 1%</td>
+<td align="right">-34%</td>
+<td>하락</td>
+<td>-26% 기준선보다 약함</td>
+<td>—</td>
+<td>바나나보트 선크림 100</td>
+</tr>
+</tbody></table>
+<h2>Attribute · 논브랜드</h2>
+<table>
+<thead>
+<tr>
+<th align="right">순위(하한)</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 [추정 · 하한 ~ 상한]</th>
+<th align="right">축 내 비중 [추정 · 하한 / 상한]</th>
+<th align="right">전년 동기 [실제 데이터 계산 · 대표 검색어 합산 = 하한 기준]</th>
+<th>판정</th>
+<th>기준선 대비 [추정]</th>
+<th>상한 시 뒤집힘</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>사용 대상(아기·남성·임산부) [추정·분류]</td>
+<td align="right">하한 222,680 ~ 상한 331,900</td>
+<td align="right">55% / 56%</td>
+<td align="right">+2%</td>
+<td>보합</td>
+<td>+15% 기준선보다 강함</td>
+<td>—</td>
+<td>남자 썬크림 · 아기 선크림 · 남자 선크림 추천</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>해외 제품 [추정·분류]</td>
+<td align="right">하한 60,990 ~ 상한 104,110</td>
+<td align="right">15% / 18%</td>
+<td align="right">-7%</td>
+<td>보합</td>
+<td>+4% 기준선과 같이 움직임</td>
+<td>—</td>
+<td>일본 선크림</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>사용 부위(바디·얼굴) [추정·분류]</td>
+<td align="right">하한 50,910 ~ 상한 81,010</td>
+<td align="right">12% / 14%</td>
+<td align="right">-18%</td>
+<td>보합</td>
+<td>-8% 기준선과 같이 움직임</td>
+<td>—</td>
+<td>바디 선크림</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td>화장 궁합 [추정·분류]</td>
+<td align="right">하한 37,670 ~ 상한 37,670</td>
+<td align="right">9% / 6%</td>
+<td align="right">-7%</td>
+<td>보합</td>
+<td>+5% 기준선과 같이 움직임</td>
+<td>—</td>
+<td>화잘먹 선크림</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td>수분·촉촉 [추정·분류]</td>
+<td align="right">하한 31,460 ~ 상한 31,460</td>
+<td align="right">8% / 5%</td>
+<td align="right">+16%</td>
+<td>보합</td>
+<td>+30% 기준선보다 강함</td>
+<td>—</td>
+<td>수분 선크림</td>
+</tr>
+</tbody></table>
+<h2>Attribute · 브랜드</h2>
+<table>
+<thead>
+<tr>
+<th align="right">순위(하한)</th>
+<th>니즈 항목</th>
+<th align="right">12개월 검색량 [추정 · 하한 ~ 상한]</th>
+<th align="right">축 내 비중 [추정 · 하한 / 상한]</th>
+<th align="right">전년 동기 [실제 데이터 계산 · 대표 검색어 합산 = 하한 기준]</th>
+<th>판정</th>
+<th>기준선 대비 [추정]</th>
+<th>상한 시 뒤집힘</th>
+<th>대표 검색어</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>수분·촉촉 [추정·분류]</td>
+<td align="right">하한 283,980 ~ 상한 283,980</td>
+<td align="right">79% / 79%</td>
+<td align="right">-14%</td>
+<td>보합</td>
+<td>-4% 기준선과 같이 움직임</td>
+<td>—</td>
+<td>자작나무 수분 선크림 · 라운드랩 자작나무 수분 선크림</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>순한·진정 [추정·분류]</td>
+<td align="right">하한 40,020 ~ 상한 40,020</td>
+<td align="right">11% / 11%</td>
+<td align="right">+24%</td>
+<td>상승</td>
+<td>+39% 기준선보다 강함</td>
+<td>—</td>
+<td>구달 어성초 선크림</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>피부 타입(지성·건성) [추정·분류]</td>
+<td align="right">하한 34,140 ~ 상한 34,140</td>
+<td align="right">10% / 10%</td>
+<td align="right">+21%</td>
+<td>상승</td>
+<td>+35% 기준선보다 강함</td>
+<td>—</td>
+<td>이니스프리 노세범 선크림</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td>모공 케어 [추정·분류]</td>
+<td align="right">하한 508 ~ 상한 508</td>
+<td align="right">0% / 0%</td>
+<td align="right">— (계산 불가: 시계열 없음 1)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>오드로이 모공수축 선크림</td>
+</tr>
+</tbody></table>
+<h2>카테고리 경계 점검</h2>
+<p>경계 밖(exclude 패턴 — 집계 제외): 없음</p>
+<p>카테고리어를 포함하지 않는 검색어(집계에는 남아 있다 — 인접 카테고리면 exclude에 추가, 맞으면 category_terms 보강): 없음</p>
+<h2>미분류 상위 검색어(하한 순) — 축 사전 보강 후보</h2>
+<p>썬크림(583,810<del>1,141,120), 선크림 추천(367,890</del>367,890), 닥터지 선크림(347,450<del>347,450), 조선미녀 선크림(282,700</del>333,470), 달바 선크림(281,290<del>281,290), 헤라 썬크림(256,890</del>438,270), 다이소 선크림(220,590<del>407,060), 셀퓨전씨 선크림(214,820</del>251,630), 비오레 선크림(191,150<del>227,380), ahc 선크림(181,930</del>212,690), 자작나무 선크림(149,780<del>193,300), 랑콤 선크림(146,650</del>146,650), 구달 선크림(144,100<del>144,100), 에스트라 선크림(138,060</del>168,690), 식물나라 선크림(118,150~143,960)</p>
+<h2>라벨</h2>
+<ul>
+<li><code>[실제 데이터]</code> 검색량·monthly_volume과 그로부터의 직접 계산(전년 동기 · 기준선 전년 동기)</li>
+<li><code>[추정]</code> 축·니즈 항목 분류(정규식 사전 규칙) · 표기변형 그룹 볼륨 하한(최댓값)·상한(합)과 그 합계·비중·추세 커버리지 · 같은 검색 중복 판정 · 기준선 대비 · 마지막 달 미완결 의심</li>
+<li><code>[가정]</code> 게이트 그룹 3,000 · 항목 합산 1,000 · 판정 임계 ±20% · 기준선 대비 임계 ±10% · 추세 커버리지 50% 미만은 잠정 · 마지막 달 제외(기본) · 순위·판정을 하한으로 매김 · 카테고리 경계 패턴</li>
+<li><code>[데이터 공백]</code> 시계열 없음·결측 월·게이트 미달 그룹, 검색량 미반환 키워드, 기준선 시계열 없음</li>
+</ul>
+</section>
+<section class="panel" id="p-t0" hidden data-table="0">
+ <div class="tools"><input type="search" placeholder="니즈 항목 검색"><select data-f="1"><option value="">축 전체</option><option>Attribute</option><option>Feature</option><option>Pain</option><option>unclassified</option></select><select data-f="2"><option value="">브랜드 범위 전체</option><option>논브랜드</option><option>브랜드</option></select><span class="count"></span></div>
+ <div class="scroll"><table class="u"><thead><tr><th data-k="0">니즈 항목</th><th data-k="1">축</th><th data-k="2">브랜드 범위</th><th data-k="3" class="n">볼륨 12개월(하한)</th><th data-k="4" class="n">상한</th><th data-k="5" class="n">축 안 비중</th><th data-k="6" class="n">축 안 순위</th><th data-k="7" class="n">전년 대비</th><th data-k="8" class="n">카테고리 대비</th><th data-k="9">추세 판정</th><th data-k="10">대표 검색어</th></tr></thead><tbody></tbody></table></div>
+ <p class="foot">축·항목은 규칙 사전 [추정], 전년 대비는 마지막 달 제외 창(2026-05~07). 카테고리 기준선(선크림) 대비 상대 추세를 함께 본다. 원본: roadmap_priority_선크림.csv</p>
+</section>
+<section class="panel" id="p-t1" hidden data-table="1">
+ <div class="tools"><input type="search" placeholder="검색어 검색"><select data-f="1"><option value="">축 전체</option><option>Attribute</option><option>Feature</option><option>Pain</option><option>unclassified</option></select><select data-f="2"><option value="">니즈 항목 전체</option><option>건조함</option><option>끈적임</option><option>눈시림</option><option>단점·불만</option><option>모공 케어</option><option>밀림</option><option>백탁</option><option>브랜드·제품명</option><option>사용 대상(아기·남성·임산부)</option><option>사용 부위(바디·얼굴)</option><option>세안·지우기 부담</option><option>수분·촉촉</option><option>순한·진정</option><option>워터프루프</option><option>자차 방식(무기·유기)</option><option>제형(스틱·쿠션 등)</option><option>차단 지수(SPF·PA)</option><option>코어·일반</option><option>톤업·커버</option><option>트러블·모공 막힘</option><option>피부 타입(지성·건성)</option><option>해외 제품</option><option>화장 궁합</option></select><span class="count"></span></div>
+ <div class="scroll"><table class="u"><thead><tr><th data-k="0">검색어</th><th data-k="1">축</th><th data-k="2">니즈 항목</th><th data-k="3">브랜드</th><th data-k="4" class="n">볼륨 12개월</th><th data-k="5" class="n">그룹 전년 대비</th><th data-k="6">여러 축</th></tr></thead><tbody></tbody></table></div>
+ <p class="foot"> 원본: voc_decomposition_선크림.csv</p>
+</section>
+<p class="foot">find-customer-needs 스킬 산출물을 그대로 옮긴 페이지 — 수치는 스킬 스크립트와 응답 원장에서 나왔다. 동봉 파일: axes.json · roadmap_priority_선크림.csv · voc_decomposition_선크림.csv · request.md</p>
+</div>
+<script type="application/json" id="data">[{"rows":[["세안·지우기 부담","Pain","논브랜드","66772","102412","0.2964","1","-0.2886","-0.2012","하락","선크림 세안 · 무기자차 선크림 세안 · 무기자차 선크림 클렌징"],["백탁","Pain","논브랜드","61276","61276","0.272","2","-0.1507","-0.0464","보합","백탁없는 선크림 · 선크림 백탁 · 선크림 백탁현상"],["눈시림","Pain","논브랜드","51559","51559","0.2289","3","-0.4492","-0.3815","하락","눈시림 없는 선크림 · 선크림 눈시림 · 선크림 눈 시림 성분"],["트러블·모공 막힘","Pain","논브랜드","15238","15238","0.0676","4","-0.4096","-0.3371","하락","선크림 트러블 · 모공 안막는 선크림 · 논코메도제닉 무기자차 선크림"],["끈적임","Pain","논브랜드","14926","14926","0.0663","5","-0.3072","-0.2221","하락","끈적임 없는 선크림 · 끈적임 없는 선스틱 · 끈적임 없는 선크림 추천"],["밀림","Pain","논브랜드","7746","7746","0.0344","6","-0.3715","-0.2943","하락","선크림 밀림 · 선크림 때밀림 · 선크림 화장 밀림"],["단점·불만","Pain","논브랜드","4250","4250","0.0189","7","-0.1627","-0.0598","보합","선스틱 단점 · 무기자차 선크림 단점 · 유기자차 선크림 단점"],["건조함","Pain","논브랜드","3521","3521","0.0156","8","","","","선크림 건조 · 선크림 건조함 · 선크림 바르면 건조"],["눈시림","Pain","브랜드","9417","9417","0.5642","1","","","","달바 선크림 눈시림 · 비오레 선크림 눈시림 · 닥터지 선크림 눈시림"],["트러블·모공 막힘","Pain","브랜드","4762","4762","0.2853","2","0.2188","0.3685","상승","후시다인 더마 트러블 징크 카밍 선크림 · 후시다인 더마 트러블 선크림"],["백탁","Pain","브랜드","2513","2513","0.1506","3","","","","다이 소 백탁 없는 선크림 · 닥터지 선크림 백탁 · 올리브영 백탁 없는 선크림"],["톤업·커버","Feature","논브랜드","568496","711436","0.3691","1","-0.1461","-0.0412","보합","톤업 선크림 · 파데프리 선크림 · 톤업 선크림 추천"],["자차 방식(무기·유기)","Feature","논브랜드","441597","503247","0.2867","2","0.0022","0.1253","보합","무기자차 선크림 · 유기자차 선크림 · 무기자차 선크림 추천"],["제형(스틱·쿠션 등)","Feature","논브랜드","430829","430829","0.2798","3","-0.2001","-0.1018","하락","선스틱 · 선스틱 추천 · 아기 선스틱"],["워터프루프","Feature","논브랜드","99110","99110","0.0644","4","-0.1931","-0.094","보합","워터프루프 선크림"],["제형(스틱·쿠션 등)","Feature","브랜드","1348946","1348946","0.4869","1","-0.2199","-0.1241","하락","ahc 선스틱 · 덱스 선스틱 · 오브제 선스틱"],["톤업·커버","Feature","브랜드","1149210","1149210","0.4148","2","-0.0136","0.1076","보합","달바 톤업 선크림 · 헤라 톤업 선크림 · 이니스프리 톤업 선크림"],["자차 방식(무기·유기)","Feature","브랜드","234664","234664","0.0847","3","0.2718","0.428","잠정","에스트라 무기자차 선크림 · 자작나무 무기자차 선크림 · 구달 무기자차 선크림"],["차단 지수(SPF·PA)","Feature","브랜드","37710","37710","0.0136","4","-0.3402","-0.2592","하락","바나나보트 선크림 100"],["사용 대상(아기·남성·임산부)","Attribute","논브랜드","222680","331900","0.5458","1","0.0233","0.149","보합","남자 썬크림 · 아기 선크림 · 남자 선크림 추천"],["해외 제품","Attribute","논브랜드","60990","104110","0.1495","2","-0.0732","0.0406","보합","일본 선크림"],["사용 부위(바디·얼굴)","Attribute","논브랜드","50910","81010","0.1248","3","-0.1832","-0.0829","보합","바디 선크림"],["화장 궁합","Attribute","논브랜드","37670","37670","0.0923","4","-0.0653","0.0495","보합","화잘먹 선크림"],["수분·촉촉","Attribute","논브랜드","31460","31460","0.0771","5","0.1571","0.2992","보합","수분 선크림"],["모공 케어","Attribute","논브랜드","4282","4282","0.0105","6","","","","모공 선크림 · 선크림 모공 · 선크림 모공 디시"],["수분·촉촉","Attribute","브랜드","283980","283980","0.7918","1","-0.1446","-0.0395","보합","자작나무 수분 선크림 · 라운드랩 자작나무 수분 선크림"],["순한·진정","Attribute","브랜드","40020","40020","0.1116","2","0.2358","0.3876","상승","구달 어성초 선크림"],["피부 타입(지성·건성)","Attribute","브랜드","34140","34140","0.0952","3","0.2052","0.3532","상승","이니스프리 노세범 선크림"],["모공 케어","Attribute","브랜드","508","508","0.0014","4","","","","오드로이 모공수축 선크림"],["코어·일반","unclassified","논브랜드","1090890","1710725","1.0","1","0.1575","0.2997","보합","썬크림 · 선크림 추천 · 선크림 바르는법"],["브랜드·제품명","unclassified","브랜드","5379997","6285316","1.0","1","","","","닥터지 선크림 · 조선미녀 선크림 · 달바 선크림"]],"types":["text","tag","text","num","num","share","num","pct","pct","text","text"],"sort":3},{"rows":[["선크림 세안","Pain","세안·지우기 부담","","40900","-0.4282",""],["썬크림 세안","Pain","세안·지우기 부담","","35640","",""],["백탁없는 선크림","Pain","백탁","","23770","-0.0235",""],["눈시림 없는 선크림","Pain","눈시림","","20570","-0.6021",""],["선크림 눈시림","Pain","눈시림","","17540","-0.2503",""],["무기자차 선크림 세안","Pain","세안·지우기 부담","","16860","0.3673","Y"],["끈적임 없는 선크림","Pain","끈적임","","10470","-0.135",""],["선크림 백탁","Pain","백탁","","8260","-0.2518",""],["선크림 백탁현상","Pain","백탁","","5420","",""],["무기자차 선크림 클렌징","Pain","세안·지우기 부담","","5257","","Y"],["선크림 밀림","Pain","밀림","","4110","",""],["백탁 선크림","Pain","백탁","","3740","",""],["백탁없는 무기자차 선크림","Pain","백탁","","3624","","Y"],["끈적임 없는 선스틱","Pain","끈적임","","3526","-0.5528","Y"],["선크림 트러블","Pain","트러블·모공 막힘","","3012","",""],["선스틱 단점","Pain","단점·불만","","2900","","Y"],["후시다인 더마 트러블 징크 카밍 선크림","Pain","트러블·모공 막힘","후시다인","2690","","Y"],["달바 선크림 눈시림","Pain","눈시림","달바","2600","",""],["백탁있는 선크림","Pain","백탁","","2415","",""],["모공 안막는 선크림","Pain","트러블·모공 막힘","","2361","","Y"],["후시다인 더마 트러블 선크림","Pain","트러블·모공 막힘","후시다인","2072","",""],["선크림 눈 시림 성분","Pain","눈시림","","2040","",""],["눈시림 없는 톤업 선크림","Pain","눈시림","","1796","","Y"],["무기자차 선크림 백탁","Pain","백탁","","1788","","Y"],["논코메도제닉 무기자차 선크림","Pain","트러블·모공 막힘","","1688","","Y"],["눈 시림 선크림","Pain","눈시림","","1646","",""],["백탁 현상 없는 선크림","Pain","백탁","","1620","",""],["백탁없는 선크림 추천","Pain","백탁","","1604","",""],["선크림 백탁 없이 바르는 법","Pain","백탁","","1440","",""],["선크림 피부 트러블","Pain","트러블·모공 막힘","","1403","",""],["트러블 선크림","Pain","트러블·모공 막힘","","1350","",""],["선크림 때밀림","Pain","밀림","","1254","",""],["백탁 없는 선크림 디시","Pain","백탁","","1230","",""],["눈시림 없는 선크림 추천","Pain","눈시림","","1220","",""],["무기자차 선크림 세안디시","Pain","세안·지우기 부담","","1200","","Y"],["선크림 눈 시림 해결","Pain","눈시림","","1137","",""],["무기자차 선크림 클렌징 밀크","Pain","세안·지우기 부담","","1113","","Y"],["선크림 눈시림 이유","Pain","눈시림","","1098","",""],["트러블 피부 선크림","Pain","트러블·모공 막힘","","1039","",""],["선크림 바르면 트러블","Pain","트러블·모공 막힘","","974","",""],["선크림 백탁 디시","Pain","백탁","","970","",""],["선크림 눈시림 해결 디시","Pain","눈시림","","950","",""],["트러블 안나는 선크림","Pain","트러블·모공 막힘","","947","",""],["무기자차 선크림 눈시림","Pain","눈시림","","942","","Y"],["비오레 선크림 눈시림","Pain","눈시림","비오레","900","",""],["닥터지 선크림 눈시림","Pain","눈시림","닥터지","827","",""],["자작나무 선크림 눈시림","Pain","눈시림","자작나무","798","",""],["선크림 건조","Pain","건조함","","785","",""],["눈시림 없는 선크림 더쿠","Pain","눈시림","","780","",""],["다이 소 백탁 없는 선크림","Pain","백탁","다이소","778","",""],["무기자차 선크림 세안법","Pain","세안·지우기 부담","","734","","Y"],["무기자차 선크림 이중세안","Pain","세안·지우기 부담","","708","","Y"],["선크림 모공끼임","Pain","트러블·모공 막힘","","708","","Y"],["선크림 백탁현상 해결","Pain","백탁","","700","",""],["백탁 선크림 추천","Pain","백탁","","650","",""],["선크림 화장 밀림","Pain","밀림","","646","","Y"],["선크림 건조함","Pain","건조함","","621","",""],["눈시림 없는 선크림 디시","Pain","눈시림","","600","",""],["자작나무 수분 선크림 눈시림","Pain","눈시림","자작나무","596","","Y"],["닥터지 선크림 백탁","Pain","백탁","닥터지","591","",""],["선크림 밀림 현상","Pain","밀림","","591","",""],["선크림 눈시림 디시","Pain","눈시림","","580","",""],["선크림 바르면 건조","Pain","건조함","","574","",""],["선크림 바르고 건조할때","Pain","건조함","","563","",""],["무기자차 선크림 단점","Pain","단점·불만","","561","","Y"],["헤라 선크림 눈시림","Pain","눈시림","헤라","518","",""],["조선미녀 선크림 눈시림","Pain","눈시림","조선미녀","463","",""],["선크림 트러블 디시","Pain","트러블·모공 막힘","","460","",""],["트러블 없는 선크림","Pain","트러블·모공 막힘","","444","",""],["올리브영 백탁 없는 선크림","Pain","백탁","올리브영","440","",""],["백탁없는 남자 선크림","Pain","백탁","","430","","Y"],["선크림 밀림더쿠","Pain","밀림","","420","",""],["남자 선크림 백탁","Pain","백탁","","419","","Y"],["백탁없는 톤업 선크림","Pain","백탁","","411","","Y"],["남자 선크림 백탁디시","Pain","백탁","","410","","Y"],["선크림 백탁 없는","Pain","백탁","","406","",""],["피지오겔 선크림 눈시림","Pain","눈시림","피지오겔","405","",""],["끈적임 없는 선크림 추천","Pain","끈적임","","397","",""],["선크림 모공 막힘","Pain","트러블·모공 막힘","","390","","Y"],["에스쁘아 선크림 눈시림","Pain","눈시림","에스쁘아","384","",""],["선크림 밀림 디시","Pain","밀림","","380","",""],["밀림없는 선크림","Pain","밀림","","345","",""],["선크림 끈적임","Pain","끈적임","","343","",""],["라로슈포제 선크림 눈시림","Pain","눈시림","라로슈포제","341","",""],["선크림 백탁 없애기","Pain","백탁","","331","",""],["다이소 선크림 눈시림","Pain","눈시림","다이소","329","",""],["셀퓨전씨 선크림 눈시림","Pain","눈시림","셀퓨전씨","326","",""],["유기자차 선크림 단점","Pain","단점·불만","","314","","Y"],["선크림 백탁 뜻","Pain","백탁","","301","",""],["백탁 심한 선크림","Pain","백탁","","296","",""],["속 건조 선크림","Pain","건조함","","291","",""],["아넷사 선크림 눈시림","Pain","눈시림","아넷사","290","",""],["백탁있는 선크림 추천","Pain","백탁","","290","",""],["선크림 눈시림 더쿠","Pain","눈시림","","290","",""],["무기자차 선크림 건조","Pain","건조함","","287","","Y"],["선크림 건조디시","Pain","건조함","","280","",""],["백탁없는 선크림 올리브영","Pain","백탁","올리브영","275","",""],["선크림 백탁 없애는 법","Pain","백탁","","271","",""],["선크림 단점","Pain","단점·불만","","265","",""],["유기자차 선크림 눈시림","Pain","눈시림","","250","","Y"],["백탁없는 선크림 더쿠","Pain","백탁","","230","",""],["자작나무 수분 선크림 백탁","Pain","백탁","자작나무","217","","Y"],["선스틱 단점 디시","Pain","단점·불만","","210","","Y"],["끈적임 없는 선크림 디시","Pain","끈적임","","190","",""],["식물나라 선크림 눈시림","Pain","눈시림","식물나라","180","",""],["이니스프리 선크림 눈시림","Pain","눈시림","이니스프리","151","",""],["에스트라 선크림 백탁","Pain","백탁","에스트라","140","",""],["선크림 트러블더쿠","Pain","트러블·모공 막힘","","140","",""],["무기자차 선크림 트러블","Pain","트러블·모공 막힘","","139","","Y"],["남자 백탁 없는 선크림 디시","Pain","백탁","","130","","Y"],["일리윤 선크림 눈시림","Pain","눈시림","일리윤","128","",""],["선크림 백탁더쿠","Pain","백탁","","120","",""],["선크림 눈시림방지","Pain","눈시림","","120","",""],["선크림 바르고 건조","Pain","건조함","","120","",""],["아떼 선크림 눈시림","Pain","눈시림","아떼","112","",""],["더마 트러블 징크 카밍 선크림","Pain","트러블·모공 막힘","","87","","Y"],["자작나무 선크림 백탁","Pain","백탁","자작나무","72","",""],["시세이도 선크림 눈시림","Pain","눈시림","시세이도","69","",""],["피부 트러블 선크림","Pain","트러블·모공 막힘","","64","",""],["선크림만 바르면 트러블","Pain","트러블·모공 막힘","","32","",""],["톤업 선크림","Feature","톤업·커버","","279780","-0.1466",""],["달바 톤업 선크림","Feature","톤업·커버","달바","254840","0.0462",""],["무기자차 선크림","Feature","자차 방식(무기·유기)","","241160","0.0155",""],["ahc 선스틱","Feature","제형(스틱·쿠션 등)","AHC","224410","-0.3446",""],["선스틱","Feature","제형(스틱·쿠션 등)","","212700","-0.1931",""],["덱스 선스틱","Feature","제형(스틱·쿠션 등)","덱스","145780","-0.2681",""],["톤업 썬크림","Feature","톤업·커버","","142940","",""],["오브제 선스틱","Feature","제형(스틱·쿠션 등)","오브제","140530","0.0161",""],["헤라 톤업 선크림","Feature","톤업·커버","헤라","135930","0.2085",""],["워터프루프 선크림","Feature","워터프루프","","99110","-0.1931",""],["파데프리 선크림","Feature","톤업·커버","","93820","-0.2777",""],["선스틱 추천","Feature","제형(스틱·쿠션 등)","","84840","-0.2306",""],["가히 선스틱","Feature","제형(스틱·쿠션 등)","가히","69500","-0.3964",""],["톤업 선크림 추천","Feature","톤업·커버","","62780","-0.1853",""],["무기자차 썬크림","Feature","자차 방식(무기·유기)","","61650","",""],["넛세린 선스틱","Feature","제형(스틱·쿠션 등)","넛세린","59810","1.1502",""],["다이소 선스틱","Feature","제형(스틱·쿠션 등)","다이소","48850","0.3797",""],["유기자차 선크림","Feature","자차 방식(무기·유기)","","46950","0.0023",""],["무기자차 선크림 추천","Feature","자차 방식(무기·유기)","","46200","0.3763",""],["남자 톤업 선크림","Feature","톤업·커버","","42980","0.4688","Y"],["김정문알로에 선스틱","Feature","제형(스틱·쿠션 등)","김정문","42790","-0.2402",""],["이니스프리 톤업 선크림","Feature","톤업·커버","이니스프리","37710","0.272",""],["바나나보트 선크림 100","Feature","차단 지수(SPF·PA)","바나나보트","37710","-0.3402",""],["토코보 선스틱","Feature","제형(스틱·쿠션 등)","토코보","37270","1.1223",""],["다이소 톤업선크림","Feature","톤업·커버","다이소","35110","0.0631",""],["식물나라 톤업 선크림","Feature","톤업·커버","식물나라","34400","0.1613",""],["식물나라 선스틱","Feature","제형(스틱·쿠션 등)","식물나라","31620","-0.3029",""],["달바 워터풀 톤업 선크림","Feature","톤업·커버","달바","30480","-0.0969",""],["구달 톤업 선크림","Feature","톤업·커버","구달","29070","-0.2271",""],["닥터지 선스틱","Feature","제형(스틱·쿠션 등)","닥터지","28980","-0.4376",""],["자작나무 톤업 선크림","Feature","톤업·커버","자작나무","27730","-0.2113",""],["무기자차 선스틱","Feature","자차 방식(무기·유기)","","27060","-0.2388",""],["아트델리 톤업 선크림","Feature","톤업·커버","아트델리","26022","",""],["닥터지 톤업 선크림","Feature","톤업·커버","닥터지","22230","-0.4038",""],["김정문 선스틱","Feature","제형(스틱·쿠션 등)","김정문","21850","-0.3413",""],["에스트라 무기자차 선크림","Feature","자차 방식(무기·유기)","에스트라","21610","0.7714",""],["라로슈포제 톤업 선크림","Feature","톤업·커버","라로슈포제","20600","-0.1472",""],["올리브영 톤업 선크림","Feature","톤업·커버","올리브영","20280","-0.2342",""],["가희 선스틱","Feature","제형(스틱·쿠션 등)","가희","19820","-0.8681",""],["유이크 톤업 선크림","Feature","톤업·커버","유이크","19400","-0.6405",""],["셀퓨전씨 선 스틱","Feature","제형(스틱·쿠션 등)","셀퓨전씨","18970","0.1211",""],["헤라 선크림 톤업","Feature","톤업·커버","헤라","18050","",""],["에스트라 톤업 선크림","Feature","톤업·커버","에스트라","17690","-0.0035",""],["셀퓨전씨 톤업 선크림","Feature","톤업·커버","셀퓨전씨","17550","-0.3182",""],["듀이트리 선스틱","Feature","제형(스틱·쿠션 등)","듀이트리","17510","-0.535",""],["px 선스틱","Feature","제형(스틱·쿠션 등)","px","17150","0.1829",""],["올리브영 선스틱","Feature","제형(스틱·쿠션 등)","올리브영","15920","-0.1529",""],["달바 선스틱","Feature","제형(스틱·쿠션 등)","달바","15460","-0.4922",""],["그린핑거 선스틱","Feature","제형(스틱·쿠션 등)","그린핑거","15260","-0.3741",""],["차앤박 톤업 선크림","Feature","톤업·커버","차앤박","14790","-0.0637",""],["이니스프리 노세범 톤업 선크림","Feature","톤업·커버","이니스프리","14370","","Y"],["설화수 상백톤업선크림","Feature","톤업·커버","설화수","14350","0.2099",""],["달바 선크림 톤업","Feature","톤업·커버","달바","14180","",""],["자작나무 무기자차 선크림","Feature","자차 방식(무기·유기)","자작나무","14150","-0.1218",""],["달바 핑크 톤업 선크림","Feature","톤업·커버","달바","13990","-0.1541",""],["ahc 마스터즈 에어 리치 선스틱","Feature","제형(스틱·쿠션 등)","AHC","13690","0.2985",""],["랑콤 톤업 선크림","Feature","톤업·커버","랑콤","13690","0.1095",""],["설화수 톤업 선크림","Feature","톤업·커버","설화수","13660","0.1763",""],["아기 선스틱","Feature","제형(스틱·쿠션 등)","","13630","-0.0464","Y"],["구달 무기자차 선크림","Feature","자차 방식(무기·유기)","구달","13620","0.0178",""],["선크림 무기 자차","Feature","자차 방식(무기·유기)","","12910","-0.3705",""],["아떼 무기자차 선크림","Feature","자차 방식(무기·유기)","아떼","12850","0.7309",""],["메이크프렘 톤업 선크림","Feature","톤업·커버","메이크프렘","12840","-0.492",""],["가히 에어리 핏 선스틱","Feature","제형(스틱·쿠션 등)","가히","12320","-0.5227",""],["시세이도 선스틱","Feature","제형(스틱·쿠션 등)","시세이도","12170","-0.2188",""],["아비브 톤업 선크림","Feature","톤업·커버","아비브","11880","",""],["딘시 톤업 선크림","Feature","톤업·커버","딘시","11769","",""],["아토팜 선스틱","Feature","제형(스틱·쿠션 등)","아토팜","11710","",""],["라로제 선스틱","Feature","제형(스틱·쿠션 등)","라로제","11580","",""],["자작나무 선스틱","Feature","제형(스틱·쿠션 등)","자작나무","11350","",""],["다이소 무기자차 선크림","Feature","자차 방식(무기·유기)","다이소","11330","",""],["스킨 아쿠아 톤업 선크림","Feature","톤업·커버","스킨아쿠아","10920","",""],["남자 선스틱","Feature","제형(스틱·쿠션 등)","","10820","","Y"],["자작나무 수분 톤업 선크림","Feature","톤업·커버","자작나무","10720","","Y"],["닥터지 그린 마일드 업 선스틱","Feature","제형(스틱·쿠션 등)","닥터지","10630","","Y"],["오브제 포어제로 선스틱","Feature","제형(스틱·쿠션 등)","오브제","10270","",""],["이즈앤트리 선 스틱","Feature","제형(스틱·쿠션 등)","이즈앤트리","10230","",""],["달바 퍼플 톤업 선크림","Feature","톤업·커버","달바","10150","",""],["에스쁘아 톤업 선크림","Feature","톤업·커버","에스쁘아","10120","",""],["토리든 선스틱","Feature","제형(스틱·쿠션 등)","토리든","10080","",""],["유이크 선스틱","Feature","제형(스틱·쿠션 등)","유이크","9930","",""],["달바 톤업 선크림 퍼플","Feature","톤업·커버","달바","9770","",""],["닥터지 선크림 무기자차","Feature","자차 방식(무기·유기)","닥터지","9770","",""],["ahc 마스터즈 선스틱","Feature","제형(스틱·쿠션 등)","AHC","9670","",""],["몽디에스 선스틱","Feature","제형(스틱·쿠션 등)","몽디에스","9628","",""],["아이오페 톤업 선크림","Feature","톤업·커버","아이오페","9430","",""],["무기자차 톤업 선크림","Feature","자차 방식(무기·유기)","","9230","",""],["조선미녀 선스틱","Feature","제형(스틱·쿠션 등)","조선미녀","9140","",""],["닥터지 무기자차 선크림","Feature","자차 방식(무기·유기)","닥터지","9060","",""],["워터프루프 선스틱","Feature","제형(스틱·쿠션 등)","","8980","",""],["선크림 무기자차 유기자차","Feature","자차 방식(무기·유기)","","8790","",""],["쿨링 선스틱","Feature","제형(스틱·쿠션 등)","","8760","",""],["선스틱 효과","Feature","제형(스틱·쿠션 등)","","8680","",""],["비레디 선스틱","Feature","제형(스틱·쿠션 등)","비레디","8670","",""],["헤라 uv프로텍터 톤업 선크림","Feature","톤업·커버","헤라","8640","",""],["박세리 선스틱","Feature","제형(스틱·쿠션 등)","박세리","8500","",""],["아비브 선스틱","Feature","제형(스틱·쿠션 등)","아비브","8490","",""],["넘버즈인 톤업 선크림","Feature","톤업·커버","넘버즈인","8420","",""],["메디힐 선스틱","Feature","제형(스틱·쿠션 등)","메디힐","8398","",""],["톤업 선스틱","Feature","톤업·커버","","8260","",""],["선스틱 선크림 차이","Feature","제형(스틱·쿠션 등)","","8037","",""],["올리브 영 무기자차 선크림","Feature","자차 방식(무기·유기)","올리브영","8030","",""],["선스틱 끝까지 쓰기","Feature","제형(스틱·쿠션 등)","","7769","",""],["듀이트리 톤업 선크림","Feature","톤업·커버","듀이트리","7740","",""],["비오레 톤업 선크림","Feature","톤업·커버","비오레","7640","",""],["가히 캐비어 선스틱","Feature","제형(스틱·쿠션 등)","가히","7565","",""],["에스트라 선크림 무기자차","Feature","자차 방식(무기·유기)","에스트라","7520","",""],["자작나무 수분 선스틱","Feature","제형(스틱·쿠션 등)","자작나무","7510","","Y"],["ahc 톤업 선크림","Feature","톤업·커버","AHC","7450","",""],["선스틱 바르는 법","Feature","제형(스틱·쿠션 등)","","7443","",""],["노세범 선스틱","Feature","제형(스틱·쿠션 등)","","7290","","Y"],["유아 선스틱","Feature","제형(스틱·쿠션 등)","","7249","","Y"],["올리브영 선스틱 추천","Feature","제형(스틱·쿠션 등)","올리브영","7200","",""],["메디필 선스틱","Feature","제형(스틱·쿠션 등)","메디필","7160","",""],["포어 제로 오일 컨트롤 선스틱","Feature","제형(스틱·쿠션 등)","","7020","","Y"],["네이처리퍼블릭 선스틱","Feature","제형(스틱·쿠션 등)","네이처리퍼블릭","6950","",""],["달바 그린 톤업 선크림","Feature","톤업·커버","달바","6930","",""],["에스트라 더마uv365 장벽수분 무기자차 선크림","Feature","자차 방식(무기·유기)","에스트라","6890","","Y"],["구달 선크림 무기자차","Feature","자차 방식(무기·유기)","구달","6870","",""],["애터미 선스틱","Feature","제형(스틱·쿠션 등)","애터미","6858","",""],["선크림 유기자차 무기자차","Feature","자차 방식(무기·유기)","","6820","",""],["자작나무 수분 선크림 무기자차","Feature","자차 방식(무기·유기)","자작나무","6790","","Y"],["군마트 선스틱","Feature","제형(스틱·쿠션 등)","군마트","6480","",""],["선크림 무기자차 유기자차 차이","Feature","자차 방식(무기·유기)","","6400","",""],["오휘 선스틱","Feature","제형(스틱·쿠션 등)","오휘","6310","",""],["다이소 선스틱 추천","Feature","제형(스틱·쿠션 등)","다이소","6240","",""],["달바 톤업 선크림 핑크","Feature","톤업·커버","달바","6220","",""],["ahc 에어리치 선스틱","Feature","제형(스틱·쿠션 등)","AHC","6210","",""],["자작나무 선크림 무기자차","Feature","자차 방식(무기·유기)","자작나무","6030","",""],["아떼 톤업 선크림","Feature","톤업·커버","아떼","6000","",""],["비플레인 톤업 선크림","Feature","톤업·커버","비플레인","5980","",""],["미샤 톤업 선크림","Feature","톤업·커버","미샤","5900","",""],["토리든 무기자차 선크림","Feature","자차 방식(무기·유기)","토리든","5860","",""],["조선미녀 톤업 선크림","Feature","톤업·커버","조선미녀","5796","",""],["파데프리 톤업 선크림","Feature","톤업·커버","","5720","",""],["ahc 선스틱 22g","Feature","제형(스틱·쿠션 등)","AHC","5680","",""],["디렉터 파이 선스틱","Feature","제형(스틱·쿠션 등)","디렉터파이","5544","",""],["올리브영 톤업 선크림 추천","Feature","톤업·커버","올리브영","5520","",""],["기름종이 선스틱","Feature","제형(스틱·쿠션 등)","","5413","","Y"],["톤업 선크림 남자","Feature","톤업·커버","","5387","","Y"],["라운드랩 선스틱","Feature","제형(스틱·쿠션 등)","라운드랩","5380","",""],["구달 선스틱","Feature","제형(스틱·쿠션 등)","구달","5360","",""],["토리든 톤업 선크림","Feature","톤업·커버","토리든","5280","",""],["키즈 선스틱","Feature","제형(스틱·쿠션 등)","","5272","","Y"],["빌리프 톤업 선크림","Feature","톤업·커버","빌리프","5080","",""],["아떼 비건 릴리프 무기자차 선크림","Feature","자차 방식(무기·유기)","아떼","5070","","Y"],["라운드랩 톤업 선크림","Feature","톤업·커버","라운드랩","5050","",""],["더마블록 선스틱","Feature","제형(스틱·쿠션 등)","더마블록","5050","",""],["헤라 uv 톤업 선크림","Feature","톤업·커버","헤라","5040","",""],["헤라 선스틱","Feature","제형(스틱·쿠션 등)","헤라","5040","",""],["에뛰드 톤업 선크림","Feature","톤업·커버","에뛰드","5000","",""],["올영 톤업 선크림","Feature","톤업·커버","올영","4991","",""],["셀퓨전씨 선크림 무기자차","Feature","자차 방식(무기·유기)","셀퓨전씨","4960","",""],["오브제 포어 제로 오일 컨트롤 선스틱","Feature","제형(스틱·쿠션 등)","오브제","4890","","Y"],["닥터아토 선스틱","Feature","제형(스틱·쿠션 등)","닥터","4880","",""],["남자 톤업 선크림 디시","Feature","톤업·커버","","4800","","Y"],["아트델리 멜라 컷 톤업 선크림","Feature","톤업·커버","아트델리","4760","",""],["어린이 선스틱","Feature","제형(스틱·쿠션 등)","","4751","","Y"],["cnp 톤업 선크림","Feature","톤업·커버","CNP","4680","",""],["남자 선스틱 추천","Feature","제형(스틱·쿠션 등)","","4606","","Y"],["일본 톤업 선크림","Feature","톤업·커버","","4600","","Y"],["이니스프리 선스틱","Feature","제형(스틱·쿠션 등)","이니스프리","4560","",""],["달바 무기자차 선크림","Feature","자차 방식(무기·유기)","달바","4480","",""],["메디큐브 톤업 선크림","Feature","톤업·커버","메디큐브","4470","",""],["빌리프 선스틱","Feature","제형(스틱·쿠션 등)","빌리프","4450","",""],["톤업크림 선크림 순서","Feature","톤업·커버","","4424","",""],["톤업 선크림 바르는 법","Feature","톤업·커버","","4408","",""],["오브제 선스틱 후기","Feature","제형(스틱·쿠션 등)","오브제","4336","",""],["닥터지 선크림 톤업","Feature","톤업·커버","닥터지","4320","",""],["무기자차 선크림 추천 디시","Feature","자차 방식(무기·유기)","","4300","",""],["바이오힐보 톤업 선크림","Feature","톤업·커버","바이오힐보","4270","",""],["싸이닉 선스틱","Feature","제형(스틱·쿠션 등)","싸이닉","4270","",""],["넛세린 시카밤 선스틱","Feature","제형(스틱·쿠션 등)","넛세린","4241","","Y"],["달바 선크림 무기자차","Feature","자차 방식(무기·유기)","달바","4240","",""],["ahc 내추럴 퍼펙션 프레쉬 선스틱","Feature","제형(스틱·쿠션 등)","AHC","4200","",""],["촉촉한 톤업 선크림","Feature","톤업·커버","","4180","","Y"],["라운드랩 무기자차 선크림","Feature","자차 방식(무기·유기)","라운드랩","4160","",""],["마데카 선스틱","Feature","제형(스틱·쿠션 등)","마데카","4154","",""],["토코보 코튼 소프트 선스틱","Feature","제형(스틱·쿠션 등)","토코보","4060","",""],["두잉왓 선스틱","Feature","제형(스틱·쿠션 등)","두잉왓","4035","",""],["지성 톤업 선크림","Feature","톤업·커버","","4028","","Y"],["프리메라 톤업 선크림","Feature","톤업·커버","프리메라","4025","",""],["구달 어성초 톤업 선크림","Feature","톤업·커버","구달","4020","","Y"],["벤튼 선스틱","Feature","제형(스틱·쿠션 등)","벤튼","3990","",""],["에뛰드 순정 톤업 선크림","Feature","톤업·커버","에뛰드","3949","",""],["선스틱 디시","Feature","제형(스틱·쿠션 등)","","3930","",""],["비오템 선스틱","Feature","제형(스틱·쿠션 등)","비오템","3890","",""],["아이오페 선스틱","Feature","제형(스틱·쿠션 등)","아이오페","3890","",""],["달바 톤업 선크림 그린","Feature","톤업·커버","달바","3870","",""],["마미 케어 들깨톤업 선크림","Feature","톤업·커버","마미케어","3851","",""],["건성 톤업 선크림","Feature","톤업·커버","","3811","","Y"],["이니스프리 톤업 노세범 선크림","Feature","톤업·커버","이니스프리","3720","","Y"],["더마블록 톤업 선크림","Feature","톤업·커버","더마블록","3692","",""],["다이소 톤업 선크림 추천","Feature","톤업·커버","다이소","3664","",""],["선스틱 선크림","Feature","제형(스틱·쿠션 등)","","3656","",""],["에뛰드 무기자차 선크림","Feature","자차 방식(무기·유기)","에뛰드","3630","",""],["바디 톤업 선크림","Feature","톤업·커버","","3613","","Y"],["남자 톤업 선크림 추천 디시","Feature","톤업·커버","","3610","","Y"],["닥터자르트 선스틱","Feature","제형(스틱·쿠션 등)","닥터자르트","3593","",""],["ahc 내추럴 퍼펙션 더블쉴드 선스틱","Feature","제형(스틱·쿠션 등)","AHC","3590","",""],["선크림 선스틱","Feature","제형(스틱·쿠션 등)","","3557","",""],["아이디얼포맨 선스틱","Feature","제형(스틱·쿠션 등)","아이디얼포맨","3540","","Y"],["오브제 오일 컨트롤 선스틱","Feature","제형(스틱·쿠션 등)","오브제","3517","","Y"],["톤업 선크림 남자 디시","Feature","톤업·커버","","3500","","Y"],["스타라이크 파데 프리 톤업 선크림","Feature","톤업·커버","스타라이크","3457","",""],["오브제 선스틱 디시","Feature","제형(스틱·쿠션 등)","오브제","3450","",""],["아떼 선크림 무기자차","Feature","자차 방식(무기·유기)","아떼","3408","",""],["라운드랩 자작나무 수분 톤업 선크림","Feature","톤업·커버","라운드랩","3400","","Y"],["px 무기자차 선크림","Feature","자차 방식(무기·유기)","px","3400","",""],["톤업 선크림 디시","Feature","톤업·커버","","3390","",""],["피지 오겔 톤업 선크림","Feature","톤업·커버","피지오겔","3309","",""],["디올 톤업 선크림","Feature","톤업·커버","디올","3303","",""],["보타니컬테라피 선스틱","Feature","제형(스틱·쿠션 등)","보타니컬테라피","3256","",""],["피지오겔 선스틱","Feature","제형(스틱·쿠션 등)","피지오겔","3244","",""],["올리브영 오브제 선스틱","Feature","제형(스틱·쿠션 등)","오브제","3227","",""],["스와니 브 멜라 즈노 톤업 선크림","Feature","톤업·커버","스와니브","3222","",""],["aa 선스틱","Feature","제형(스틱·쿠션 등)","","3220","",""],["조선미녀 선크림 무기자차","Feature","자차 방식(무기·유기)","조선미녀","3216","",""],["듀이트리 어반 쉐이드 쿨 카밍 선스틱","Feature","제형(스틱·쿠션 등)","듀이트리","3210","","Y"],["선스틱 기내반입","Feature","제형(스틱·쿠션 등)","","3206","","Y"],["다이소 선크림 무기자차","Feature","자차 방식(무기·유기)","다이소","3125","",""],["오휘 톤업 선크림","Feature","톤업·커버","오휘","3041","",""],["선크림 유기자차 무기자차 차이","Feature","자차 방식(무기·유기)","","3034","",""],["남성 톤업 선크림","Feature","톤업·커버","","3020","","Y"],["남자 톤업 선크림 추천","Feature","톤업·커버","","2996","","Y"],["그린 톤업 선크림","Feature","톤업·커버","","2985","",""],["셀 퓨전 씨 선크림 톤업","Feature","톤업·커버","셀퓨전씨","2975","",""],["무기자차 선크림 디시","Feature","자차 방식(무기·유기)","","2960","",""],["에뛰드 순정 디렉터 무기자차 선크림","Feature","자차 방식(무기·유기)","에뛰드","2960","",""],["메이크프렘 수딩 핑크 톤업 선크림","Feature","톤업·커버","메이크프렘","2900","",""],["핑크 톤업 선크림","Feature","톤업·커버","","2857","",""],["임산부 무기자차 선크림","Feature","자차 방식(무기·유기)","","2840","","Y"],["노세범 톤업 선크림","Feature","톤업·커버","","2825","","Y"],["선크림 톤업","Feature","톤업·커버","","2810","",""],["톤업 선크림 더쿠","Feature","톤업·커버","","2770","",""],["바세린 톤업 선크림","Feature","톤업·커버","바세린","2760","",""],["일리윤 무기자차 선크림","Feature","자차 방식(무기·유기)","일리윤","2750","",""],["라로슈포제 선크림 톤업","Feature","톤업·커버","라로슈포제","2732","",""],["토니모리 톤업 선크림","Feature","톤업·커버","토니모리","2730","",""],["올영 톤업 선크림 추천","Feature","톤업·커버","올영","2688","",""],["촉촉 톤업 선크림","Feature","톤업·커버","","2660","","Y"],["라운드랩 자작나무 무기자차 선크림","Feature","자차 방식(무기·유기)","라운드랩","2490","",""],["토리든 선크림 무기자차","Feature","자차 방식(무기·유기)","토리든","2443","",""],["무기자차 선크림 바르는법","Feature","자차 방식(무기·유기)","","2434","",""],["식물나라 선크림 무기자차","Feature","자차 방식(무기·유기)","식물나라","2426","",""],["선크림 무기자차 유기자차 구분","Feature","자차 방식(무기·유기)","","2289","",""],["구달 맑은 어성초 진정 무기자차 선크림","Feature","자차 방식(무기·유기)","구달","2100","","Y"],["헤라 선크림 무기자차","Feature","자차 방식(무기·유기)","헤라","1957","",""],["이니스프리 무기자차 선크림","Feature","자차 방식(무기·유기)","이니스프리","1930","",""],["비오레 선크림 무기자차","Feature","자차 방식(무기·유기)","비오레","1913","",""],["이지워시 무기자차 선크림","Feature","자차 방식(무기·유기)","","1905","",""],["모공커버 선크림","Feature","톤업·커버","","1815","","Y"],["비프루브 마린 무기자차 마일드 선크림","Feature","자차 방식(무기·유기)","비프루브","1703","","Y"],["독도 선크림 무기 자차","Feature","자차 방식(무기·유기)","독도","1677","",""],["셀리맥스 브라이트닝 모공잡티 선크림","Feature","톤업·커버","셀리맥스","1660","","Y"],["토리든 다이브인 무기자차 마일드 선크림","Feature","자차 방식(무기·유기)","토리든","1649","","Y"],["선크림 유기자차 무기자차 구분","Feature","자차 방식(무기·유기)","","1595","",""],["ahc 선크림 무기자차","Feature","자차 방식(무기·유기)","AHC","1588","",""],["무기자차 선크림 뜻","Feature","자차 방식(무기·유기)","","1586","",""],["올리브영 무기자차 선크림 추천","Feature","자차 방식(무기·유기)","올리브영","1557","",""],["논나노 무기자차 선크림","Feature","자차 방식(무기·유기)","","1501","",""],["에뛰드 순정 무기자차 선크림","Feature","자차 방식(무기·유기)","에뛰드","1414","",""],["라운드랩 선크림 무기자차","Feature","자차 방식(무기·유기)","라운드랩","1388","",""],["구달 어성초 무기자차 선크림","Feature","자차 방식(무기·유기)","구달","1358","","Y"],["라운드랩 자작나무 선크림 무기자차","Feature","자차 방식(무기·유기)","라운드랩","1355","",""],["구달 어성초 선크림 무기자차","Feature","자차 방식(무기·유기)","구달","1346","","Y"],["셀리맥스 모공 잡티 선크림","Feature","톤업·커버","셀리맥스","1344","","Y"],["남자 무기자차 선크림","Feature","자차 방식(무기·유기)","","1333","","Y"],["이니스프리 선크림 무기자차","Feature","자차 방식(무기·유기)","이니스프리","1312","",""],["피지오겔 선크림 무기자차","Feature","자차 방식(무기·유기)","피지오겔","1293","",""],["유이크 무기자차 선크림","Feature","자차 방식(무기·유기)","유이크","1224","",""],["무기자차 워터프루프 선크림","Feature","자차 방식(무기·유기)","","1213","",""],["에스쁘아 선크림 무기자차","Feature","자차 방식(무기·유기)","에스쁘아","1207","",""],["자작나무 수분 선크림 무기자차유기자차","Feature","자차 방식(무기·유기)","자작나무","1188","","Y"],["라로슈포제 선크림 무기자차","Feature","자차 방식(무기·유기)","라로슈포제","1178","",""],["아넷사 선크림 무기 자차","Feature","자차 방식(무기·유기)","아넷사","1156","",""],["무기자차 선크림 화장","Feature","자차 방식(무기·유기)","","1114","","Y"],["무기자차 유기자차 선크림 차이","Feature","자차 방식(무기·유기)","","1107","",""],["시드물 무기자차 선크림","Feature","자차 방식(무기·유기)","시드물","1093","",""],["에스트라 무기자차 선크림 디시","Feature","자차 방식(무기·유기)","에스트라","1080","",""],["무기자차 선크림 성분","Feature","자차 방식(무기·유기)","","1063","",""],["벤튼 무기자차 선크림","Feature","자차 방식(무기·유기)","벤튼","1060","",""],["에뛰드 순정 선크림 무기자차","Feature","자차 방식(무기·유기)","에뛰드","1057","",""],["무기자차 유기자차 선크림","Feature","자차 방식(무기·유기)","","1056","",""],["달바 톤업 선크림 무기자차","Feature","자차 방식(무기·유기)","달바","984","",""],["남자 무기자차 선크림 추천","Feature","자차 방식(무기·유기)","","961","","Y"],["선크림 무기자차 추천","Feature","자차 방식(무기·유기)","","894","",""],["헤라 톤업 선크림 무기자차","Feature","자차 방식(무기·유기)","헤라","845","",""],["디렉터파이 무기자차 선크림","Feature","자차 방식(무기·유기)","디렉터파이","845","",""],["무기자차 선크림 올리브영","Feature","자차 방식(무기·유기)","올리브영","788","",""],["셀퓨전씨 무기자차 선크림","Feature","자차 방식(무기·유기)","셀퓨전씨","787","",""],["라운드랩 자작나무 수분 선크림 무기자차","Feature","자차 방식(무기·유기)","라운드랩","753","","Y"],["무기자차 수분 선크림","Feature","자차 방식(무기·유기)","","744","","Y"],["메이크프렘 선크림 무기 자차","Feature","자차 방식(무기·유기)","메이크프렘","741","",""],["순한 무기자차 선크림","Feature","자차 방식(무기·유기)","","738","","Y"],["무기자차 선크림 추천 더쿠","Feature","자차 방식(무기·유기)","","720","",""],["무기자차 선크림 더쿠","Feature","자차 방식(무기·유기)","","690","",""],["모공 프라이머 선크림 순서","Feature","톤업·커버","","439","","Y"],["모공 커버 선크림 디시","Feature","톤업·커버","","130","","Y"],["모공 프라이머 선크림","Feature","톤업·커버","","98","","Y"],["자작나무 수분 선크림","Attribute","수분·촉촉","자작나무","249060","-0.1923",""],["남자 썬크림","Attribute","사용 대상(아기·남성·임산부)","","81720","0.3922",""],["아기 선크림","Attribute","사용 대상(아기·남성·임산부)","","79710","-0.1371",""],["남자 선크림","Attribute","사용 대상(아기·남성·임산부)","","78160","",""],["일본 선크림","Attribute","해외 제품","","60990","-0.0732",""],["바디 선크림","Attribute","사용 부위(바디·얼굴)","","50910","-0.1832",""],["일본 썬크림","Attribute","해외 제품","","43120","",""],["구달 어성초 선크림","Attribute","순한·진정","구달","40020","0.2358",""],["화잘먹 선크림","Attribute","화장 궁합","","37670","-0.0653",""],["라운드랩 자작나무 수분 선크림","Attribute","수분·촉촉","라운드랩","34920","0.3568",""],["이니스프리 노세범 선크림","Attribute","피부 타입(지성·건성)","이니스프리","34140","0.2052",""],["남자 선크림 추천","Attribute","사용 대상(아기·남성·임산부)","","32020","0.2045",""],["수분 선크림","Attribute","수분·촉촉","","31460","0.1571",""],["남자 썬 크림 추천","Attribute","사용 대상(아기·남성·임산부)","","31060","",""],["바디 썬크림","Attribute","사용 부위(바디·얼굴)","","30100","",""],["유아 선크림","Attribute","사용 대상(아기·남성·임산부)","","29230","-0.2557",""],["모공 선크림","Attribute","모공 케어","","2049","",""],["선크림 모공","Attribute","모공 케어","","1263","",""],["선크림 모공 디시","Attribute","모공 케어","","600","",""],["오드로이 모공수축 선크림","Attribute","모공 케어","오드로이","508","",""],["모공 선크림 디시","Attribute","모공 케어","","260","",""],["선크림 모공더쿠","Attribute","모공 케어","","110","",""],["썬크림","unclassified","코어·일반","","583810","0.1748",""],["선크림","unclassified","코어·일반","","557310","",""],["선크림 추천","unclassified","코어·일반","","367890","",""],["닥터지 선크림","unclassified","브랜드·제품명","닥터지","347450","",""],["조선미녀 선크림","unclassified","브랜드·제품명","조선미녀","282700","",""],["달바 선크림","unclassified","브랜드·제품명","달바","281290","",""],["헤라 썬크림","unclassified","브랜드·제품명","헤라","256890","",""],["다이소 선크림","unclassified","브랜드·제품명","다이소","220590","",""],["셀퓨전씨 선크림","unclassified","브랜드·제품명","셀퓨전씨","214820","",""],["비오레 선크림","unclassified","브랜드·제품명","비오레","191150","",""],["다이 소썬 크림","unclassified","브랜드·제품명","다이소","186470","",""],["ahc 선크림","unclassified","브랜드·제품명","AHC","181930","",""],["자작나무 선크림","unclassified","브랜드·제품명","자작나무","149780","",""],["헤라 선크림","unclassified","브랜드·제품명","헤라","149260","",""],["랑콤 선크림","unclassified","브랜드·제품명","랑콤","146650","",""],["구달 선크림","unclassified","브랜드·제품명","구달","144100","",""],["에스트라 선크림","unclassified","브랜드·제품명","에스트라","138060","",""],["식물나라 선크림","unclassified","브랜드·제품명","식물나라","118150","",""],["라로슈포제 선크림","unclassified","브랜드·제품명","라로슈포제","117490","",""],["에스쁘아 선크림","unclassified","브랜드·제품명","에스쁘아","106180","",""],["제로이드 선크림","unclassified","브랜드·제품명","제로이드","102120","",""],["양현종 썬크림","unclassified","브랜드·제품명","양현종","98220","",""],["이니스프리 선크림","unclassified","브랜드·제품명","이니스프리","96260","",""],["아넷사 선크림","unclassified","브랜드·제품명","아넷사","89870","",""],["양현종 선크림","unclassified","브랜드·제품명","양현종","77640","",""],["아떼 선크림","unclassified","브랜드·제품명","아떼","76720","",""],["바나나보트 선크림","unclassified","브랜드·제품명","바나나보트","73720","",""],["시세이도 선크림","unclassified","브랜드·제품명","시세이도","71350","",""],["px 선크림","unclassified","브랜드·제품명","px","68840","",""],["올리브영 선크림","unclassified","브랜드·제품명","올리브영","66430","",""],["애터미 선크림","unclassified","브랜드·제품명","애터미","66120","",""],["김고은 선크림","unclassified","브랜드·제품명","김고은","65433","",""],["듀이트리 선크림","unclassified","브랜드·제품명","듀이트리","59920","",""],["디렉터파이 선크림","unclassified","브랜드·제품명","디렉터파이","59720","",""],["인셀덤 선크림","unclassified","브랜드·제품명","인셀덤","57870","",""],["아이오페 선크림","unclassified","브랜드·제품명","아이오페","53880","",""],["키엘 선크림","unclassified","브랜드·제품명","키엘","53280","",""],["다이소 선크림 추천","unclassified","브랜드·제품명","다이소","53260","",""],["토리든 선크림","unclassified","브랜드·제품명","토리든","51500","",""],["설화수 선크림","unclassified","브랜드·제품명","설화수","51390","",""],["라운드랩 선크림","unclassified","브랜드·제품명","라운드랩","51310","",""],["조선미녀 썬 크림","unclassified","브랜드·제품명","조선미녀","50770","",""],["올리브영 썬크림","unclassified","브랜드·제품명","올리브영","50500","",""],["부쉬맨 선크림","unclassified","브랜드·제품명","부쉬맨","49680","",""],["도미나스 선크림","unclassified","브랜드·제품명","도미나스","49230","",""],["아네 사 선크림","unclassified","브랜드·제품명","아네사","48520","",""],["다이 소 썬크림 추천","unclassified","브랜드·제품명","다이소","48210","",""],["피지오겔 선크림","unclassified","브랜드·제품명","피지오겔","47840","",""],["유이크 선크림","unclassified","브랜드·제품명","유이크","47140","",""],["올리브 영 썬크림 추천","unclassified","브랜드·제품명","올리브영","46760","",""],["올리브영 선크림 추천","unclassified","브랜드·제품명","올리브영","46310","",""],["자작 나무 썬크림","unclassified","브랜드·제품명","자작나무","43520","",""],["선크림 바르는법","unclassified","코어·일반","","43290","",""],["스킨1004 선크림","unclassified","브랜드·제품명","스킨1004","43150","",""],["메이크프렘 선크림","unclassified","브랜드·제품명","메이크프렘","41360","",""],["스완 선크림","unclassified","브랜드·제품명","스완","40824","",""],["넘버즈인 선크림","unclassified","브랜드·제품명","넘버즈인","40060","",""],["썬크림 바르는 법","unclassified","코어·일반","","40045","",""],["덱스 선크림","unclassified","브랜드·제품명","덱스","39130","",""],["압토솔 선크림","unclassified","브랜드·제품명","압토솔","37920","",""],["메디힐 선크림","unclassified","브랜드·제품명","메디힐","37870","",""],["그린핑거 선크림","unclassified","브랜드·제품명","그린핑거","37380","",""],["셀 퓨전 씨 썬 크림","unclassified","브랜드·제품명","셀퓨전씨","36810","",""],["비플레인 선크림","unclassified","브랜드·제품명","비플레인","36530","",""],["비오레 썬크림","unclassified","브랜드·제품명","비오레","36230","",""],["오휘 선크림","unclassified","브랜드·제품명","오휘","35550","",""],["셀리맥스 선크림","unclassified","브랜드·제품명","셀리맥스","35240","",""],["니베아 선크림","unclassified","브랜드·제품명","니베아","34980","",""],["아비브 선크림","unclassified","브랜드·제품명","아비브","34050","",""],["바를 선크림","unclassified","코어·일반","","33850","",""],["이지워시 선크림","unclassified","코어·일반","","33600","-0.0856",""],["아토팜 선크림","unclassified","브랜드·제품명","아토팜","33320","",""],["해라썬크림","unclassified","브랜드·제품명","헤라","32120","",""],["독도 선크림","unclassified","브랜드·제품명","독도","32060","",""],["상떼 선크림","unclassified","브랜드·제품명","상떼","31670","",""],["조선미녀 맑은쌀 선크림","unclassified","브랜드·제품명","조선미녀","31180","",""],["ahc 썬크림","unclassified","브랜드·제품명","AHC","30760","",""],["에스트라썬크림","unclassified","브랜드·제품명","에스트라","30630","",""],["라운드랩 자작나무 선크림","unclassified","브랜드·제품명","라운드랩","30620","",""],["일리윤 선크림","unclassified","브랜드·제품명","일리윤","30180","",""],["넘버즈인 3번 선크림","unclassified","브랜드·제품명","넘버즈인","29640","",""],["닥터자르트 선크림","unclassified","브랜드·제품명","닥터자르트","29380","",""],["선크림 유통기한","unclassified","코어·일반","","28450","",""],["몽디에스 선크림","unclassified","브랜드·제품명","몽디에스","28180","",""],["에스네이처 선크림","unclassified","브랜드·제품명","에스네이처","28120","",""],["알리 선크림","unclassified","브랜드·제품명","알리","27990","",""],["식물나라 썬 크림","unclassified","브랜드·제품명","식물나라","25810","",""],["에스쁘아 썬크림","unclassified","브랜드·제품명","에스쁘아","24340","",""],["썬크림 유통기한","unclassified","코어·일반","","22480","",""],["px 썬크림","unclassified","브랜드·제품명","px","18359","",""],["바나나보트 썬크림","unclassified","브랜드·제품명","바나나보트","17580","",""]],"types":["text","tag","tag","text","num","pct","text"],"sort":4}]</script>
+<script>
+(function(){
+  var T=JSON.parse(document.getElementById("data").textContent);
+  var num=function(v){var x=parseFloat(v);return v===""||isNaN(x)?null:x};
+  function fmt(v,ty){var x=num(v);if(ty==="num")return x===null?v:x.toLocaleString("ko-KR");if(ty==="dec2")return x===null?v:x.toFixed(2);
+    if(ty==="pct")return x===null?(v||"—"):(x>0?"+":"")+Math.round(x*100)+"%";if(ty==="share")return x===null?(v||"—"):(x*100).toFixed(1)+"%";if(ty==="pct100")return x===null?(v||"—"):x+"%";return v}
+  document.querySelectorAll("[data-table]").forEach(function(sec){
+    var t=T[+sec.dataset.table], sortK=t.sort, desc=true, tb=sec.querySelector("tbody"), q=sec.querySelector("input"), sels=sec.querySelectorAll("select"), cnt=sec.querySelector(".count");
+    function render(){
+      var s=q.value.trim().toLowerCase();
+      var list=t.rows.filter(function(r){if(s&&String(r[0]).toLowerCase().indexOf(s)<0)return false;for(var i=0;i<sels.length;i++){var v=sels[i].value;if(v&&r[+sels[i].dataset.f]!==v)return false}return true});
+      list.sort(function(a,c){var x=num(a[sortK]),y=num(c[sortK]);if(x===null&&y===null){x=a[sortK];y=c[sortK]}else{x=x===null?-Infinity:x;y=y===null?-Infinity:y}return (x<y?-1:x>y?1:0)*(desc?-1:1)});
+      tb.textContent="";
+      list.slice(0,500).forEach(function(r){var tr=document.createElement("tr");
+        r.forEach(function(v,k){var ty=t.types[k],td=document.createElement("td");
+          if(ty==="tag"){if(v){var sp=document.createElement("span");sp.className="tag";sp.textContent=v;td.appendChild(sp)}}
+          else{td.textContent=fmt(v,ty);if(ty!=="text")td.className="n";if(ty==="pct"&&num(v)!==null)td.className+=num(v)>0?" up":" down"}
+          tr.appendChild(td)});tb.appendChild(tr)});
+      cnt.textContent=list.length.toLocaleString("ko-KR")+"행"+(list.length>500?" · 상위 500행 표시":"");
+    }
+    q.addEventListener("input",render);sels.forEach(function(el){el.addEventListener("input",render)});
+    sec.querySelectorAll("th[data-k]").forEach(function(h){h.addEventListener("click",function(){var k=+h.dataset.k;desc=sortK===k?!desc:true;sortK=k;render()})});
+    render();
+  });
+  document.querySelectorAll("[data-tab]").forEach(function(b){b.addEventListener("click",function(){
+    document.querySelectorAll("[data-tab]").forEach(function(x){x.setAttribute("aria-selected",String(x===b));document.getElementById("p-"+x.dataset.tab).hidden=x!==b});
+  })});
+})();
+</script></body></html>

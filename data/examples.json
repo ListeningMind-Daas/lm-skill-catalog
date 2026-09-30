@@ -94,5 +94,23 @@
     "credits": 1739,
     "request": "선크림 검색 의도 분석해줘",
     "calls": "intent_finder 3회 690 · keyword_info 2회 1,049"
+  },
+  "find-customer-needs": {
+    "seed": "선크림",
+    "gl": "kr",
+    "date": "2026-09-30",
+    "server": "운영",
+    "credits": 3023,
+    "request": "선크림 고객 불편·니즈 찾아줘",
+    "calls": "keyword_info 4회 1,589 · intent_finder 13회 1,434"
+  },
+  "track-search-share": {
+    "seed": "선크림",
+    "gl": "kr",
+    "date": "2026-09-30",
+    "server": "운영",
+    "credits": 5506,
+    "request": "선크림 브랜드 검색 점유율 뽑아줘",
+    "calls": "intent_finder 8회 1,708 · keyword_info 2회 3,798"
   }
 }
