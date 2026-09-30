@@ -112,5 +112,43 @@
     "credits": 5506,
     "request": "선크림 브랜드 검색 점유율 뽑아줘",
     "calls": "intent_finder 8회 1,708 · keyword_info 2회 3,798"
+  },
+  "discover-sub-markets": {
+    "seed": "선크림",
+    "gl": "kr",
+    "date": "2026-09-30",
+    "server": "운영",
+    "credits": 4957,
+    "request": "선크림 주변 하위 시장 찾아줘",
+    "calls": "keyword_info 3회 149 · cluster_finder 2회 4,808"
+  },
+  "trace-search-journey": {
+    "seed": "선크림",
+    "gl": "kr",
+    "date": "2026-09-30",
+    "server": "운영",
+    "credits": 2825,
+    "request": "선크림 검색 앞뒤로 뭘 찾는지 보여줘",
+    "calls": "keyword_info 1회 5 · path_finder 2회 2,820"
+  },
+  "plug-into-your-ai-agents": {
+    "seed": "",
+    "gl": "",
+    "date": "2026-09-30",
+    "server": "",
+    "credits": 0,
+    "request": "내 에이전트에 LM API 연결해줘",
+    "calls": "",
+    "offline": "모의 응답 dry-run · 실제 API 호출 없음"
+  },
+  "lm-skill-creator": {
+    "seed": "",
+    "gl": "",
+    "date": "2026-09-30",
+    "server": "",
+    "credits": 0,
+    "request": "선크림 성분 트렌드 스킬 만들어줘",
+    "calls": "",
+    "offline": "골격 생성 · 자가검증 · 정적 감사까지 · 실행 평가(STEP 5) 생략"
   }
 }

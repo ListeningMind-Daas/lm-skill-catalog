@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>에이전트 도구 연결 한 벌 (Claude · OpenAI) · 내 에이전트에 LM API 연결해줘</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{--page:#fbfafb;--surface:#fff;--muted:#eae8ee;--line:#eae8ee;--ink:#3d3a46;--soft:#5d596a;--mute:#6a6773;--brand:#5e2cc9;--brand50:#e2e0f8;--link:#4d62dc;--linkbg:#eef0fc}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:14px/1.6 "Noto Sans KR",-apple-system,system-ui,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 16px 56px}
+.eyebrow{font-size:12px;font-weight:700;color:var(--brand);letter-spacing:.04em}
+h1{font-size:24px;margin:6px 0 4px;font-weight:700}.q{display:inline-block;background:var(--brand50);color:var(--brand);border-radius:8px;padding:6px 12px;font-weight:500;margin:6px 0 10px}
+.meta{font-size:13px;color:var(--mute)}.meta b{color:var(--ink);font-weight:600}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--line);margin-top:18px}.tabs button{font:inherit;border:0;background:none;padding:10px 14px;color:var(--soft);font-weight:500;border-bottom:2px solid transparent;cursor:pointer}
+.tabs button[aria-selected=true]{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;padding:18px 20px;overflow-wrap:anywhere}
+.md h1{font-size:19px}.md h2{font-size:16px;margin:26px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}.md h3{font-size:14.5px}.md p,.md li{color:var(--soft)}
+.md table{border-collapse:collapse;width:100%;font-size:12.5px;margin:10px 0;display:block;overflow-x:auto}.md th{text-align:left;background:#f7f6f8;color:var(--mute);font-weight:500;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.md td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}.md code{background:#f3f2f5;border-radius:4px;padding:0 4px;font-size:12px}
+.md pre{background:#f7f6f8;border-radius:8px;padding:10px 12px;overflow-x:auto;font-size:12px}.md pre code{background:none;padding:0}
+.md blockquote{margin:10px 0;padding:8px 14px;border-left:3px solid var(--brand50);background:#f8f7fd;color:var(--soft)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.tools input,.tools select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:#fff;color:var(--ink);max-width:100%}
+.tools input{flex:1;min-width:160px}.count{font-size:12px;color:var(--mute)}
+table.u{border-collapse:collapse;width:100%;font-size:12.5px}table.u th{position:sticky;top:0;background:#f7f6f8;color:var(--mute);font-weight:500;text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap}
+table.u td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}table.u .n{text-align:right}
+.scroll{max-height:620px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.tag{display:inline-block;border-radius:5px;padding:0 6px;font-size:11.5px;background:var(--muted);color:var(--soft)}
+.up{color:#2f7d32}.down{color:#b3261e}
+.foot{margin-top:14px;font-size:12px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<div class="eyebrow">plug-into-your-ai-agents · 실행 결과</div>
+<h1>에이전트 도구 연결 한 벌 (Claude · OpenAI)</h1>
+<div class="q">“내 에이전트에 LM API 연결해줘”</div>
+<div class="meta">모의 응답 dry-run · 실제 API 호출 없음 · 크레딧 <b>0</b></div>
+<div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-tab="r0">연결 요약</button><button role="tab" aria-selected="false" data-tab="r1">시스템 규칙</button><button role="tab" aria-selected="false" data-tab="t0">도구 정의 (9)</button></div>
+<section class="panel md" id="p-r0"><h1>에이전트에 ListeningMind API 연결 — 산출물 예시</h1>
+<blockquote>
+<p>사용자 질의: «내 에이전트에 LM API 연결해줘» · 스킬 <code>plug-into-your-ai-agents</code> v0.3.1
+명세 v0.0.60 (잠금 파일 · 2026-09-29 동기화) · 시장 kr · 1회 상한 1,000 · 세션 예산 5,000 크레딧 (예시값)
+<strong>모의 응답으로만 검증했다 — 실제 API 호출 0건 · 크레딧 0.</strong> 아래 수치는 연결이 도는지 보이는 모의 값이지 시장 분석 결과가 아니다.</p>
+</blockquote>
+<h2>1. 무엇을 만들었나</h2>
+<p>분석 리포트가 아니라 <strong>에이전트가 LM API를 안전하게 부르게 하는 연결 한 벌</strong>이다.</p>
+<table>
+<thead>
+<tr>
+<th>산출물</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tools.claude.json</code></td>
+<td>Claude tool use 도구 정의 9종 (<code>name</code> · <code>description</code> · <code>input_schema</code>)</td>
+</tr>
+<tr>
+<td><code>tools.openai.json</code></td>
+<td>OpenAI function calling 도구 정의 9종 (<code>type: function</code>)</td>
+</tr>
+<tr>
+<td><code>system_rules.txt</code></td>
+<td>에이전트 시스템 프롬프트에 붙일 사용 규칙 10줄</td>
+</tr>
+<tr>
+<td><code>dispatcher_example.py</code></td>
+<td>두 프레임워크의 도구 호출 루프에 끼우는 디스패처 예 — 스킬 런타임 + 1회 상한 · 시장 고정</td>
+</tr>
+<tr>
+<td><code>ledger.jsonl</code></td>
+<td>크레딧 원장 — 호출 1건 = 1행 (22행)</td>
+</tr>
+<tr>
+<td><code>usage_2026-09.md</code></td>
+<td>원장 요약 (스킬 <code>summary</code> 출력)</td>
+</tr>
+<tr>
+<td><code>raw/</code></td>
+<td>성공 호출의 응답 본문 + 해석 주석(<code>lm_meta</code>) — 요청 헤더(키)는 저장하지 않음</td>
+</tr>
+<tr>
+<td><code>tools.csv</code></td>
+<td>도구 목록 한 장 (이 보고서 2절과 같은 내용)</td>
+</tr>
+</tbody></table>
+<h3>수행 단계</h3>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>STEP 0 명세 동기화</td>
+<td>운영 명세를 받지 않고 <strong>번들 잠금 파일로 대체</strong> — 명세 v0.0.60 · 엔드포인트 9개 · 검토된 도구 9종 (크레딧 0)</td>
+</tr>
+<tr>
+<td>STEP 1 도구 정의</td>
+<td>Claude · OpenAI 형식 각 9종 생성 — 두 형식의 도구 이름 목록 동일</td>
+</tr>
+<tr>
+<td>STEP 2 시스템 규칙</td>
+<td>규칙 10줄 추출 (라벨 · 기준월 · 절단 · 예산 차단 시 우회 금지 등)</td>
+</tr>
+<tr>
+<td>STEP 3 디스패처</td>
+<td>스킬 런타임에 1회 상한 · 시장 고정을 덧붙인 예시 — 막힌 호출도 원장에 남김</td>
+</tr>
+<tr>
+<td>STEP 4 dry-run</td>
+<td>번들 시나리오 통과 (13단계 · 문서 예산 1,500) · 사용자 시나리오 통과 (22단계 · 세션 5,000 · 1회 1,000)</td>
+</tr>
+<tr>
+<td>STEP 4.5 기준월 확인</td>
+<td>모의 <code>all</code> 응답에서 데이터 기준월 / 조회일 / 지연을 읽고 교차확인 스크립트와 대조</td>
+</tr>
+<tr>
+<td>STEP 5 원장 요약</td>
+<td><code>usage_2026-09.md</code></td>
+</tr>
+<tr>
+<td>STEP 6 실연결</td>
+<td><strong>하지 않음</strong> (크레딧 소모 단계 — 사람이 확인한 뒤 연다)</td>
+</tr>
+</tbody></table>
+<p>두 프레임워크 확인: 같은 22단계를 Claude 도구 JSON과 OpenAI 도구 JSON으로 각각 돌렸고 원장이 시각을 빼고 같았다. 디스패처 한 턴 모의(<code>demo_dispatch.json</code>)도 두 형식의 판정이 같았다.</p>
+<h2>2. 도구 목록</h2>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th>엔드포인트</th>
+<th>용도</th>
+<th>크레딧 결정식</th>
+<th>필수 인자</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>lm_cluster_finder</code></td>
+<td><code>POST /cluster_finder</code></td>
+<td>시드 하나의 동시검색 군집을 조회한다</td>
+<td>150×입력 키워드 + 50×고유 키워드(노드)</td>
+<td>keyword · gl</td>
+</tr>
+<tr>
+<td><code>lm_cluster_keyword_list</code></td>
+<td><code>POST /cluster_finder/keyword_list</code></td>
+<td>lm_cluster_finder와 같은 동시검색 그래프에서 키워드 목록만 돌려준다(군집·관계 없음)</td>
+<td>30×입력 키워드 + 2×반환 키워드 · 명세값 · 실측 대조 전 [가정]</td>
+<td>keyword · gl</td>
+</tr>
+<tr>
+<td><code>lm_intent_finder</code></td>
+<td><code>POST /intent_finder/keyword_list</code></td>
+<td>시드 키워드의 연관 검색어를 키워드 문자열 목록으로 돌려준다(지표 없음 — 지표는 lm_keyword_info로 붙인다)</td>
+<td>30×입력 키워드 + 2×반환 키워드 · 명세값 · 실측 대조 전 [가정]</td>
+<td>keywords · gl</td>
+</tr>
+<tr>
+<td><code>lm_keyword_info</code></td>
+<td><code>POST /keyword_info</code></td>
+<td>키워드별 검색량·광고지표(ads_metrics) 또는 월별 시계열·의도·인구통계(all)를 조회한다</td>
+<td>data_type별 — ads_metrics 1×키워드 · all 10×키워드</td>
+<td>keywords · gl · data_type</td>
+</tr>
+<tr>
+<td><code>lm_path_finder</code></td>
+<td><code>POST /path_finder</code></td>
+<td>키워드 앞뒤로 이어지는 세션 인접 검색 경로를 조회한다(집계 행동이지 개인 여정이 아님)</td>
+<td>50×입력 키워드 + 40×경로 안 고유 키워드</td>
+<td>keyword · gl</td>
+</tr>
+<tr>
+<td><code>lm_path_keyword_list</code></td>
+<td><code>POST /path_finder/keyword_list</code></td>
+<td>lm_path_finder의 경로에 등장하는 키워드 목록만 돌려준다(경로 순서·전이 없음)</td>
+<td>30×입력 키워드 + 2×반환 키워드 · 명세값 · 실측 대조 전 [가정]</td>
+<td>keyword · gl</td>
+</tr>
+<tr>
+<td><code>lm_serp</code></td>
+<td><code>POST /serp</code></td>
+<td>키워드의 구글 검색결과 화면(SERP) 블록을 돌려준다</td>
+<td>30×입력 키워드 (출력 무과금)</td>
+<td>keyword · gl</td>
+</tr>
+<tr>
+<td><code>lm_trend_finder</code></td>
+<td><code>POST /trend_finder/issue_list</code></td>
+<td>시드 키워드 하나 주변에서 최근 급부상한 이슈(키워드·이슈 점수·요약·출처 링크)를 돌려준다</td>
+<td>50×입력 키워드 + 2×반환 이슈 · 빈 결과는 0(실측 1건 · 환경마다 확인)</td>
+<td>keyword · gl</td>
+</tr>
+<tr>
+<td><code>lm_usage_summary</code></td>
+<td><code>GET /usage/summary</code></td>
+<td>기간(from·to, YYYY-MM-DD) 동안 이 계정의 호출 수·에러율·엔드포인트별 호출 수·일별 시계열을 돌려준다</td>
+<td>명세(v0.0.60)에 단가 없음 — 원장의 cost_detail로 확인한다</td>
+<td>from · to</td>
+</tr>
+</tbody></table>
+<ul>
+<li>결정식은 모두 «입력 단가 × 입력 수 + 출력 단가 × 출력 수»이고 단가는 명세 잠금 파일에서 온다 — 코드에 적지 않는다.</li>
+<li>«실측 대조 전 [가정]»이 붙은 단가는 명세값이다. 실연결 첫 호출에서 원장의 <code>formula_match</code>로 확인한다.</li>
+<li><code>lm_keyword_info</code>의 <code>all</code>은 같은 세션에서 <code>ads_metrics</code>로 먼저 확인한 키워드에만 허용된다(2단 조회).</li>
+</ul>
+<h2>3. 예산 가드 — dry-run 사례</h2>
+<p>설정: 세션 예산 5,000 · 1회 상한 1,000 (예시값). 호출 전 추정이 1회 상한을 넘거나, 남은 예산을 넘으면 보내기 전에 막는다.</p>
+<h3>막은 호출</h3>
+<table>
+<thead>
+<tr>
+<th align="right">#</th>
+<th>도구</th>
+<th>요청</th>
+<th>사유</th>
+<th align="right">호출 전 추정</th>
+<th align="right">남은 예산</th>
+<th>에이전트가 받은 안내</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td><code>lm_keyword_info</code></td>
+<td>keywords=[1개], data_type=all</td>
+<td>2단 조회 위반 (<code>two_stage</code>)</td>
+<td align="right">10</td>
+<td align="right">5,000</td>
+<td>먼저 data_type=ads_metrics로 조회하고 게이트 통과분만 all로 다시 요청할 것</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td><code>lm_cluster_finder</code></td>
+<td>keyword=선크림</td>
+<td>1회 상한 초과 (<code>per_call_cap</code>)</td>
+<td align="right">5,200</td>
+<td align="right">4,905</td>
+<td>1회 상한 1,000을 넘는다 — limit 100을 줄여 다시 요청</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td><code>lm_path_finder</code></td>
+<td>keyword=선크림</td>
+<td>1회 상한 초과 (<code>per_call_cap</code>)</td>
+<td align="right">2,450</td>
+<td align="right">4,205</td>
+<td>1회 상한 1,000을 넘는다 — limit 20을 줄여 다시 요청</td>
+</tr>
+<tr>
+<td align="right">14</td>
+<td><code>lm_keyword_info</code></td>
+<td>keywords=[1개], data_type=ads_metrics</td>
+<td>세션 시장 밖 (<code>market_lock</code>)</td>
+<td align="right">—</td>
+<td align="right">3,685</td>
+<td>이 세션의 시장은 kr 하나다 — 다른 시장은 새 세션·새 예산으로</td>
+</tr>
+<tr>
+<td align="right">15</td>
+<td><code>lm_serp</code></td>
+<td>keyword=선크림, num=50</td>
+<td>스키마 밖 인자값 (<code>invalid_args</code>)</td>
+<td align="right">—</td>
+<td align="right">3,685</td>
+<td>num은 10·20만</td>
+</tr>
+<tr>
+<td align="right">16</td>
+<td><code>lm_cluster_finder</code></td>
+<td>keyword=선크림, limit=18, hop=1, time_point=3m</td>
+<td>1회 상한 초과 (<code>per_call_cap</code>)</td>
+<td align="right">1,100</td>
+<td align="right">3,685</td>
+<td>1회 상한 1,000을 넘는다 — limit 18을 줄여 다시 요청</td>
+</tr>
+<tr>
+<td align="right">22</td>
+<td><code>lm_cluster_finder</code></td>
+<td>keyword=선크림, limit=16, hop=2</td>
+<td>세션 예산 초과 (<code>budget_guard</code>)</td>
+<td align="right">1,000</td>
+<td align="right">555</td>
+<td>추정 1,000 &gt; 남은 예산</td>
+</tr>
+</tbody></table>
+<h3>허용한 호출</h3>
+<table>
+<thead>
+<tr>
+<th align="right">#</th>
+<th>도구</th>
+<th>요청</th>
+<th align="right">실제 소진</th>
+<th align="right">누적</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">2</td>
+<td><code>lm_keyword_info</code></td>
+<td>keywords=[5개], data_type=ads_metrics</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td>후보 5개 스크리닝(1×5)</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td><code>lm_intent_finder</code></td>
+<td>keywords=[1개], limit=10</td>
+<td align="right">50</td>
+<td align="right">55</td>
+<td>연관어 확장 — limit에 닿아 절단</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td><code>lm_keyword_info</code></td>
+<td>keywords=[4개], data_type=all</td>
+<td align="right">40</td>
+<td align="right">95</td>
+<td>게이트 통과 4개만 all(10×4) — 429 한 번 뒤 재시도</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td><code>lm_cluster_finder</code></td>
+<td>keyword=선크림, limit=10, hop=1</td>
+<td align="right">700</td>
+<td align="right">795</td>
+<td>limit을 줄여 재요청(추정 700) · 절단</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td><code>lm_path_finder</code></td>
+<td>keyword=선크림, limit=3</td>
+<td align="right">330</td>
+<td align="right">1,125</td>
+<td>limit 3으로 재요청(추정 410) · 절단</td>
+</tr>
+<tr>
+<td align="right">9</td>
+<td><code>lm_cluster_keyword_list</code></td>
+<td>keyword=선크림, limit=10, hop=1</td>
+<td align="right">52</td>
+<td align="right">1,177</td>
+<td>키워드 목록만 — 싼 대안 · 절단</td>
+</tr>
+<tr>
+<td align="right">10</td>
+<td><code>lm_path_keyword_list</code></td>
+<td>keyword=선크림, limit=3</td>
+<td align="right">44</td>
+<td align="right">1,221</td>
+<td>경로 키워드 목록만 — 싼 대안 · 절단 판정 불가</td>
+</tr>
+<tr>
+<td align="right">11</td>
+<td><code>lm_serp</code></td>
+<td>keyword=선크림</td>
+<td align="right">30</td>
+<td align="right">1,251</td>
+<td>SERP 스냅샷(30×1)</td>
+</tr>
+<tr>
+<td align="right">12</td>
+<td><code>lm_trend_finder</code></td>
+<td>keyword=선크림, period_days=90, limit=20</td>
+<td align="right">64</td>
+<td align="right">1,315</td>
+<td>급부상 이슈 — 매칭 9건 중 7건 반환(절단)</td>
+</tr>
+<tr>
+<td align="right">13</td>
+<td><code>lm_usage_summary</code></td>
+<td>from=2026-09-01, to=2026-09-29</td>
+<td align="right">— (단가 없음)</td>
+<td align="right">1,315</td>
+<td>계정 사용량 집계(단가 없음 → 0)</td>
+</tr>
+<tr>
+<td align="right">17</td>
+<td><code>lm_cluster_finder</code></td>
+<td>keyword=선크림, limit=16, hop=1, time_point=3m</td>
+<td align="right">700</td>
+<td align="right">2,015</td>
+<td>시점 비교 3m — 추정 1,000(1회 상한 안) · 모의 응답 재사용 · 절단 판정 불가</td>
+</tr>
+<tr>
+<td align="right">18</td>
+<td><code>lm_cluster_finder</code></td>
+<td>keyword=선크림, limit=16, hop=1, time_point=6m</td>
+<td align="right">700</td>
+<td align="right">2,715</td>
+<td>시점 비교 6m — 추정 1,000(1회 상한 안) · 모의 응답 재사용 · 절단 판정 불가</td>
+</tr>
+<tr>
+<td align="right">19</td>
+<td><code>lm_cluster_finder</code></td>
+<td>keyword=선크림, limit=16, hop=1, time_point=9m</td>
+<td align="right">700</td>
+<td align="right">3,415</td>
+<td>시점 비교 9m — 추정 1,000(1회 상한 안) · 모의 응답 재사용 · 절단 판정 불가</td>
+</tr>
+<tr>
+<td align="right">20</td>
+<td><code>lm_cluster_finder</code></td>
+<td>keyword=선크림, limit=16, hop=1, time_point=12m</td>
+<td align="right">700</td>
+<td align="right">4,115</td>
+<td>시점 비교 12m — 추정 1,000(1회 상한 안) · 모의 응답 재사용 · 절단 판정 불가</td>
+</tr>
+<tr>
+<td align="right">21</td>
+<td><code>lm_path_finder</code></td>
+<td>keyword=선크림, limit=5, time_point=3m</td>
+<td align="right">330</td>
+<td align="right">4,445</td>
+<td>limit 5 → 추정 650 ≤ 남은 예산</td>
+</tr>
+</tbody></table>
+<p>결과: 성공 15 · 차단 7 · 오류 0 — 세션 소진 4,445 / 5,000. 기본 limit으로 보낸 cluster(추정 5,200)·path(추정 2,450)는 1회 상한에서 막혔고, 에이전트가 limit을 줄여 다시 요청했다. 마지막 요청은 남은 예산 555보다 추정이 커서 세션 예산에서 막혔다.</p>
+<h2>4. 응답 주석 예</h2>
+<p>에이전트는 응답과 함께 해석 주석(<code>lm_meta</code>)을 받는다. 아래는 모의 응답에 실제로 붙은 주석이다.</p>
+<table>
+<thead>
+<tr>
+<th>함정</th>
+<th>주석</th>
+<th>이번 dry-run 값</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>기준월 · 지연</td>
+<td><code>data_ref_month</code> · <code>queried_at</code> · <code>lag_months</code></td>
+<td>데이터 기준월 2026-08 / 조회일 2026-09-28 / 지연 1개월</td>
+</tr>
+<tr>
+<td>마지막 달 미완결 의심</td>
+<td><code>last_month_suspect</code></td>
+<td>선크림 — 추세는 마지막 달을 뺀 창(2026-05<del>2026-07 vs 2025-05</del>2025-07)</td>
+</tr>
+<tr>
+<td>추세(전년 동기 · 마지막 달 제외)</td>
+<td><code>yoy_ex_last_month</code> · <code>yoy_status</code> · <code>below_base_gate</code></td>
+<td>선크림: 전년 동기 +10.0%</td>
+</tr>
+<tr>
+<td>추세(전년 동기 · 마지막 달 제외)</td>
+<td><code>yoy_ex_last_month</code> · <code>yoy_status</code> · <code>below_base_gate</code></td>
+<td>썬크림: 전년 동기 -5.0%</td>
+</tr>
+<tr>
+<td>추세(전년 동기 · 마지막 달 제외)</td>
+<td><code>yoy_ex_last_month</code> · <code>yoy_status</code> · <code>below_base_gate</code></td>
+<td>선스틱: 계산 불가(결측 월) · 결측 월 2개 · 기저 게이트 미달(랭킹 제외)</td>
+</tr>
+<tr>
+<td>추세(전년 동기 · 마지막 달 제외)</td>
+<td><code>yoy_ex_last_month</code> · <code>yoy_status</code> · <code>below_base_gate</code></td>
+<td>무기자차 선크림: 전년 동기 +150.2% · 기저 게이트 미달(랭킹 제외)</td>
+</tr>
+<tr>
+<td>교차확인</td>
+<td>공유 스크립트 <code>trend_yoy</code> · <code>check_refmonth</code></td>
+<td>마지막 달 제외 전년 동기 값 일치 3/3행 · 기준월 동일</td>
+</tr>
+<tr>
+<td>표기변형 묶음</td>
+<td><code>variant_groups</code> (치환 규칙 <code>썬→선</code>)</td>
+<td>선크림 · 썬크림 → 하한 40,000 · 상한 45,083건 <code>[추정]</code></td>
+</tr>
+<tr>
+<td>쓰지 말 필드</td>
+<td><code>volume_trend_do_not_use</code></td>
+<td>응답의 <code>volume_trend</code>를 이 이름으로 옮김 — 추세 판정에 쓰지 않음</td>
+</tr>
+<tr>
+<td>절단</td>
+<td><code>truncated</code> · <code>convergence</code></td>
+<td>연관어 10/10 → «보류 — limit에 닿음»</td>
+</tr>
+<tr>
+<td>절단</td>
+<td><code>truncated</code> (cluster)</td>
+<td>limit 10에 노드 11 → «보류 — limit에 닿음» / limit 16에 노드 11 → «보류 — 절단 판정 불가»</td>
+</tr>
+<tr>
+<td>절단</td>
+<td><code>matched_total</code> (trend)</td>
+<td>매칭 9건 중 7건 반환 → «보류 — limit에 닿음»</td>
+</tr>
+<tr>
+<td>SERP 시점</td>
+<td><code>collected_at</code> · <code>snapshot_note</code></td>
+<td>수집 시각 2026-09-20T03:00:00.000Z · 블록 4개 — 실시간 순위 아님</td>
+</tr>
+<tr>
+<td>트렌드 근거</td>
+<td><code>evidence_note</code></td>
+<td>이슈는 검색량이 아니다 — 수요·추세는 lm_keyword_info로 판정한다 · summary는 AI 생성 요약 [추정]</td>
+</tr>
+<tr>
+<td>사용량 범위</td>
+<td><code>scope_note</code></td>
+<td>계정 전체 집계 — 다른 세션·파이프라인 소비가 섞인다. 이 세션 소진은 원장의 cost_detail 합산으로 말한다. total_credits는 잔여량이 아니다</td>
+</tr>
+</tbody></table>
+<h2>5. 원장 요약</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>호출</td>
+<td>22건 (성공 15 · 차단 7 · 오류 0)</td>
+</tr>
+<tr>
+<td>이번 세션 소진</td>
+<td><strong>4,445</strong> 크레딧 — 성공 호출의 <code>cost_detail.total_cost</code> 합산 (모의 응답 값)</td>
+</tr>
+<tr>
+<td>성공 호출의 사전 추정 합</td>
+<td>6,075 <code>[추정]</code> — limit·상한을 대입한 값이라 실제보다 크다</td>
+</tr>
+<tr>
+<td>결정식 불일치</td>
+<td>0건</td>
+</tr>
+<tr>
+<td>429 재시도</td>
+<td>1건 (재시도 뒤 성공)</td>
+</tr>
+<tr>
+<td>응답의 <code>used_credits</code></td>
+<td>185,295 — <strong>월간 누적 사용량</strong>(모의 가상값). 잔여량도, 이번 세션 소진도 아니다</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th align="right">성공</th>
+<th align="right">차단</th>
+<th align="right">소진</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>lm_keyword_info</code></td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">45</td>
+</tr>
+<tr>
+<td><code>lm_intent_finder</code></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">50</td>
+</tr>
+<tr>
+<td><code>lm_cluster_finder</code></td>
+<td align="right">5</td>
+<td align="right">3</td>
+<td align="right">3,500</td>
+</tr>
+<tr>
+<td><code>lm_path_finder</code></td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">660</td>
+</tr>
+<tr>
+<td><code>lm_cluster_keyword_list</code></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">52</td>
+</tr>
+<tr>
+<td><code>lm_path_keyword_list</code></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">44</td>
+</tr>
+<tr>
+<td><code>lm_serp</code></td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">30</td>
+</tr>
+<tr>
+<td><code>lm_trend_finder</code></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">64</td>
+</tr>
+<tr>
+<td><code>lm_usage_summary</code></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody></table>
+<h2>6. 실연결 전 체크리스트</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <code>LM_API_BASE</code>에 운영 주소를 넣고 <code>sync</code>로 잠금 파일과 운영 명세가 같은지 확인 (종료 코드 0 · 크레딧 0) — 이번 예시는 잠금 파일로 대체했다</li>
+<li><input disabled="" type="checkbox"> 키는 환경변수 <code>LM_API_KEY</code>로만 넣는다 — 코드·저장소·로그·원장에 남기지 않는다</li>
+<li><input disabled="" type="checkbox"> 에이전트에 줄 도구 목록을 정해 도구 JSON과 런타임에 <strong>같은 목록</strong>을 준다 (path_finder는 여정이 꼭 필요할 때만)</li>
+<li><input disabled="" type="checkbox"> 시스템 프롬프트에 <code>system_rules.txt</code>를 붙인다</li>
+<li><input disabled="" type="checkbox"> 첫 실호출은 <code>lm_keyword_info</code> <code>ads_metrics</code> 1키워드(1크레딧)로 키·주소 확인</li>
+<li><input disabled="" type="checkbox"> «실측 대조 전» 단가 도구(키워드 목록 2종 · 연관어)는 작은 limit 1회로 원장 <code>formula_match=true</code> 확인</li>
+<li><input disabled="" type="checkbox"> cluster·path는 작은 limit 1회씩(예: cluster limit 10 · path limit 3)으로 응답 모양과 <code>formula_match</code> 확인</li>
+<li><input disabled="" type="checkbox"> 1회 상한(1,000)·세션 예산(5,000)은 예시값이다 — 실제 계약 한도에 맞춰 사람이 정한다</li>
+<li><input disabled="" type="checkbox"> 원장의 <code>used_credits</code>는 월간 누적이다 — 잔여는 계약 한도에서 따로 계산한다</li>
+<li><input disabled="" type="checkbox"> 여러 에이전트·프로세스가 한 예산을 나누면 원장을 합쳐서 본다 (런타임은 세션 단위)</li>
+</ul>
+<h2>라벨</h2>
+<p><code>[실제 데이터]</code> 응답 반환값 · <code>[추정]</code> 호출 전 비용 추정·표기변형 볼륨 경계 · <code>[가정]</code> 노드·경로 상한·기저 게이트·치환 규칙 · <code>[데이터 공백]</code> 단가 없는 도구의 비용·결측 월·계산 불가. 이 예시의 응답은 전부 모의 응답이다(cluster·path는 과거 실측 응답 원문, 나머지는 합성).</p>
+</section>
+<section class="panel md" id="p-r1" hidden><p>[ListeningMind 도구 사용 규칙]</p>
+<ol>
+<li>모든 수치에 라벨을 붙인다: [실제 데이터] API 반환값 · [추정] 해석·결합 · [가정] 게이트·임계값 · [데이터 공백] 미반환·결측·계산 불가.</li>
+<li>시점은 lm_meta.data_ref_month(데이터 기준월)로 말한다. 조회일이 아니다. 지연은 lm_meta.lag_months로 응답에서 읽는다(관측 1개월). 월 그레인이므로 주간 조기경보에 쓰지 않는다.</li>
+<li>volume_trend_do_not_use는 판정에 쓰지 않는다. 추세는 yoy_ex_last_month, 기저 게이트 미달(below_base_gate)은 랭킹에서 뺀다.</li>
+<li>canonical이 같은 키워드는 표기변형이다. dup_of가 있는 행은 같은 검색의 중복이라 한 번만 센다. 집계는 lm_meta.variant_groups 기준으로 하되, 그룹 볼륨은 volume_lo(하한·최댓값)와 volume_hi(상한·중복 제외 합)를 병기한다 [추정]. 한쪽만 고르거나 행을 그냥 합산하지 않는다. 순위·판정은 volume_lo 기준, volume_hi로 뒤집히면 그 사실을 적는다.</li>
+<li>lm_meta.truncated가 true이거나 null(판정 불가)이면 «더 없다»고 말하지 않는다. limit을 올리거나 수렴 판정을 보류한다.</li>
+<li>도구가 budget_guard로 막히면 남은 예산(remaining)을 사용자에게 알리고 범위를 줄인다. 우회하지 않는다.</li>
+<li>검색량 단위는 «건»이다(사람 수 아님). 검색은 관심 신호이지 구매가 아니다.</li>
+<li>SERP는 저장된 스냅샷이다 — lm_meta.collected_at(수집 시각)을 적고 «지금 순위»라고 말하지 않는다.</li>
+<li>트렌드 이슈는 검색량이 아니다. 수요·추세 판정은 keyword_info로 하고, 검색량으로 확인되지 않은 이슈는 «이슈 신호만 · 검색량 미확인»으로 따로 적는다. 빈 결과는 «그 기간 매칭 없음»이라는 실측이다.</li>
+<li>[검토 전] 도구의 응답은 해석 규칙이 없다 — 수치를 판정에 쓰지 않고 사람에게 확인을 요청한다.</li>
+</ol>
+</section>
+<section class="panel" id="p-t0" hidden data-table="0">
+ <div class="tools"><input type="search" placeholder="도구 검색"><span class="count"></span></div>
+ <div class="scroll"><table class="u"><thead><tr><th data-k="0">도구</th><th data-k="1">엔드포인트</th><th data-k="2">용도</th><th data-k="3">크레딧 결정식</th><th data-k="4">필수 인자</th><th data-k="5">dry-run 결과(모의)</th></tr></thead><tbody></tbody></table></div>
+ <p class="foot">dry-run 의 «소진»은 모의 응답에 결정식을 적용한 값이다 — 실제로 쓴 크레딧은 0. 원본: tools.csv</p>
+</section>
+<p class="foot">plug-into-your-ai-agents 스킬 산출물을 그대로 옮긴 페이지 — 수치는 스킬 스크립트와 응답 원장에서 나왔다. 동봉 파일: tools.claude.json · tools.openai.json · dispatcher_example.py · system_rules.txt · ledger.jsonl(모의)</p>
+</div>
+<script type="application/json" id="data">[{"rows":[["lm_cluster_finder","POST /cluster_finder","시드 하나의 동시검색 군집을 조회한다","150×입력 키워드 + 50×고유 키워드(노드)","keyword · gl","성공 5 · 차단 3(per_call_cap 2, budget_guard 1) · 소진 3,500 · 결정식 일치"],["lm_cluster_keyword_list","POST /cluster_finder/keyword_list","lm_cluster_finder와 같은 동시검색 그래프에서 키워드 목록만 돌려준다(군집·관계 없음)","30×입력 키워드 + 2×반환 키워드 · 명세값 · 실측 대조 전 [가정]","keyword · gl","성공 1 · 차단 0 · 소진 52 · 결정식 일치"],["lm_intent_finder","POST /intent_finder/keyword_list","시드 키워드의 연관 검색어를 키워드 문자열 목록으로 돌려준다(지표 없음 — 지표는 lm_keyword_info로 붙인다)","30×입력 키워드 + 2×반환 키워드 · 명세값 · 실측 대조 전 [가정]","keywords · gl","성공 1 · 차단 0 · 소진 50 · 결정식 일치"],["lm_keyword_info","POST /keyword_info","키워드별 검색량·광고지표(ads_metrics) 또는 월별 시계열·의도·인구통계(all)를 조회한다","data_type별 — ads_metrics 1×키워드 · all 10×키워드","keywords · gl · data_type","성공 2 · 차단 2(two_stage 1, market_lock 1) · 소진 45 · 결정식 일치"],["lm_path_finder","POST /path_finder","키워드 앞뒤로 이어지는 세션 인접 검색 경로를 조회한다(집계 행동이지 개인 여정이 아님)","50×입력 키워드 + 40×경로 안 고유 키워드","keyword · gl","성공 2 · 차단 1(per_call_cap 1) · 소진 660 · 결정식 일치"],["lm_path_keyword_list","POST /path_finder/keyword_list","lm_path_finder의 경로에 등장하는 키워드 목록만 돌려준다(경로 순서·전이 없음)","30×입력 키워드 + 2×반환 키워드 · 명세값 · 실측 대조 전 [가정]","keyword · gl","성공 1 · 차단 0 · 소진 44 · 결정식 일치"],["lm_serp","POST /serp","키워드의 구글 검색결과 화면(SERP) 블록을 돌려준다","30×입력 키워드 (출력 무과금)","keyword · gl","성공 1 · 차단 1(invalid_args 1) · 소진 30 · 결정식 일치"],["lm_trend_finder","POST /trend_finder/issue_list","시드 키워드 하나 주변에서 최근 급부상한 이슈(키워드·이슈 점수·요약·출처 링크)를 돌려준다","50×입력 키워드 + 2×반환 이슈 · 빈 결과는 0(실측 1건 · 환경마다 확인)","keyword · gl","성공 1 · 차단 0 · 소진 64 · 결정식 일치"],["lm_usage_summary","GET /usage/summary","기간(from·to, YYYY-MM-DD) 동안 이 계정의 호출 수·에러율·엔드포인트별 호출 수·일별 시계열을 돌려준다","명세(v0.0.60)에 단가 없음 — 원장의 cost_detail로 확인한다","from · to","성공 1 · 차단 0 · 소진 0 · 결정식 대조 없음(단가 없음)"]],"types":["text","text","text","text","text","text"],"sort":0}]</script>
+<script>
+(function(){
+  var T=JSON.parse(document.getElementById("data").textContent);
+  var num=function(v){var x=parseFloat(v);return v===""||isNaN(x)?null:x};
+  function fmt(v,ty){var x=num(v);if(ty==="num")return x===null?v:x.toLocaleString("ko-KR");if(ty==="dec2")return x===null?v:x.toFixed(2);
+    if(ty==="pct")return x===null?(v||"—"):(x>0?"+":"")+Math.round(x*100)+"%";if(ty==="share")return x===null?(v||"—"):(x*100).toFixed(1)+"%";if(ty==="pct100")return x===null?(v||"—"):x+"%";return v}
+  document.querySelectorAll("[data-table]").forEach(function(sec){
+    var t=T[+sec.dataset.table], sortK=t.sort, desc=true, tb=sec.querySelector("tbody"), q=sec.querySelector("input"), sels=sec.querySelectorAll("select"), cnt=sec.querySelector(".count");
+    function render(){
+      var s=q.value.trim().toLowerCase();
+      var list=t.rows.filter(function(r){if(s&&String(r[0]).toLowerCase().indexOf(s)<0)return false;for(var i=0;i<sels.length;i++){var v=sels[i].value;if(v&&r[+sels[i].dataset.f]!==v)return false}return true});
+      list.sort(function(a,c){var x=num(a[sortK]),y=num(c[sortK]);if(x===null&&y===null){x=a[sortK];y=c[sortK]}else{x=x===null?-Infinity:x;y=y===null?-Infinity:y}return (x<y?-1:x>y?1:0)*(desc?-1:1)});
+      tb.textContent="";
+      list.slice(0,500).forEach(function(r){var tr=document.createElement("tr");
+        r.forEach(function(v,k){var ty=t.types[k],td=document.createElement("td");
+          if(ty==="tag"){if(v){var sp=document.createElement("span");sp.className="tag";sp.textContent=v;td.appendChild(sp)}}
+          else{td.textContent=fmt(v,ty);if(ty!=="text")td.className="n";if(ty==="pct"&&num(v)!==null)td.className+=num(v)>0?" up":" down"}
+          tr.appendChild(td)});tb.appendChild(tr)});
+      cnt.textContent=list.length.toLocaleString("ko-KR")+"행"+(list.length>500?" · 상위 500행 표시":"");
+    }
+    q.addEventListener("input",render);sels.forEach(function(el){el.addEventListener("input",render)});
+    sec.querySelectorAll("th[data-k]").forEach(function(h){h.addEventListener("click",function(){var k=+h.dataset.k;desc=sortK===k?!desc:true;sortK=k;render()})});
+    render();
+  });
+  document.querySelectorAll("[data-tab]").forEach(function(b){b.addEventListener("click",function(){
+    document.querySelectorAll("[data-tab]").forEach(function(x){x.setAttribute("aria-selected",String(x===b));document.getElementById("p-"+x.dataset.tab).hidden=x!==b});
+  })});
+})();
+</script></body></html>

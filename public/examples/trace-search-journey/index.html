@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>선크림·선스틱 검색 여정 · 선크림 검색 앞뒤로 뭘 찾는지 보여줘</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{--page:#fbfafb;--surface:#fff;--muted:#eae8ee;--line:#eae8ee;--ink:#3d3a46;--soft:#5d596a;--mute:#6a6773;--brand:#5e2cc9;--brand50:#e2e0f8;--link:#4d62dc;--linkbg:#eef0fc}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:14px/1.6 "Noto Sans KR",-apple-system,system-ui,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 16px 56px}
+.eyebrow{font-size:12px;font-weight:700;color:var(--brand);letter-spacing:.04em}
+h1{font-size:24px;margin:6px 0 4px;font-weight:700}.q{display:inline-block;background:var(--brand50);color:var(--brand);border-radius:8px;padding:6px 12px;font-weight:500;margin:6px 0 10px}
+.meta{font-size:13px;color:var(--mute)}.meta b{color:var(--ink);font-weight:600}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--line);margin-top:18px}.tabs button{font:inherit;border:0;background:none;padding:10px 14px;color:var(--soft);font-weight:500;border-bottom:2px solid transparent;cursor:pointer}
+.tabs button[aria-selected=true]{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;padding:18px 20px;overflow-wrap:anywhere}
+.md h1{font-size:19px}.md h2{font-size:16px;margin:26px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}.md h3{font-size:14.5px}.md p,.md li{color:var(--soft)}
+.md table{border-collapse:collapse;width:100%;font-size:12.5px;margin:10px 0;display:block;overflow-x:auto}.md th{text-align:left;background:#f7f6f8;color:var(--mute);font-weight:500;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.md td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}.md code{background:#f3f2f5;border-radius:4px;padding:0 4px;font-size:12px}
+.md pre{background:#f7f6f8;border-radius:8px;padding:10px 12px;overflow-x:auto;font-size:12px}.md pre code{background:none;padding:0}
+.md blockquote{margin:10px 0;padding:8px 14px;border-left:3px solid var(--brand50);background:#f8f7fd;color:var(--soft)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.tools input,.tools select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:#fff;color:var(--ink);max-width:100%}
+.tools input{flex:1;min-width:160px}.count{font-size:12px;color:var(--mute)}
+table.u{border-collapse:collapse;width:100%;font-size:12.5px}table.u th{position:sticky;top:0;background:#f7f6f8;color:var(--mute);font-weight:500;text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap}
+table.u td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}table.u .n{text-align:right}
+.scroll{max-height:620px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.tag{display:inline-block;border-radius:5px;padding:0 6px;font-size:11.5px;background:var(--muted);color:var(--soft)}
+.up{color:#2f7d32}.down{color:#b3261e}
+.foot{margin-top:14px;font-size:12px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<div class="eyebrow">trace-search-journey · 실행 결과</div>
+<h1>선크림·선스틱 검색 여정</h1>
+<div class="q">“선크림 검색 앞뒤로 뭘 찾는지 보여줘”</div>
+<div class="meta">운영 서버 실측 · 이번 생성 크레딧 <b>2,825</b> (응답 cost_detail 합) · 호출 3건</div>
+<div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-tab="r0">여정 리포트</button><button role="tab" aria-selected="false" data-tab="r1">스킬 원문 요약</button><button role="tab" aria-selected="false" data-tab="t0">앞뒤 전이 (68)</button><button role="tab" aria-selected="false" data-tab="t1">두 걸음 흐름 (15)</button><button role="tab" aria-selected="false" data-tab="t2">경로 속 키워드 (67)</button></div>
+<section class="panel md" id="p-r0"><h1>선크림 검색 앞뒤로 무엇을 찾는가 — 세션 인접 검색 여정 (한국)</h1>
+<blockquote>
+<p>질문: «선크림 검색 앞뒤로 뭘 찾는지 보여줘»<br>시장: 한국(gl=kr) · 조회일 2026-09-30 · 데이터 시점 <code>time_point</code> = curr (조회 시점의 최신 월 단위 스냅샷 — 실시간이 아니다) [실제 데이터]<br>도구: trace-search-journey v0.2.1 (lm-skills 1.6.0) · 운영 서버</p>
+</blockquote>
+<p><strong>읽기 전에</strong> — 이 리포트는 같은 검색 세션 안에서 <strong>바로 앞뒤로 붙어 나온 검색어의 집계</strong>다. 한 사람의 구매 여정, 전환율, 이탈률, 며칠 뒤의 행동, 성·연령별 차이는 이 데이터에 없다. «A 다음에 B»는 반환된 경로에서 A 바로 뒤에 B가 붙은 경로 수이며, 사람이 A를 거쳐 B로 이동해 샀다는 뜻이 아니다. 검색은 관심 신호이지 구매가 아니다.</p>
+<h2>1. 한눈에 보기</h2>
+<ul>
+<li><strong>선크림 바로 다음 검색</strong>은 세 갈래로 나뉜다 — «선크림 바르지마라» 5경로 · «선크림 추천» 5경로 · «선크림 종류» 5경로 (시드 뒤 인접 16건 중, 반환 20경로 기준) [실제 데이터 · 로컬 집계]. 고르는 검색(추천·종류)과 쓰는 법 검색(바르지마라→바르는법→지우는법)이 비슷한 비중으로 붙었다.</li>
+<li><strong>선스틱 바로 다음 검색</strong>은 «선스틱 선크림 차이» 13 · «선스틱 다이소» 10 · «선스틱 나무위키» 9경로 (시드 뒤 인접 33건 중, 반환 40경로 기준) [실제 데이터 · 로컬 집계]. 선스틱과 선크림의 차이를 확인하는 검색과 다이소 채널 검색이 앞에 섰다.</li>
+<li>선스틱 뒤 두 걸음: «선스틱 선크림 차이» → «선크림 추천» 13경로 · «선스틱 다이소» → «다이소 선크림» 10경로 · «선스틱 나무위키» → «선크림 추천» 9경로 [실제 데이터 · 로컬 집계]. 차이·백과 검색 다음 걸음이 모두 «선크림 추천»으로 모인다.</li>
+<li><strong>앞 검색</strong>은 표본이 작다 — 선크림 앞 인접 4건, 선스틱 앞 인접 7건. 선스틱 바로 앞에서 가장 많은 검색어는 «올리브영 선쿠션 추천»(5건)이다 (선쿠션·선팩트 추천에서 선스틱으로 붙는 경로) [실제 데이터 · 로컬 집계].</li>
+<li><strong>판정 보류</strong>: 두 시드 모두 반환 경로 수가 요청 limit에 닿았다(절단). 위 비중은 반환분 기준이며 «선크림 검색 앞뒤 전체»로 일반화하지 않는다. 두 시드의 limit이 달라(20·40) 서로 비중·순위를 나란히 비교하지 않는다 [가정].</li>
+</ul>
+<h2>2. 시드별 바로 다음 · 바로 앞 검색</h2>
+<h3>선크림 (요청 limit 20 · 반환 20경로 · 절단 — 반환분 기준)</h3>
+<ul>
+<li>경로 길이 3~5단계 · 시드 위치: 처음 16 · 중간 0 · 끝 4 [실제 데이터]</li>
+<li>응답 속 시드 표기: «썬크림» 20 [실제 데이터]</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>방향</th>
+<th>검색어</th>
+<th>단계 [추정]</th>
+<th align="right">인접 경로 수</th>
+<th align="right">방향 내 비중</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>바로 다음</td>
+<td>선크림 바르지마라</td>
+<td>사용·방법</td>
+<td align="right">5</td>
+<td align="right">31%</td>
+</tr>
+<tr>
+<td>바로 다음</td>
+<td>선크림 추천</td>
+<td>탐색·추천</td>
+<td align="right">5</td>
+<td align="right">31%</td>
+</tr>
+<tr>
+<td>바로 다음</td>
+<td>선크림 종류</td>
+<td>탐색·추천</td>
+<td align="right">5</td>
+<td align="right">31%</td>
+</tr>
+<tr>
+<td>바로 다음</td>
+<td>선크림 pa++++</td>
+<td>속성·성분</td>
+<td align="right">1</td>
+<td align="right">6%</td>
+</tr>
+<tr>
+<td>바로 앞</td>
+<td>식물나라 선 미스트</td>
+<td>제형</td>
+<td align="right">2</td>
+<td align="right">50%</td>
+</tr>
+<tr>
+<td>바로 앞</td>
+<td>어바웃미 선크림</td>
+<td>브랜드·제품명</td>
+<td align="right">1</td>
+<td align="right">25%</td>
+</tr>
+<tr>
+<td>바로 앞</td>
+<td>한국 일본 메이크업 차이</td>
+<td>비교·검증</td>
+<td align="right">1</td>
+<td align="right">25%</td>
+</tr>
+</tbody></table>
+<p>두 걸음 뒤까지 (시드 → 다음 → 그다음, 상위 5) [실제 데이터 · 로컬 집계]</p>
+<table>
+<thead>
+<tr>
+<th>다음</th>
+<th>그다음</th>
+<th align="right">경로 수</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>선크림 종류</td>
+<td>유기자차 선크림</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td>선크림 바르지마라</td>
+<td>선크림 바르는법</td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td>선크림 추천</td>
+<td>선크림 추천 디시</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>선크림 추천</td>
+<td>남자 선크림 추천 디시</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>선크림 추천</td>
+<td>선크림 추천 #남자</td>
+<td align="right">1</td>
+</tr>
+</tbody></table>
+<h3>선스틱 (요청 limit 40 · 반환 40경로 · 절단 — 반환분 기준)</h3>
+<ul>
+<li>경로 길이 3~4단계 · 시드 위치: 처음 33 · 중간 0 · 끝 7 [실제 데이터]</li>
+<li>응답 속 시드 표기: «선스틱» 40 [실제 데이터]</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>방향</th>
+<th>검색어</th>
+<th>단계 [추정]</th>
+<th align="right">인접 경로 수</th>
+<th align="right">방향 내 비중</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>바로 다음</td>
+<td>선스틱 선크림 차이</td>
+<td>비교·검증</td>
+<td align="right">13</td>
+<td align="right">39%</td>
+</tr>
+<tr>
+<td>바로 다음</td>
+<td>선스틱 다이소</td>
+<td>구매·채널</td>
+<td align="right">10</td>
+<td align="right">30%</td>
+</tr>
+<tr>
+<td>바로 다음</td>
+<td>선스틱 나무위키</td>
+<td>비교·검증</td>
+<td align="right">9</td>
+<td align="right">27%</td>
+</tr>
+<tr>
+<td>바로 다음</td>
+<td>선스틱 추천</td>
+<td>탐색·추천</td>
+<td align="right">1</td>
+<td align="right">3%</td>
+</tr>
+<tr>
+<td>바로 앞</td>
+<td>올리브영 선쿠션 추천</td>
+<td>구매·채널</td>
+<td align="right">5</td>
+<td align="right">71%</td>
+</tr>
+<tr>
+<td>바로 앞</td>
+<td>선로션 선크림 차이</td>
+<td>비교·검증</td>
+<td align="right">1</td>
+<td align="right">14%</td>
+</tr>
+<tr>
+<td>바로 앞</td>
+<td>sunblock</td>
+<td>제형</td>
+<td align="right">1</td>
+<td align="right">14%</td>
+</tr>
+</tbody></table>
+<p>두 걸음 뒤까지 (시드 → 다음 → 그다음, 상위 5) [실제 데이터 · 로컬 집계]</p>
+<table>
+<thead>
+<tr>
+<th>다음</th>
+<th>그다음</th>
+<th align="right">경로 수</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>선스틱 선크림 차이</td>
+<td>선크림 추천</td>
+<td align="right">13</td>
+</tr>
+<tr>
+<td>선스틱 다이소</td>
+<td>다이소 선크림</td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td>선스틱 나무위키</td>
+<td>선크림 추천</td>
+<td align="right">9</td>
+</tr>
+<tr>
+<td>선스틱 추천</td>
+<td>ahc 선스틱</td>
+<td align="right">1</td>
+</tr>
+</tbody></table>
+<h2>3. 단계로 묶어 보기 [추정 · 규칙 분류]</h2>
+<p>검색어를 단계 사전(정규식 규칙 7단계)으로 분류해 시드를 뺀 출현 경로 수를 합했다. 사전의 정의·순서를 바꾸면 숫자가 바뀐다 [가정]. 단계는 «고르는 순서»가 아니라 검색어 성격의 묶음이다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th align="right">선크림 (limit 20)</th>
+<th align="right">선스틱 (limit 40)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사용·방법</td>
+<td align="right">14</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>구매·채널</td>
+<td align="right">0</td>
+<td align="right">37</td>
+</tr>
+<tr>
+<td>비교·검증</td>
+<td align="right">2</td>
+<td align="right">23</td>
+</tr>
+<tr>
+<td>탐색·추천</td>
+<td align="right">17</td>
+<td align="right">45</td>
+</tr>
+<tr>
+<td>속성·성분</td>
+<td align="right">7</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>대상·상황</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>제형</td>
+<td align="right">5</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td>브랜드·제품명</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>미분류</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+</tbody></table>
+<ul>
+<li>선크림 반환분에서는 탐색·추천과 사용·방법이 앞섰고, 선스틱 반환분에서는 탐색·추천·구매·채널(다이소·올리브영)·비교·검증이 앞섰다. limit이 달라 두 열의 크기를 비교하지 않는다 [추정].</li>
+</ul>
+<h2>4. 숫자를 읽을 때의 주의</h2>
+<ul>
+<li>선크림: 반환 20경로 중 4경로가 같은 앞 세 걸음(«선크림 → 선크림종류 → 유기자차선크림», 정규화 표기)을 공유한다(뒤쪽만 갈라지거나 거기서 끝난다) [실제 데이터]. 반환 경로는 공통 줄기에서 끝만 갈라지는 형태가 많아, 인접 경로 수는 «세션 빈도»라기보다 «그 줄기 아래 갈래 수»에 가깝게 커질 수 있다 [추정].</li>
+<li>선스틱: 반환 40경로 중 13경로가 같은 앞 세 걸음(«선스틱 → 선스틱선크림차이 → 선크림추천», 정규화 표기)을 공유한다(뒤쪽만 갈라지거나 거기서 끝난다) [실제 데이터]. 반환 경로는 공통 줄기에서 끝만 갈라지는 형태가 많아, 인접 경로 수는 «세션 빈도»라기보다 «그 줄기 아래 갈래 수»에 가깝게 커질 수 있다 [추정].</li>
+<li>«선크림» 요청의 응답은 시드를 «썬크림» 20경로 표기로 돌려줬다 [실제 데이터]. 단계 사전의 변형치환(썬→선)으로 같은 검색어로 묶어 셌다 — 이 치환이 없으면 시드가 경로에서 한 번도 잡히지 않는다 [가정: 변형치환 규칙].</li>
+<li>경로의 끝은 이탈이 아니라 세션·데이터의 끝일 수 있어 이탈률을 계산하지 않았다.</li>
+</ul>
+<h2>5. 호출과 크레딧 (응답 cost_detail 합산)</h2>
+<table>
+<thead>
+<tr>
+<th align="right">순서</th>
+<th>커넥터</th>
+<th>내용</th>
+<th align="right">추정</th>
+<th align="right">실측</th>
+<th align="right">반환</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>keyword_info</td>
+<td>STEP 1 출발 후보 ads_metrics (5)</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">7</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>path_finder</td>
+<td>STEP 2 파일럿 선크림 limit 20</td>
+<td align="right">1500</td>
+<td align="right">1170</td>
+<td align="right">20</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>path_finder</td>
+<td>STEP 3 본 호출 선스틱 limit 40 (계획 2290)</td>
+<td align="right">3250</td>
+<td align="right">1650</td>
+<td align="right">40</td>
+</tr>
+<tr>
+<td align="right"></td>
+<td></td>
+<td><strong>합계</strong></td>
+<td align="right"></td>
+<td align="right"><strong>2825</strong></td>
+<td align="right"></td>
+</tr>
+</tbody></table>
+<ul>
+<li>이번 분석 소진 2825크레딧 [실제 데이터] · 이 도구 상한 4,500 · 남은 1675. path_finder 과금은 <code>50 + 40 × 경로 안 고유 키워드 수</code>와 두 호출 모두 일치했다(선크림 고유 28 → 1170, 선스틱 고유 40 → 1650) [실제 데이터].</li>
+<li>계획 대비: 선스틱 계획 2290(파일럿 경로당 고유 키워드 비율 r=1.4 · limit 40) → 실측 1650 (실측 r=1.00) — 계획이 과대였다 [추정 → 실제 데이터].</li>
+</ul>
+<h2>6. 출발 후보와 예산 결정</h2>
+<table>
+<thead>
+<tr>
+<th>후보(응답 표기)</th>
+<th>요청 표기</th>
+<th align="right">최근 3개월 평균 검색량(건)</th>
+<th>게이트 1,000</th>
+<th>도구 판정(5후보 계획)</th>
+<th>이번 결정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>선크림</td>
+<td>선크림</td>
+<td align="right">65186</td>
+<td>통과</td>
+<td>pilot_done</td>
+<td>파일럿(limit 20)으로 수집</td>
+</tr>
+<tr>
+<td>선크림 추천</td>
+<td>선크림 추천</td>
+<td align="right">39550</td>
+<td>통과</td>
+<td>call</td>
+<td>수집 범위 밖 — 호출 안 함</td>
+</tr>
+<tr>
+<td>무기자차 선크림</td>
+<td>무기자차 선크림</td>
+<td align="right">28773</td>
+<td>통과</td>
+<td>hold_budget</td>
+<td>수집 범위 밖 — 호출 안 함</td>
+</tr>
+<tr>
+<td>선스틱</td>
+<td>선스틱</td>
+<td align="right">27550</td>
+<td>통과</td>
+<td>hold_budget</td>
+<td>본 호출(limit 40)</td>
+</tr>
+<tr>
+<td>아기 선크림</td>
+<td>아기 선크림</td>
+<td align="right">7613</td>
+<td>통과</td>
+<td>hold_budget</td>
+<td>수집 범위 밖 — 호출 안 함</td>
+</tr>
+<tr>
+<td>썬크림</td>
+<td>—</td>
+<td align="right">68973</td>
+<td>통과</td>
+<td>hold_unrequested</td>
+<td>출발 후보 아님</td>
+</tr>
+<tr>
+<td>무기자차 썬크림</td>
+<td>—</td>
+<td align="right">7036</td>
+<td>통과</td>
+<td>hold_unrequested</td>
+<td>출발 후보 아님</td>
+</tr>
+</tbody></table>
+<ul>
+<li>검색량은 keyword_info <code>ads_metrics</code>의 <code>volume_avg</code> [실제 데이터] · 게이트 1,000은 도구 기본값 [가정].</li>
+<li>이번 수집 범위는 «선크림» 기본 + 예산이 허락하면 «선스틱»으로 정해져 있었다. 도구의 5후보 계획은 볼륨 순으로 «선크림 추천»을 본 호출로 골랐으나, 범위에 맞춰 선크림·선스틱 두 후보만으로 예산 게이트를 다시 돌려 선스틱을 불렀다(선스틱 계획 2,290 ≤ 남은 예산 3,325).</li>
+<li>선크림을 선스틱과 같은 limit 40으로 다시 부르는 것은 계획 2290 &gt; 선스틱 호출 뒤 남은 예산 1675보다 커서 하지 않았다 — 두 시드의 limit 불일치는 이 때문이다 [추정: 계획 비용].</li>
+<li>«썬크림»(요청하지 않은 변형 행, 검색량이 선크림보다 큼)은 출발 후보가 아니라 표기변형이다. path_finder는 선크림 요청에 이 표기로 경로를 돌려줬다.</li>
+</ul>
+<h2>7. 라벨 규약</h2>
+<ul>
+<li>[실제 데이터] 경로 원본 · 인접 경로 수 · 시드 위치 · cost_detail · volume_avg</li>
+<li>[추정] 단계 분류·단계 분포(규칙 사전) · 계획 비용 · 경로 구조 해석</li>
+<li>[가정] 단계 정의와 순서 · 변형치환(썬→선, 올영→올리브영) · limit 20/40 · 볼륨 게이트 1,000</li>
+<li>[데이터 공백] 절단 너머의 경로 · 인구통계 · 구매·전환</li>
+</ul>
+<p>산출 파일: <code>out/journey_edges_sunscreen-kr.csv</code>(인접 전이) · <code>out/journey_nodes_sunscreen-kr.csv</code>(검색어별 출현) · <code>out/journey_next2_sunscreen-kr.csv</code>(두 걸음 순서) · <code>out/journey_summary_sunscreen-kr.md</code>(도구 요약) · <code>path_plan.csv</code>(예산 계획)</p>
+</section>
+<section class="panel md" id="p-r1" hidden><h1>검색 여정 요약 — sunscreen-kr</h1>
+<ul>
+<li>조회일: 2026-09-30 · 데이터 시점: <code>time_point</code> = curr (월 그레인 스냅샷 · 조회일과 다르다) [실제 데이터]</li>
+<li>이 표는 <strong>세션 인접 검색</strong>의 집계다. 개인 여정·구매·전환이 아니다.</li>
+</ul>
+<h2>호출과 크레딧 [실제 데이터: 반환·절단·고유 키워드·실측 크레딧 · 추정: 식 재계산]</h2>
+<table>
+<thead>
+<tr>
+<th>시드</th>
+<th>gl</th>
+<th>time_point</th>
+<th align="right">요청 limit</th>
+<th align="right">반환 경로</th>
+<th align="right">사용 경로</th>
+<th>절단</th>
+<th align="right">고유 키워드</th>
+<th align="right">실측 크레딧</th>
+<th align="right">식 50+40×U</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>선크림</td>
+<td>kr</td>
+<td>curr</td>
+<td align="right">20</td>
+<td align="right">20</td>
+<td align="right">20</td>
+<td>예 — 반환분 기준</td>
+<td align="right">28</td>
+<td align="right">1170</td>
+<td align="right">1170</td>
+</tr>
+<tr>
+<td>선스틱</td>
+<td>kr</td>
+<td>curr</td>
+<td align="right">40</td>
+<td align="right">40</td>
+<td align="right">40</td>
+<td>예 — 반환분 기준</td>
+<td align="right">40</td>
+<td align="right">1650</td>
+<td align="right">1650</td>
+</tr>
+</tbody></table>
+<ul>
+<li>이번 분석 path_finder 소진(실측 합): 2820 [실제 데이터] · 식 재계산 합: 2820 [추정]</li>
+<li>⚠️ 요청 limit이 시드마다 다르다(20, 40) — 반환 규모가 달라 시드 간 비중·순위를 나란히 비교하지 않는다 [가정]</li>
+<li>⚠️ 절단: 선크림, 선스틱 — 반환 경로 수가 limit에 닿았다. 아래 비중은 <strong>반환분 기준</strong>이며 이 시드의 경로 전체로 일반화하지 않는다. limit을 올려도 수렴 여부는 비용을 치러야 알 수 있다.</li>
+</ul>
+<h2>보류한 출발 후보 (path_plan.csv)</h2>
+<ul>
+<li>없음</li>
+</ul>
+<h2>선크림</h2>
+<ul>
+<li><p>사용 경로 20 · 시드가 경로 안에 있는 경로 20 · 표기변형 인접(전이에서 제외) 0건 [실제 데이터 · 로컬 집계]</p>
+</li>
+<li><p>시드 «선크림»(단계: 미분류) 자신은 아래 단계 분포·단계 간 전이에서 뺐다 — 출현 20경로. 시드 전후는 «바로 다음/앞 검색» 표로 본다</p>
+</li>
+</ul>
+<h3>단계 분포 (시드 제외 · 키워드 출현 경로 수 합 기준) [추정 · 규칙 분류]</h3>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th align="right">출현 합</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>탐색·추천</td>
+<td align="right">17</td>
+</tr>
+<tr>
+<td>사용·방법</td>
+<td align="right">14</td>
+</tr>
+<tr>
+<td>속성·성분</td>
+<td align="right">7</td>
+</tr>
+<tr>
+<td>제형</td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td>비교·검증</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>브랜드·제품명</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>대상·상황</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>미분류</td>
+<td align="right">1</td>
+</tr>
+</tbody></table>
+<h3>단계 간 전이 상위 (시드가 낀 인접 20건 제외 · 남은 29건 기준) [추정 · 규칙 분류]</h3>
+<table>
+<thead>
+<tr>
+<th>from → to</th>
+<th align="right">인접 수</th>
+<th align="right">비중</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사용·방법 → 사용·방법</td>
+<td align="right">8</td>
+<td align="right">27.6%</td>
+</tr>
+<tr>
+<td>탐색·추천 → 탐색·추천</td>
+<td align="right">6</td>
+<td align="right">20.7%</td>
+</tr>
+<tr>
+<td>탐색·추천 → 속성·성분</td>
+<td align="right">4</td>
+<td align="right">13.8%</td>
+</tr>
+<tr>
+<td>제형 → 제형</td>
+<td align="right">3</td>
+<td align="right">10.3%</td>
+</tr>
+<tr>
+<td>속성·성분 → 속성·성분</td>
+<td align="right">2</td>
+<td align="right">6.9%</td>
+</tr>
+<tr>
+<td>속성·성분 → 비교·검증</td>
+<td align="right">1</td>
+<td align="right">3.4%</td>
+</tr>
+<tr>
+<td>속성·성분 → 탐색·추천</td>
+<td align="right">1</td>
+<td align="right">3.4%</td>
+</tr>
+<tr>
+<td>사용·방법 → 대상·상황</td>
+<td align="right">1</td>
+<td align="right">3.4%</td>
+</tr>
+<tr>
+<td>대상·상황 → 사용·방법</td>
+<td align="right">1</td>
+<td align="right">3.4%</td>
+</tr>
+<tr>
+<td>브랜드·제품명 → 브랜드·제품명</td>
+<td align="right">1</td>
+<td align="right">3.4%</td>
+</tr>
+</tbody></table>
+<h3>시드 바로 다음 검색 상위 [실제 데이터 · 로컬 집계]</h3>
+<table>
+<thead>
+<tr>
+<th>키워드</th>
+<th>단계</th>
+<th align="right">인접 수</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>선크림 바르지마라</td>
+<td>사용·방법</td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td>선크림 추천</td>
+<td>탐색·추천</td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td>선크림 종류</td>
+<td>탐색·추천</td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td>선크림 pa++++</td>
+<td>속성·성분</td>
+<td align="right">1</td>
+</tr>
+</tbody></table>
+<h3>시드 바로 앞 검색 상위 [실제 데이터 · 로컬 집계]</h3>
+<table>
+<thead>
+<tr>
+<th>키워드</th>
+<th>단계</th>
+<th align="right">인접 수</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>식물나라 선 미스트</td>
+<td>제형</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>어바웃미 선크림</td>
+<td>브랜드·제품명</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>한국 일본 메이크업 차이</td>
+<td>비교·검증</td>
+<td align="right">1</td>
+</tr>
+</tbody></table>
+<h2>선스틱</h2>
+<ul>
+<li><p>사용 경로 40 · 시드가 경로 안에 있는 경로 40 · 표기변형 인접(전이에서 제외) 1건 [실제 데이터 · 로컬 집계]</p>
+</li>
+<li><p>시드 «선스틱»(단계: 제형) 자신은 아래 단계 분포·단계 간 전이에서 뺐다 — 출현 40경로. 시드 전후는 «바로 다음/앞 검색» 표로 본다</p>
+</li>
+</ul>
+<h3>단계 분포 (시드 제외 · 키워드 출현 경로 수 합 기준) [추정 · 규칙 분류]</h3>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th align="right">출현 합</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>탐색·추천</td>
+<td align="right">45</td>
+</tr>
+<tr>
+<td>구매·채널</td>
+<td align="right">37</td>
+</tr>
+<tr>
+<td>비교·검증</td>
+<td align="right">23</td>
+</tr>
+<tr>
+<td>제형</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td>대상·상황</td>
+<td align="right">2</td>
+</tr>
+</tbody></table>
+<h3>단계 간 전이 상위 (시드가 낀 인접 40건 제외 · 남은 71건 기준) [추정 · 규칙 분류]</h3>
+<table>
+<thead>
+<tr>
+<th>from → to</th>
+<th align="right">인접 수</th>
+<th align="right">비중</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>비교·검증 → 탐색·추천</td>
+<td align="right">22</td>
+<td align="right">31.0%</td>
+</tr>
+<tr>
+<td>구매·채널 → 구매·채널</td>
+<td align="right">19</td>
+<td align="right">26.8%</td>
+</tr>
+<tr>
+<td>탐색·추천 → 탐색·추천</td>
+<td align="right">18</td>
+<td align="right">25.4%</td>
+</tr>
+<tr>
+<td>탐색·추천 → 구매·채널</td>
+<td align="right">6</td>
+<td align="right">8.5%</td>
+</tr>
+<tr>
+<td>제형 → 탐색·추천</td>
+<td align="right">2</td>
+<td align="right">2.8%</td>
+</tr>
+<tr>
+<td>탐색·추천 → 제형</td>
+<td align="right">1</td>
+<td align="right">1.4%</td>
+</tr>
+<tr>
+<td>대상·상황 → 비교·검증</td>
+<td align="right">1</td>
+<td align="right">1.4%</td>
+</tr>
+<tr>
+<td>구매·채널 → 제형</td>
+<td align="right">1</td>
+<td align="right">1.4%</td>
+</tr>
+<tr>
+<td>대상·상황 → 탐색·추천</td>
+<td align="right">1</td>
+<td align="right">1.4%</td>
+</tr>
+</tbody></table>
+<h3>시드 바로 다음 검색 상위 [실제 데이터 · 로컬 집계]</h3>
+<table>
+<thead>
+<tr>
+<th>키워드</th>
+<th>단계</th>
+<th align="right">인접 수</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>선스틱 선크림 차이</td>
+<td>비교·검증</td>
+<td align="right">13</td>
+</tr>
+<tr>
+<td>선스틱 다이소</td>
+<td>구매·채널</td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td>선스틱 나무위키</td>
+<td>비교·검증</td>
+<td align="right">9</td>
+</tr>
+<tr>
+<td>선스틱 추천</td>
+<td>탐색·추천</td>
+<td align="right">1</td>
+</tr>
+</tbody></table>
+<h3>시드 바로 앞 검색 상위 [실제 데이터 · 로컬 집계]</h3>
+<table>
+<thead>
+<tr>
+<th>키워드</th>
+<th>단계</th>
+<th align="right">인접 수</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>올리브영 선쿠션 추천</td>
+<td>구매·채널</td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td>선로션 선크림 차이</td>
+<td>비교·검증</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>sunblock</td>
+<td>제형</td>
+<td align="right">1</td>
+</tr>
+</tbody></table>
+<h2>라벨</h2>
+<ul>
+<li>[실제 데이터] 경로 시퀀스 · 인접 쌍 수 · cost_detail</li>
+<li>[추정] 단계 분류(단계 사전 규칙) · 단계 분포 · 단계 간 전이</li>
+<li>[가정] 단계 정의와 순서 · 변형치환 규칙 · limit · 볼륨 게이트</li>
+<li>[데이터 공백] 빈 응답 · 시드 미포함 경로 · 방향별 인접 없음</li>
+</ul>
+</section>
+<section class="panel" id="p-t0" hidden data-table="0">
+ <div class="tools"><input type="search" placeholder="앞 검색 검색"><select data-f="2"><option value="">출발 전체</option><option>선스틱</option><option>선크림</option></select><select data-f="3"><option value="">위치 전체</option><option>post_seed</option><option>pre_seed</option></select><span class="count"></span></div>
+ <div class="scroll"><table class="u"><thead><tr><th data-k="0">앞 검색</th><th data-k="1">뒤 검색</th><th data-k="2">출발</th><th data-k="3">위치</th><th data-k="4">앞 단계</th><th data-k="5">뒤 단계</th><th data-k="6" class="n">경로 수</th><th data-k="7" class="n">방향 내 비중</th></tr></thead><tbody></tbody></table></div>
+ <p class="foot">path_finder 세션 인접 경로(선크림 limit 20 · 선스틱 limit 40, 둘 다 절단) — 비중은 돌려받은 경로 기준. 원본: out/journey_edges_sunscreen-kr.csv</p>
+</section>
+<section class="panel" id="p-t1" hidden data-table="1">
+ <div class="tools"><input type="search" placeholder="다음 검색 검색"><select data-f="2"><option value="">출발 전체</option><option>선스틱</option><option>선크림</option></select><span class="count"></span></div>
+ <div class="scroll"><table class="u"><thead><tr><th data-k="0">다음 검색</th><th data-k="1">그다음 검색</th><th data-k="2">출발</th><th data-k="3" class="n">경로 수</th></tr></thead><tbody></tbody></table></div>
+ <p class="foot"> 원본: out/journey_next2_sunscreen-kr.csv</p>
+</section>
+<section class="panel" id="p-t2" hidden data-table="2">
+ <div class="tools"><input type="search" placeholder="키워드 검색"><select data-f="1"><option value="">출발 전체</option><option>선스틱</option><option>선크림</option></select><select data-f="2"><option value="">단계 전체</option><option>구매·채널</option><option>대상·상황</option><option>미분류</option><option>브랜드·제품명</option><option>비교·검증</option><option>사용·방법</option><option>속성·성분</option><option>제형</option><option>탐색·추천</option></select><span class="count"></span></div>
+ <div class="scroll"><table class="u"><thead><tr><th data-k="0">키워드</th><th data-k="1">출발</th><th data-k="2">단계</th><th data-k="3" class="n">등장 경로</th><th data-k="4" class="n">경로 비중</th><th data-k="5" class="n">시드 앞</th><th data-k="6" class="n">시드 뒤</th></tr></thead><tbody></tbody></table></div>
+ <p class="foot"> 원본: out/journey_nodes_sunscreen-kr.csv</p>
+</section>
+<p class="foot">trace-search-journey 스킬 산출물을 그대로 옮긴 페이지 — 수치는 스킬 스크립트와 응답 원장에서 나왔다. 동봉 파일: stages.json · out/journey_edges_sunscreen-kr.csv · out/journey_nodes_sunscreen-kr.csv · path_plan.csv · request.md</p>
+</div>
+<script type="application/json" id="data">[{"rows":[["썬크림","선크림 바르지마라","선크림","post_seed","미분류","사용·방법","5","0.102"],["썬크림","선크림 추천","선크림","post_seed","미분류","탐색·추천","5","0.102"],["썬크림","선크림 종류","선크림","post_seed","미분류","탐색·추천","5","0.102"],["선크림 종류","유기자차 선크림","선크림","post_seed","탐색·추천","속성·성분","4","0.0816"],["선크림 바르지마라","선크림 바르는법","선크림","post_seed","사용·방법","사용·방법","3","0.0612"],["선크림 바르는법","선크림 지우는법","선크림","post_seed","사용·방법","사용·방법","2","0.0408"],["식물나라 선스프레이","식물나라 선 미스트","선크림","pre_seed","제형","제형","2","0.0408"],["식물나라 선 미스트","썬크림","선크림","pre_seed","제형","미분류","2","0.0408"],["선크림 추천","선크림 추천 디시","선크림","post_seed","탐색·추천","탐색·추천","1","0.0204"],["선크림 추천","남자 선크림 추천 디시","선크림","post_seed","탐색·추천","탐색·추천","1","0.0204"],["선크림 추천","선크림 추천 #남자","선크림","post_seed","탐색·추천","탐색·추천","1","0.0204"],["유기자차 선크림","무기자차 유기자차 차이","선크림","post_seed","속성·성분","비교·검증","1","0.0204"],["선크림 지우는법","선크림 세안","선크림","post_seed","사용·방법","사용·방법","1","0.0204"],["유기자차 선크림","무기자차 선크림 추천","선크림","post_seed","속성·성분","탐색·추천","1","0.0204"],["선크림 추천","건성 선크림 추천","선크림","post_seed","탐색·추천","탐색·추천","1","0.0204"],["유기자차 선크림","혼합자차 선크림","선크림","post_seed","속성·성분","속성·성분","1","0.0204"],["선크림 바르지마라","실내 선크림","선크림","post_seed","사용·방법","대상·상황","1","0.0204"],["실내 선크림","썬크림 안 바르면","선크림","post_seed","대상·상황","사용·방법","1","0.0204"],["썬크림 안 바르면","선크림 매일 바르면","선크림","post_seed","사용·방법","사용·방법","1","0.0204"],["선크림 종류","무기자차 선크림 추천","선크림","post_seed","탐색·추천","탐색·추천","1","0.0204"],["썬크림","선크림 pa++++","선크림","post_seed","미분류","속성·성분","1","0.0204"],["선크림 pa++++","spf 50 ++","선크림","post_seed","속성·성분","속성·성분","1","0.0204"],["선크림 추천","선크림 추천더쿠","선크림","post_seed","탐색·추천","탐색·추천","1","0.0204"],["선크림 바르지마라","선크림 지우는법","선크림","post_seed","사용·방법","사용·방법","1","0.0204"],["어바웃미","어바웃미 선크림","선크림","pre_seed","브랜드·제품명","브랜드·제품명","1","0.0204"],["어바웃미 선크림","썬크림","선크림","pre_seed","브랜드·제품명","미분류","1","0.0204"],["일본 화장","한국 일본 메이크업 차이","선크림","pre_seed","미분류","비교·검증","1","0.0204"],["한국 일본 메이크업 차이","썬크림","선크림","pre_seed","비교·검증","미분류","1","0.0204"],["자외선 차단 스프레이","식물나라 선스프레이","선크림","pre_seed","제형","제형","1","0.0204"],["선스틱","선스틱 선크림 차이","선스틱","post_seed","제형","비교·검증","13","0.1171"],["선스틱 선크림 차이","선크림 추천","선스틱","post_seed","비교·검증","탐색·추천","13","0.1171"],["선스틱","선스틱 다이소","선스틱","post_seed","제형","구매·채널","10","0.0901"],["선스틱 다이소","다이소 선크림","선스틱","post_seed","구매·채널","구매·채널","10","0.0901"],["선스틱","선스틱 나무위키","선스틱","post_seed","제형","비교·검증","9","0.0811"],["선스틱 나무위키","선크림 추천","선스틱","post_seed","비교·검증","탐색·추천","9","0.0811"],["올리브영 선쿠션 추천","선스틱","선스틱","pre_seed","구매·채널","제형","5","0.045"],["선쿠션 추천","올리브영 선쿠션 추천","선스틱","pre_seed","탐색·추천","구매·채널","3","0.027"],["선크림 추천","선크림 추천 순위","선스틱","post_seed","탐색·추천","탐색·추천","2","0.018"],["선크림 추천","여자 선크림 추천","선스틱","post_seed","탐색·추천","탐색·추천","2","0.018"],["선크림 추천","선크림 추천더쿠","선스틱","post_seed","탐색·추천","탐색·추천","2","0.018"],["선크림 추천","남자 선크림 추천 디시","선스틱","post_seed","탐색·추천","탐색·추천","2","0.018"],["선크림 추천","선크림 추천 #남자","선스틱","post_seed","탐색·추천","탐색·추천","2","0.018"],["선크림 추천","선크림 추천 올리브 영","선스틱","post_seed","탐색·추천","구매·채널","2","0.018"],["선크림 추천","선크림 추천 디시","선스틱","post_seed","탐색·추천","탐색·추천","2","0.018"],["선크림 추천","건성 선크림 추천","선스틱","post_seed","탐색·추천","탐색·추천","2","0.018"],["선스틱","선스틱 추천","선스틱","post_seed","제형","탐색·추천","1","0.009"],["선스틱 추천","ahc 선스틱","선스틱","post_seed","탐색·추천","제형","1","0.009"],["다이소 선크림","다이 소 선크림 논란","선스틱","post_seed","구매·채널","구매·채널","1","0.009"],["다이소 선크림","다이소 워터프루프 선크림","선스틱","post_seed","구매·채널","구매·채널","1","0.009"],["다이소 선크림","다이소 선크림 후기","선스틱","post_seed","구매·채널","구매·채널","1","0.009"],["다이소 선크림","다이소 선크림 유튜버","선스틱","post_seed","구매·채널","구매·채널","1","0.009"],["다이소 선크림","다이 소 선크림 민 동성","선스틱","post_seed","구매·채널","구매·채널","1","0.009"],["다이소 선크림","다이소 선크림 추천 디시","선스틱","post_seed","구매·채널","구매·채널","1","0.009"],["다이소 선크림","다이소 선크림 무기자차","선스틱","post_seed","구매·채널","구매·채널","1","0.009"],["다이소 선크림","다이 소 선크림 사건","선스틱","post_seed","구매·채널","구매·채널","1","0.009"],["다이소 선크림","다이 소 선크림 저격","선스틱","post_seed","구매·채널","구매·채널","1","0.009"],["선크림 추천","피부과 선크림 추천","선스틱","post_seed","탐색·추천","탐색·추천","1","0.009"],["선크림 추천","선크림 추천 무기 자차","선스틱","post_seed","탐색·추천","탐색·추천","1","0.009"],["선크림 추천","자외선 차단 선크림 추천","선스틱","post_seed","탐색·추천","탐색·추천","1","0.009"],["선크림 추천","명품 선크림 추천","선스틱","post_seed","탐색·추천","탐색·추천","1","0.009"],["스포츠 썬크림","선로션 선크림 차이","선스틱","pre_seed","대상·상황","비교·검증","1","0.009"],["선로션 선크림 차이","선스틱","선스틱","pre_seed","비교·검증","제형","1","0.009"],["선크림 아마존","sunblock","선스틱","pre_seed","구매·채널","제형","1","0.009"],["sunblock","선스틱","선스틱","pre_seed","제형","제형","1","0.009"],["남자 썬크림쿠션","선쿠션 추천","선스틱","pre_seed","대상·상황","탐색·추천","1","0.009"],["팩트 선크림","선쿠션 추천","선스틱","pre_seed","제형","탐색·추천","1","0.009"],["선팩트 추천","올리브영 선쿠션 추천","선스틱","pre_seed","탐색·추천","구매·채널","1","0.009"],["썬팩트","선쿠션 추천","선스틱","pre_seed","제형","탐색·추천","1","0.009"]],"types":["text","text","tag","text","text","text","num","share"],"sort":6},{"rows":[["선크림 종류","유기자차 선크림","선크림","4"],["선크림 바르지마라","선크림 바르는법","선크림","3"],["선크림 추천","선크림 추천 디시","선크림","1"],["선크림 추천","남자 선크림 추천 디시","선크림","1"],["선크림 추천","선크림 추천 #남자","선크림","1"],["선크림 추천","건성 선크림 추천","선크림","1"],["선크림 바르지마라","실내 선크림","선크림","1"],["선크림 종류","무기자차 선크림 추천","선크림","1"],["선크림 pa++++","spf 50 ++","선크림","1"],["선크림 추천","선크림 추천더쿠","선크림","1"],["선크림 바르지마라","선크림 지우는법","선크림","1"],["선스틱 선크림 차이","선크림 추천","선스틱","13"],["선스틱 다이소","다이소 선크림","선스틱","10"],["선스틱 나무위키","선크림 추천","선스틱","9"],["선스틱 추천","ahc 선스틱","선스틱","1"]],"types":["text","text","tag","num"],"sort":3},{"rows":[["썬크림","선크림","미분류","20","1.0","0","0"],["선크림 바르지마라","선크림","사용·방법","5","0.25","0","5"],["선크림 추천","선크림","탐색·추천","5","0.25","0","5"],["선크림 종류","선크림","탐색·추천","5","0.25","0","5"],["유기자차 선크림","선크림","속성·성분","4","0.2","0","4"],["선크림 바르는법","선크림","사용·방법","3","0.15","0","3"],["선크림 지우는법","선크림","사용·방법","3","0.15","0","3"],["무기자차 선크림 추천","선크림","탐색·추천","2","0.1","0","2"],["식물나라 선스프레이","선크림","제형","2","0.1","2","0"],["식물나라 선 미스트","선크림","제형","2","0.1","2","0"],["선크림 추천 디시","선크림","탐색·추천","1","0.05","0","1"],["남자 선크림 추천 디시","선크림","탐색·추천","1","0.05","0","1"],["선크림 추천 #남자","선크림","탐색·추천","1","0.05","0","1"],["무기자차 유기자차 차이","선크림","비교·검증","1","0.05","0","1"],["선크림 세안","선크림","사용·방법","1","0.05","0","1"],["건성 선크림 추천","선크림","탐색·추천","1","0.05","0","1"],["혼합자차 선크림","선크림","속성·성분","1","0.05","0","1"],["실내 선크림","선크림","대상·상황","1","0.05","0","1"],["썬크림 안 바르면","선크림","사용·방법","1","0.05","0","1"],["선크림 매일 바르면","선크림","사용·방법","1","0.05","0","1"],["선크림 pa++++","선크림","속성·성분","1","0.05","0","1"],["spf 50 ++","선크림","속성·성분","1","0.05","0","1"],["선크림 추천더쿠","선크림","탐색·추천","1","0.05","0","1"],["어바웃미","선크림","브랜드·제품명","1","0.05","1","0"],["어바웃미 선크림","선크림","브랜드·제품명","1","0.05","1","0"],["일본 화장","선크림","미분류","1","0.05","1","0"],["한국 일본 메이크업 차이","선크림","비교·검증","1","0.05","1","0"],["자외선 차단 스프레이","선크림","제형","1","0.05","1","0"],["선스틱","선스틱","제형","40","1.0","0","0"],["선크림 추천","선스틱","탐색·추천","22","0.55","0","22"],["선스틱 선크림 차이","선스틱","비교·검증","13","0.325","0","13"],["선스틱 다이소","선스틱","구매·채널","10","0.25","0","10"],["다이소 선크림","선스틱","구매·채널","10","0.25","0","10"],["선스틱 나무위키","선스틱","비교·검증","9","0.225","0","9"],["올리브영 선쿠션 추천","선스틱","구매·채널","5","0.125","5","0"],["선쿠션 추천","선스틱","탐색·추천","3","0.075","3","0"],["선크림 추천 순위","선스틱","탐색·추천","2","0.05","0","2"],["여자 선크림 추천","선스틱","탐색·추천","2","0.05","0","2"],["선크림 추천더쿠","선스틱","탐색·추천","2","0.05","0","2"],["남자 선크림 추천 디시","선스틱","탐색·추천","2","0.05","0","2"],["선크림 추천 #남자","선스틱","탐색·추천","2","0.05","0","2"],["선크림 추천 올리브 영","선스틱","구매·채널","2","0.05","0","2"],["선크림 추천 디시","선스틱","탐색·추천","2","0.05","0","2"],["건성 선크림 추천","선스틱","탐색·추천","2","0.05","0","2"],["선스틱 추천","선스틱","탐색·추천","1","0.025","0","1"],["ahc 선스틱","선스틱","제형","1","0.025","0","1"],["다이 소 선크림 논란","선스틱","구매·채널","1","0.025","0","1"],["다이소 워터프루프 선크림","선스틱","구매·채널","1","0.025","0","1"],["다이소 선크림 후기","선스틱","구매·채널","1","0.025","0","1"],["다이소 선크림 유튜버","선스틱","구매·채널","1","0.025","0","1"],["다이 소 선크림 민 동성","선스틱","구매·채널","1","0.025","0","1"],["다이소 선크림 추천 디시","선스틱","구매·채널","1","0.025","0","1"],["다이소 선크림 무기자차","선스틱","구매·채널","1","0.025","0","1"],["다이 소 선크림 사건","선스틱","구매·채널","1","0.025","0","1"],["다이 소 선크림 저격","선스틱","구매·채널","1","0.025","0","1"],["피부과 선크림 추천","선스틱","탐색·추천","1","0.025","0","1"],["선크림 추천 무기 자차","선스틱","탐색·추천","1","0.025","0","1"],["자외선 차단 선크림 추천","선스틱","탐색·추천","1","0.025","0","1"],["명품 선크림 추천","선스틱","탐색·추천","1","0.025","0","1"],["스포츠 썬크림","선스틱","대상·상황","1","0.025","1","0"],["선로션 선크림 차이","선스틱","비교·검증","1","0.025","1","0"],["선크림 아마존","선스틱","구매·채널","1","0.025","1","0"],["sunblock","선스틱","제형","1","0.025","1","0"],["남자 썬크림쿠션","선스틱","대상·상황","1","0.025","1","0"],["팩트 선크림","선스틱","제형","1","0.025","1","0"],["선팩트 추천","선스틱","탐색·추천","1","0.025","1","0"],["썬팩트","선스틱","제형","1","0.025","1","0"]],"types":["text","tag","tag","num","share","num","num"],"sort":3}]</script>
+<script>
+(function(){
+  var T=JSON.parse(document.getElementById("data").textContent);
+  var num=function(v){var x=parseFloat(v);return v===""||isNaN(x)?null:x};
+  function fmt(v,ty){var x=num(v);if(ty==="num")return x===null?v:x.toLocaleString("ko-KR");if(ty==="dec2")return x===null?v:x.toFixed(2);
+    if(ty==="pct")return x===null?(v||"—"):(x>0?"+":"")+Math.round(x*100)+"%";if(ty==="share")return x===null?(v||"—"):(x*100).toFixed(1)+"%";if(ty==="pct100")return x===null?(v||"—"):x+"%";return v}
+  document.querySelectorAll("[data-table]").forEach(function(sec){
+    var t=T[+sec.dataset.table], sortK=t.sort, desc=true, tb=sec.querySelector("tbody"), q=sec.querySelector("input"), sels=sec.querySelectorAll("select"), cnt=sec.querySelector(".count");
+    function render(){
+      var s=q.value.trim().toLowerCase();
+      var list=t.rows.filter(function(r){if(s&&String(r[0]).toLowerCase().indexOf(s)<0)return false;for(var i=0;i<sels.length;i++){var v=sels[i].value;if(v&&r[+sels[i].dataset.f]!==v)return false}return true});
+      list.sort(function(a,c){var x=num(a[sortK]),y=num(c[sortK]);if(x===null&&y===null){x=a[sortK];y=c[sortK]}else{x=x===null?-Infinity:x;y=y===null?-Infinity:y}return (x<y?-1:x>y?1:0)*(desc?-1:1)});
+      tb.textContent="";
+      list.slice(0,500).forEach(function(r){var tr=document.createElement("tr");
+        r.forEach(function(v,k){var ty=t.types[k],td=document.createElement("td");
+          if(ty==="tag"){if(v){var sp=document.createElement("span");sp.className="tag";sp.textContent=v;td.appendChild(sp)}}
+          else{td.textContent=fmt(v,ty);if(ty!=="text")td.className="n";if(ty==="pct"&&num(v)!==null)td.className+=num(v)>0?" up":" down"}
+          tr.appendChild(td)});tb.appendChild(tr)});
+      cnt.textContent=list.length.toLocaleString("ko-KR")+"행"+(list.length>500?" · 상위 500행 표시":"");
+    }
+    q.addEventListener("input",render);sels.forEach(function(el){el.addEventListener("input",render)});
+    sec.querySelectorAll("th[data-k]").forEach(function(h){h.addEventListener("click",function(){var k=+h.dataset.k;desc=sortK===k?!desc:true;sortK=k;render()})});
+    render();
+  });
+  document.querySelectorAll("[data-tab]").forEach(function(b){b.addEventListener("click",function(){
+    document.querySelectorAll("[data-tab]").forEach(function(x){x.setAttribute("aria-selected",String(x===b));document.getElementById("p-"+x.dataset.tab).hidden=x!==b});
+  })});
+})();
+</script></body></html>

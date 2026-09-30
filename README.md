@@ -7,10 +7,10 @@ ListeningMind 검색 데이터 분석 스킬 카탈로그 — 리포트형 스�
 
 | 묶음 | 스킬 | 출처 |
 |---|---|---|
-| 리포트형 | 4 | `lm-agent-plugins · LM Reports@d86f0cf` |
+| 리포트형 | 4 | `lm-agent-plugins · LM Reports@d9b313f` |
 | 시장 분석 | 11 | `ListeningMind-Daas/lm-skills@56a1f6a` |
 | 연동·개발 도구 | 2 | `ListeningMind-Daas/lm-skills@56a1f6a` |
 
-- 판 v0.1.7 · dev `d86f0cf` 에서 생성 (`build-stamp.json`)
+- 판 v0.1.8 · dev `d9b313f` 에서 생성 (`build-stamp.json`)
 - 카탈로그 데이터(`data/catalog.json` · `public/raw/`)는 발행 때 만들어 담았다 — `data/PREBUILT` 가 있으면 빌드가 그대로 쓴다
 - 빌드: `npm ci && npm run build` → `out/` (정적 사이트 · 도메인 루트 배포)

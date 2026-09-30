@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>새 스킬 패키지 «track-sunscreen-ingredients» · 선크림 성분 트렌드 스킬 만들어줘</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{--page:#fbfafb;--surface:#fff;--muted:#eae8ee;--line:#eae8ee;--ink:#3d3a46;--soft:#5d596a;--mute:#6a6773;--brand:#5e2cc9;--brand50:#e2e0f8;--link:#4d62dc;--linkbg:#eef0fc}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:14px/1.6 "Noto Sans KR",-apple-system,system-ui,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 16px 56px}
+.eyebrow{font-size:12px;font-weight:700;color:var(--brand);letter-spacing:.04em}
+h1{font-size:24px;margin:6px 0 4px;font-weight:700}.q{display:inline-block;background:var(--brand50);color:var(--brand);border-radius:8px;padding:6px 12px;font-weight:500;margin:6px 0 10px}
+.meta{font-size:13px;color:var(--mute)}.meta b{color:var(--ink);font-weight:600}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--line);margin-top:18px}.tabs button{font:inherit;border:0;background:none;padding:10px 14px;color:var(--soft);font-weight:500;border-bottom:2px solid transparent;cursor:pointer}
+.tabs button[aria-selected=true]{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;padding:18px 20px;overflow-wrap:anywhere}
+.md h1{font-size:19px}.md h2{font-size:16px;margin:26px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}.md h3{font-size:14.5px}.md p,.md li{color:var(--soft)}
+.md table{border-collapse:collapse;width:100%;font-size:12.5px;margin:10px 0;display:block;overflow-x:auto}.md th{text-align:left;background:#f7f6f8;color:var(--mute);font-weight:500;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.md td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}.md code{background:#f3f2f5;border-radius:4px;padding:0 4px;font-size:12px}
+.md pre{background:#f7f6f8;border-radius:8px;padding:10px 12px;overflow-x:auto;font-size:12px}.md pre code{background:none;padding:0}
+.md blockquote{margin:10px 0;padding:8px 14px;border-left:3px solid var(--brand50);background:#f8f7fd;color:var(--soft)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.tools input,.tools select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:#fff;color:var(--ink);max-width:100%}
+.tools input{flex:1;min-width:160px}.count{font-size:12px;color:var(--mute)}
+table.u{border-collapse:collapse;width:100%;font-size:12.5px}table.u th{position:sticky;top:0;background:#f7f6f8;color:var(--mute);font-weight:500;text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap}
+table.u td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}table.u .n{text-align:right}
+.scroll{max-height:620px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.tag{display:inline-block;border-radius:5px;padding:0 6px;font-size:11.5px;background:var(--muted);color:var(--soft)}
+.up{color:#2f7d32}.down{color:#b3261e}
+.foot{margin-top:14px;font-size:12px;color:var(--mute)}
+</style></head><body><div class="wrap">
+<div class="eyebrow">lm-skill-creator · 실행 결과</div>
+<h1>새 스킬 패키지 «track-sunscreen-ingredients»</h1>
+<div class="q">“선크림 성분 트렌드 스킬 만들어줘”</div>
+<div class="meta">골격 생성 · 자가검증 · 정적 감사까지 · 실행 평가(STEP 5) 생략 · 크레딧 <b>0</b></div>
+<div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-tab="r0">작업 리포트</button><button role="tab" aria-selected="false" data-tab="r1">생성된 SKILL.md</button><button role="tab" aria-selected="false" data-tab="t0">패키지 파일 (17)</button></div>
+<section class="panel md" id="p-r0"><h1>lm-skill-creator 실행 예시 — «선크림 성분 트렌드 스킬 만들어줘»</h1>
+<p>메타 스킬 <code>lm-skill-creator</code>로 ListeningMind 태스크 스킬 한 벌을 만든 기록이다. <strong>크레딧 0 단계</strong>(STEP 0~4 + STEP 6·7 중 크레딧 없이 가능한 부분)만 수행했고 API는 호출하지 않았다.</p>
+<h2>무엇을 만들었나</h2>
+<ul>
+<li>스킬 이름: <code>track-sunscreen-ingredients</code> (v0.1) — 키트 명명 규칙(동사-목적어 kebab-case, 예: <code>track-search-share</code>)을 따랐다</li>
+<li>잡(한 문장): 선크림 검색 중 성분 키워드가 붙은 검색을 성분별로 묶어 12개월 검색량 규모와 전년 동기 대비 추세를 브랜드/논브랜드로 나눠 표로 낸다</li>
+<li>패키지: 파일 17개 — 고유 4개(스크립트 3 · 성분 사전 예시 1) · 공유 자산 사본 9개 · 문서/평가 4개 (목록: <code>files.csv</code>)</li>
+<li>상태: <strong>작성 완료</strong> (감사 P0 0 · selftest 통과 · 공유 자산 동기). <strong>검증 완료 아님</strong> — 실행 평가(STEP 5)를 하지 않았다</li>
+</ul>
+<h2>STEP별로 한 일과 게이트 결과</h2>
+<table>
+<thead>
+<tr>
+<th>STEP</th>
+<th>한 일</th>
+<th>게이트 · 결과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0 · 무엇을 만드는지 확정</td>
+<td>라우팅 확인(온톨로지·오버레이·오케스트레이션 아님 → 단일 목적 태스크 스킬). 5변수 결정: 잡 1문장 · 커넥터 <code>keyword_info</code>+<code>intent_finder</code>(최소 조합, <code>cluster_finder</code>·<code>path_finder</code> 제외) · 시계열 사용(전년 동기) · 반복 확장 사용(성분 표현 수집) · 브랜드 분리 필요(병풀 ↔ 마데카 같은 브랜드 라인)</td>
+<td>해당 없음</td>
+</tr>
+<tr>
+<td>1 · 골격 생성</td>
+<td><code>new_skill.py</code>로 골격 생성 — flags=monthly,expand,share → 함정 의무 T1~T8 · 공유 스크립트 6종 · 템플릿·스키마 사본 배치 · 의무 선언 블록 삽입</td>
+<td>골격 감사: P0 3 · P1 1 · P2 0 (의도대로 차단) — 미작성 항목 3건 · 함정 미처리 — T6 결측 월 · 함정 미처리 — T7 절단 검사 · 함정 미처리 — T2 마지막 달 미완결</td>
+</tr>
+<tr>
+<td>2 · 내용 채우기</td>
+<td>description(트리거 발화 6개·경계) · 함정 처리 위치 표 · 커넥터별 결정식과 예산식(2단 조회) · 번들 자산 표 · 사전 확인 · STEP 0~7 · 산출물 컬럼 · 4-Label · 한계. 고유 스크립트 3종과 성분 사전 예시 작성</td>
+<td>—</td>
+</tr>
+<tr>
+<td>3 · 자가검증</td>
+<td><code>scripts/selftest.py</code>(공유) → <code>selftest_ingredients.py</code>(고유)가 자동 연쇄. 합성 픽스처(계절성·표기변형·같은 검색 중복·브랜드 라인·결측 월·기저 미달·복수 성분·경계 밖·마지막 달 급락·limit 절단)로 <strong>문서의 예시 명령 8개를 적힌 그대로</strong> 실행하고 CSV 헤더를 문서 컬럼과 대조</td>
+<td>공유 selftest 통과 · 고유 selftest 통과. 음성 대조: 문서 컬럼 하나를 바꾸면 실패함을 확인</td>
+</tr>
+<tr>
+<td>4 · 정적 감사</td>
+<td><code>audit_skill.py --contract</code> · <code>verify_shared.py</code>(생성 스킬이 저장소 밖에 있어 정본 사본+생성 스킬을 임시 폴더에 모아 실행)</td>
+<td>감사 <strong>P0 0 · P1 0 · P2 0</strong> (통과) · <code>verify_shared.py</code> 통과 — 계약 v1.0 · 공유 자산 9종 · 사본 9개, 사본 전부 정본 해시 일치</td>
+</tr>
+<tr>
+<td>5 · 실행 평가</td>
+<td><strong>생략</strong> — 크레딧 소모 단계라 이번 범위에서 제외. eval 2케이스(<code>evals/evals.json</code>)는 함정 의무와 1:1 채점 항목까지 작성만 함</td>
+<td>미충족</td>
+</tr>
+<tr>
+<td>6 · 개선 루프</td>
+<td>STEP 5 없이 가능한 범위: 자가검증 중 발견한 결함을 즉시 반영(기준선 행이 «성분 미분류»로 섞여 보이던 문제 → <code>기준선</code> 상태 신설 · 기준선 추세 표기 형식 · 순위 동률 시 결과가 입력 순서에 좌우되던 문제 → 상한·이름 순 타이브레이크). <code>CHANGELOG.md</code> v0.1 기록</td>
+<td>실측 기반 결함 분류는 STEP 5 이후</td>
+</tr>
+<tr>
+<td>7 · 공개 패키징</td>
+<td>가능한 범위만: <code>README.md</code> 작성 · 누출 검사(개인 경로·키 파일·비공개 호스트·익명 예시) 0건 · 실제 카테고리(선크림) 예시 · frontmatter <code>license: MIT</code> · 사본 동기 확인. 저장소 반영·발행은 하지 않음(범위 밖)</td>
+<td>누출 0건</td>
+</tr>
+</tbody></table>
+<h2>생성된 SKILL.md 요약</h2>
+<ul>
+<li>의무 선언: <code>&lt;!-- lm-skill: kind=task; connectors=keyword_info,intent_finder; flags=monthly,expand,share; traps=T1,T2,T3,T4,T5,T6,T7,T8 --&gt;</code></li>
+<li>커넥터: <code>keyword_info</code>(시드 존재 검증 <code>ads_metrics</code> · 유니버스 지표 <code>ads_metrics</code> · 선별 대상 시계열 <code>all</code>) · <code>intent_finder</code>(성분 시드 1개씩 확장, limit 100, volume_threshold 10)</li>
+<li>실행 순서: STEP 0 → STEP 1 → STEP 2 → STEP 3 → STEP 4 → STEP 5 → STEP 5.5 → STEP 6 → STEP 7</li>
+<li>예산식 (결정식 — S 시드 수 · E 확장한 성분 시드 수 · N 유니버스 · M 2단 대상):</li>
+</ul>
+<pre><code>총 크레딧 = S × 1                       # STEP 1 시드 존재 검증 (ads_metrics) — 요청 수로 과금, 미반환도 과금
+          + Σᵢ₌₁..E (30 + 2 × 반환ᵢ)    # STEP 2 확장 — 호출 1건의 상한은 30 + 2 × limit
+          + N × 1                       # STEP 4 유니버스 전량 (ads_metrics)
+          + 10 × (B + M_main + M_tail)  # STEP 5 기준선 + 게이트 통과 대표 + 성분 긴 꼬리 (all)
+</code></pre>
+<ul>
+<li><p>예시 계산 <code>[추정]</code>: 예시 사전(성분 6종 · 시드 9개) · limit 100 · N 500 · M 60 → 상한 2,949 크레딧. 2단 조회(<code>10 × M</code>)가 총액을 지배하며 M은 <code>ingredient_trend.py select</code>가 규칙으로 정한다</p>
+</li>
+<li><p>함정 처리 위치:</p>
+<ul>
+<li>T5 표기변형 canonical 정규화 — STEP 1 (시드 canonical 대조) · STEP 4 (<code>build_universe.py</code> · 같은 검색 중복 <code>dup_of</code>) · STEP 6 (그룹 하한·상한 병기 · 뒤집힘 표시)</li>
+<li>T1 기준월·지연 3종 표기 — STEP 5.5 · STEP 6 md 헤더</li>
+<li>T2 마지막 달 완결성 점검 — STEP 5.5 점검 · STEP 6 기본 제외 · md에 미완결 의심 건수</li>
+<li>T3 volume_trend 대신 전년 동기 비교 — STEP 6 (<code>monthly_volume</code> 직접 계산) · STEP 7 교차확인</li>
+<li>T4 기저 볼륨 게이트 — STEP 5 (<code>select</code> 게이트) · STEP 6 (<code>--gate</code> 그룹 · <code>--item-gate</code> 성분 합산)</li>
+<li>T6 결측 월 처리 — STEP 6 («결측 월» 상태로 보존 · 합산 제외)</li>
+<li>T7 절단(limit) 검사 — 절단이면 수렴 판정 보류 — STEP 2 호출별 기록 · STEP 3 판정 · STEP 6 헤더</li>
+<li>T8 논브랜드 분리 산출 — STEP 3 논브랜드 곡선 · STEP 6 브랜드 범위별 따로 순위</li>
+</ul>
+</li>
+<li><p>산출물: <code>ingredient_trend_{category}.csv</code>(25열) · <code>ingredient_keywords_{category}.csv</code>(17열) · <code>ingredient_trend_{category}.md</code></p>
+</li>
+<li><p>판정 규칙: 순위는 브랜드 범위(전체·논브랜드·브랜드) 안에서 12개월 검색량 하한 순, 추세는 옆 열(상승/보합/하락/잠정/계산 불가)과 카테고리 기준선(선크림) 대비로 붙인다. 가중 합성 점수는 만들지 않는다</p>
+</li>
+</ul>
+<h2>완료 게이트</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>audit_skill.py</code> P0 0건</td>
+<td>충족 (P0 0 · P1 0 · P2 0)</td>
+</tr>
+<tr>
+<td><code>selftest.py</code> 통과</td>
+<td>충족 (공유 통과 · 고유 통과)</td>
+</tr>
+<tr>
+<td>eval 2케이스 이상 실행 + 사람이 산출물 확인</td>
+<td><strong>미충족 — STEP 5 생략(크레딧 0 범위)</strong></td>
+</tr>
+<tr>
+<td>함정 의무 전건에 «어느 STEP에서 어떻게»</td>
+<td>충족 (T1~T8 모두 STEP 본문에 처리 방법 기재)</td>
+</tr>
+<tr>
+<td>산출물 컬럼 목록 = 스크립트 실제 출력</td>
+<td>충족 (<code>selftest_ingredients.py</code>가 헤더 정확 대조)</td>
+</tr>
+<tr>
+<td>크레딧 결정식 + 2단 조회 반영</td>
+<td>충족</td>
+</tr>
+<tr>
+<td>계약 사본이 정본과 동일 해시</td>
+<td>충족 (공유 자산 9종)</td>
+</tr>
+<tr>
+<td><code>license</code> MIT · 누출 검사</td>
+<td>충족 (frontmatter MIT · 누출 0건). 패키지 안에 LICENSE 파일은 없다 — 키트 저장소 루트 LICENSE를 따른다</td>
+</tr>
+<tr>
+<td>의무 선언 블록 존재</td>
+<td>충족</td>
+</tr>
+</tbody></table>
+<p>→ 상태 <strong>«작성 완료»</strong>. 배포 조건인 **«검증 완료»**에는 STEP 5(실행 평가 · 크레딧 소모)와 사람의 산출물 확인이 남아 있다.</p>
+<h2>알려진 한계 (이 스킬 · 실측 전)</h2>
+<ul>
+<li>모든 게이트·임계(3,000 · 1,000 · 12,000/1,200 · ±20% · ±10% · 50%)는 <code>[가정]</code>이다 — 실측 카테고리에서 보정되지 않았다</li>
+<li>성분 사전 예시의 패턴·브랜드 목록은 실측에서 뽑은 것이 아니라 예시다. 실제 분석에서는 STEP 2 반환 상위 검색어로 다시 채워야 한다</li>
+<li>복수 성분 검색어는 주 성분 하나에만 집계된다(배열 순서) · 성분명 없이 효과로 검색하는 관심은 잡히지 않는다</li>
+<li>합성 픽스처로만 검증했다. 실제 응답 형태(표기변형 빈도·결측 월 분포·절단 빈도)에서 나오는 결함은 아직 모른다</li>
+</ul>
+<h2>lm-skill-creator 자체에서 발견한 문제</h2>
+<ol>
+<li><strong>감사기가 표 셀 안의 ⬜를 미작성으로 세지 않는다.</strong> 미작성 판정 정규식이 줄 맨 앞(또는 <code>|</code> 바로 뒤)의 ⬜만 본다. 골격의 ⬜ 19개 중 3개만 «미작성»으로 잡혔고, 완성본의 4-Label 표 4칸과 함정 표 8칸을 ⬜로 되돌린 음성 대조에서 감사 결과가 «P0 0 · P1 0 · P2 0»였다(차단 안 됨). 4-Label 검사는 라벨 이름만 세므로 빈 표도 통과한다 — P0급 누락이 통과할 수 있다</li>
+<li><strong>함정 검사가 공유 사본 문서의 문구로 충족될 수 있다.</strong> 감사기는 계약 사본만 제외하고 <code>references/themes-schema.md</code> 사본은 읽는다. 이 사본에 <code>canonical</code>·<code>논브랜드</code> 문구가 있어, 본문에 처리가 없어도 T5·T8 검사를 통과한다(골격 상태에서 T5·T8 미지적으로 확인). 골격 안내문 자체의 «데이터 기준월»·«게이트» 문구도 T1·T4 검사를 충족시킨다</li>
+<li><strong>크리에이터 <code>selftest.py</code>가 저장소의 공유 정본 스크립트를 실제로 지웠다가 복원한다</strong>(공유 자산 부재 시 중단 검사). 중간에 중단되면 정본이 사라진다. 이번에는 저장소를 수정하지 않기 위해 키트 사본에서 실행했다 — 결과: 통과</li>
+<li><strong><code>verify_shared.py</code>는 저장소 루트 아래만 훑는다.</strong> 저장소 밖에 만든 스킬(이번처럼 작업 폴더)은 검사 대상이 안 되어, 정본과 생성 스킬을 임시 폴더에 모아 돌렸다. 스킬 폴더를 인자로 받는 옵션이 있으면 우회가 필요 없다</li>
+<li>문서: SKILL.md STEP 4는 <code>python3 shared/verify_shared.py</code>만 안내해 위 4번 상황을 다루지 않는다. 골격 생성기 출력은 로컬 절대경로를 찍는다(공개 로그에 옮길 때 세척 필요)</li>
+</ol>
+<h2>재현</h2>
+<p>로그는 <code>logs/</code>에 있다(경로 세척): 골격 생성·골격 감사(<code>step1_*</code>) · 자가검증(<code>step3_*</code>) · 정적 감사·사본 동기(<code>step4_*</code>) · 크리에이터 자가검증(<code>creator_selftest.log</code>) · 감사기 음성 대조(<code>audit_negative_unfilled_cells.log</code>). 이 보고서와 <code>files.csv</code>·<code>generated_SKILL.md</code>는 <code>make_report.py</code>가 로그와 패키지에서 생성했다.</p>
+</section>
+<section class="panel md" id="p-r1" hidden><hr>
+<p>name: track-sunscreen-ingredients
+description: |
+  선크림 검색 중 <strong>성분 키워드</strong>(징크옥사이드·티타늄디옥사이드·병풀·나이아신아마이드 등)가 붙은 검색을
+  성분별로 묶어, <strong>12개월 검색량 규모</strong>와 <strong>전년 동기 대비 추세</strong>를 브랜드/논브랜드로 나눠 표로 낸다.
+  커넥터는 <code>intent_finder</code>(성분 표현 확장) + <code>keyword_info</code>(지표·시계열) 두 개.</p>
+<p>  &quot;선크림 성분 트렌드 보여줘&quot; · &quot;징크옥사이드 선크림 검색 늘고 있어?&quot; · &quot;요즘 선크림에서 뜨는 성분이 뭐야&quot; ·
+  &quot;병풀 선크림이랑 나이아신아마이드 선크림 중 어디가 더 커?&quot; · &quot;무기자차 성분 검색 추이 뽑아줘&quot; ·
+  &quot;선크림 성분별 검색량 전년 대비로 비교해줘&quot;
+  같은 요청이면 반드시 이 스킬을 쓴다.</p>
+<p>  사용자가 &quot;트렌드&quot;라는 말을 쓰지 않아도, <strong>선크림(선스틱·선쿠션 포함)에서 성분별 관심의 크기나
+  방향을 검색 데이터로 비교하려는 요청</strong>이면 켠다 — 성분 소구 기획·상세페이지 카피 우선순위·신제품 성분
+  검토가 대표 상황이다. 결과는 검색 관심의 크기와 방향이지 효능·안전성·구매 판단이 아니다.</p>
+<h2>  경계: 선크림 카테고리 전체 지도가 목적이면 <code>map-your-market</code>, 성분이 아닌 급부상 이슈 탐지면
+  <code>spot-trends</code>, 브랜드 점유가 목적이면 <code>track-search-share</code>로 간다. 성분의 효능·안전성 판단,
+  성분 표기 규제 해석은 이 스킬의 범위가 아니다.
+license: MIT
+metadata:
+  version: &quot;0.1&quot;</h2>
+<h1>Track Sunscreen Ingredients — 선크림 성분별 검색 규모와 전년 동기 추세</h1>
+<blockquote>
+<p><strong>핵심 원칙</strong>: 성분 관심은 <code>징크옥사이드 선크림</code> 한 줄이 아니라 <code>징크 선크림</code>·<code>산화아연 선크림</code>·
+<code>징크 티타늄 선크림</code>처럼 <strong>흩어진 표현</strong>으로 나타난다. 이 스킬은 그 표현을 <strong>재현 가능한 성분 사전</strong>으로 모아
+성분 단위로 크기와 방향을 비교한다. 판 번호는 frontmatter <code>metadata.version</code>, 변경 이력은 같은 폴더 <code>CHANGELOG.md</code>.</p>
+</blockquote>
+<h2>데이터 계약</h2>
+<p>이 스킬은 <code>references/lm-data-contract.md</code>(정본 사본)를 따른다. 계약은 확장할 수 있지만
+뒤집을 수 없다. 이 스킬에 해당하는 함정 처리 의무와 처리 위치:</p>
+<table>
+<thead>
+<tr>
+<th>함정</th>
+<th>처리 위치</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T5 표기변형 canonical 정규화</td>
+<td>STEP 1 (시드 canonical 대조) · STEP 4 (<code>build_universe.py</code> · 같은 검색 중복 <code>dup_of</code>) · STEP 6 (그룹 하한·상한 병기 · 뒤집힘 표시)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>T1 기준월·지연 3종 표기</td>
+<td>STEP 5.5 · STEP 6 md 헤더</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>T2 마지막 달 완결성 점검</td>
+<td>STEP 5.5 점검 · STEP 6 기본 제외 · md에 미완결 의심 건수</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>T3 volume_trend 대신 전년 동기 비교</td>
+<td>STEP 6 (<code>monthly_volume</code> 직접 계산) · STEP 7 교차확인</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>T4 기저 볼륨 게이트</td>
+<td>STEP 5 (<code>select</code> 게이트) · STEP 6 (<code>--gate</code> 그룹 · <code>--item-gate</code> 성분 합산)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>T6 결측 월 처리</td>
+<td>STEP 6 («결측 월» 상태로 보존 · 합산 제외)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>T7 절단(limit) 검사 — 절단이면 수렴 판정 보류</td>
+<td>STEP 2 호출별 기록 · STEP 3 판정 · STEP 6 헤더</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>T8 논브랜드 분리 산출</td>
+<td>STEP 3 논브랜드 곡선 · STEP 6 브랜드 범위별 따로 순위</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>이 표는 선언이다. 실제 처리는 아래 STEP 본문에 있다.</p>
+</blockquote>
+<h2>커넥터와 크레딧</h2>
+<table>
+<thead>
+<tr>
+<th>커넥터</th>
+<th>용도</th>
+<th>크레딧 결정식</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>keyword_info</code></td>
+<td>시드 존재 검증 · 유니버스 지표 · 선별 대상 시계열</td>
+<td><code>ads_metrics</code> 1 × 키워드 · <code>all</code> 10 × 키워드</td>
+</tr>
+<tr>
+<td><code>intent_finder</code></td>
+<td>성분 시드에서 실제 검색 표현 확장</td>
+<td>호출당 <code>30 × 입력 키워드 + 2 × 반환</code> — 시드 1개씩 호출하므로 <code>30 + 2 × 반환</code></td>
+</tr>
+</tbody></table>
+<p><strong>예산식</strong> (S = 시드 수(기준선 포함), E = 확장한 성분 시드 수, 반환ᵢ = i번째 <code>intent_finder</code> 호출의 반환 수,
+N = 유니버스 크기, M = 2단 대상 수 = B + M_main + M_tail — STEP 5):</p>
+<pre><code>총 크레딧 = S × 1                       # STEP 1 시드 존재 검증 (ads_metrics) — 요청 수로 과금, 미반환도 과금
+          + Σᵢ₌₁..E (30 + 2 × 반환ᵢ)    # STEP 2 확장 — 호출 1건의 상한은 30 + 2 × limit
+          + N × 1                       # STEP 4 유니버스 전량 (ads_metrics)
+          + 10 × (B + M_main + M_tail)  # STEP 5 기준선 + 게이트 통과 대표 + 성분 긴 꼬리 (all)
+</code></pre>
+<ul>
+<li><strong>2단 조회가 기본이다.</strong> 전량에는 <code>ads_metrics</code>(1)만 걸고, 추세 판정에 쓰는 대표만 <code>all</code>(10)로 조회한다.
+<code>10 × M</code> 항이 총액을 지배하므로 <strong>M을 정하는 규칙(STEP 5)이 이 스킬에서 가장 큰 비용 결정</strong>이다.
+<code>M_tail</code>의 상한은 <code>10 × 성분 수 × 브랜드 범위(2) × --per-ingredient</code>다.</li>
+<li>계산 예 <code>[추정]</code>: 예시 사전(성분 6종 · 시드 9개 = 기준선 1 + 성분 시드 8) · limit 100 · N = 500 · M = 60이면
+상한은 <code>9 + 8 × 230 + 500 + 600 = 2,949</code>. 실제는 반환 수가 limit보다 적은 만큼 줄어든다.
+시드·성분을 늘리면 <code>E × 230</code>과 <code>M_tail</code>이 같이 늘어난다 — 실행 전에 <code>ingredient_seeds.py build</code>·<code>ingredient_trend.py select</code>
+출력의 크레딧으로 다시 계산한다.</li>
+<li><code>ads_info</code>는 쓰지 않는다 — 계약 §1 — 단가가 환경마다 다르게 관측됐고(10 · 1) <code>all</code>이 상위집합이다.</li>
+<li>배포 환경마다 단가가 다를 수 있다. 응답 <code>cost_detail.total_cost</code>를 합산해 «이번 분석 소진»으로 보고한다.</li>
+</ul>
+<blockquote>
+<p><code>cluster_finder</code>·<code>path_finder</code>는 쓰지 않는다 — 성분별 크기·방향에는 군집·여정이 필요하지 않고,
+결정식이 <code>150 + 고유 키워드 × 50</code> · <code>50 + 고유 키워드 × 40</code>이라 한 호출이 이 스킬 전체 예산을 넘길 수 있다.</p>
+</blockquote>
+<h2>번들 자산</h2>
+<table>
+<thead>
+<tr>
+<th>파일</th>
+<th>하는 일</th>
+<th>쓰는 곳</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>scripts/ingredient_seeds.py</code></td>
+<td>성분 사전 → 시드 <strong>규칙 생성</strong>(<code>build</code>) · 시드 존재 <strong>canonical 대조</strong>(<code>check</code>) (이 스킬 고유)</td>
+<td>STEP 0·1</td>
+</tr>
+<tr>
+<td><code>scripts/coverage_curve.py</code></td>
+<td>라운드별 신규 발견 기여 + <strong>호출 단위</strong> 절단 검사 + 논브랜드 곡선</td>
+<td>STEP 3</td>
+</tr>
+<tr>
+<td><code>scripts/build_universe.py</code></td>
+<td>지표 결합 + canonical 정규화 + 같은 검색 중복(<code>dup_of</code>) + 성분 사전 적용 → 유니버스 CSV</td>
+<td>STEP 4</td>
+</tr>
+<tr>
+<td><code>scripts/series_dedup.py</code></td>
+<td>canonical · 같은 검색 중복 판정 (공유 자산 사본)</td>
+<td>STEP 1·4·6</td>
+</tr>
+<tr>
+<td><code>scripts/ingredient_trend.py</code></td>
+<td>2단 대상 선정(<code>select</code>) · <strong>성분 × 브랜드 범위 규모·추세 집계 + md</strong>(<code>report</code>) (이 스킬 고유)</td>
+<td>STEP 5·6</td>
+</tr>
+<tr>
+<td><code>scripts/check_refmonth.py</code></td>
+<td>데이터 기준월·지연·마지막 달 완결성</td>
+<td>STEP 5.5</td>
+</tr>
+<tr>
+<td><code>scripts/trend_yoy.py</code></td>
+<td>키워드 단위 전년 동기 재계산 (교차확인)</td>
+<td>STEP 7</td>
+</tr>
+<tr>
+<td><code>scripts/selftest.py</code></td>
+<td>공유 스크립트 계약 검증 (공유 자산 사본 — 고치지 않는다)</td>
+<td>스킬 수정 후</td>
+</tr>
+<tr>
+<td><code>scripts/selftest_ingredients.py</code></td>
+<td>이 문서의 <code>```bash</code> 예시 명령을 <strong>적힌 그대로</strong> 합성 픽스처로 실행 · 산출물 컬럼 대조</td>
+<td>스킬 수정 후</td>
+</tr>
+<tr>
+<td><code>assets/ingredients.sunscreen-kr.example.json</code></td>
+<td>성분 사전 예시(선크림 · kr) — <strong>분석마다 다시 채운다</strong></td>
+<td>STEP 0·4</td>
+</tr>
+<tr>
+<td><code>assets/themes.template.json</code></td>
+<td>분류 사전 템플릿 (공유 자산 사본)</td>
+<td>참고</td>
+</tr>
+<tr>
+<td><code>references/themes-schema.md</code></td>
+<td>사전 스키마 — <code>theme_primary</code>는 <strong>배열 순서</strong>로 정해진다</td>
+<td>STEP 4</td>
+</tr>
+<tr>
+<td><code>references/lm-data-contract.md</code></td>
+<td>데이터 계약 정본 사본</td>
+<td>전 구간</td>
+</tr>
+</tbody></table>
+<p>성분 사전은 <code>themes</code> 스키마를 그대로 쓰고, 테마 이름을 <code>성분:</code> 접두어로 시작한다. 이 스킬은 키를 더 읽는다 —
+<code>baseline</code>(카테고리 기준선 검색어) · <code>category_terms</code>(선크림 계열어 — 하나도 없으면 집계 제외) ·
+<code>seed_category_terms</code>(시드 생성용 카테고리어) · <code>exclude</code>(인접 카테고리 canonical 정규식) · <code>themes[].seed_terms</code>.</p>
+<p><strong>이 문서나 스크립트를 고쳤다면 <code>python3 scripts/selftest.py</code>를 돌린다.</strong> 공유 selftest가 끝나면
+<code>selftest_ingredients.py</code>가 자동으로 이어서 돈다(API·크레딧 불필요).</p>
+<h2>사전 확인</h2>
+<pre><code>1. 분석 시장(gl)이 단일 값으로 확정되었는가? → kr / us / jp 중 하나. 없으면 묻는다(즉시 실행 금지)
+   성분 표기는 언어마다 다르다(징크옥사이드 / zinc oxide) — 사전은 시장마다 새로 쓴다
+2. 카테고리 경계: 선크림만인가, 선스틱·선쿠션·톤업 선크림까지인가? → category_terms가 이 경계다
+3. 성분 목록이 주어졌는가? → 없으면 예시 사전의 6종으로 시작하고, STEP 2 반환에서 새 성분 표현을 보강한다
+4. 영어 키워드는 모두 소문자인가? → API 호출 전 변환
+5. 성분 검색이 15개월 이상 이어져 왔는가? → 전년 동기 비교에 최소 15개월이 필요하다. 신규 성분은 추세가
+   [데이터 공백]으로 남는다는 것을 먼저 알린다
+</code></pre>
+<h2>실행 순서</h2>
+<h3>STEP 0 · 성분 사전 + 시드 생성 (0크레딧)</h3>
+<ol>
+<li><code>assets/ingredients.sunscreen-kr.example.json</code>을 <code>ingredients.json</code>으로 복사하고 성분·패턴·<code>seed_terms</code>를 정한다.<ul>
+<li>패턴은 <strong>canonical 문자열</strong>(NFKC → 소문자 → 변형치환 → 공백 제거)에 맞춘다. <code>징크 옥사이드</code>가 아니라 <code>징크옥사이드</code></li>
+<li>성분 별칭을 한 테마에 모은다 — 징크옥사이드 = <code>징크|산화아연|zincoxide</code>, 병풀 = <code>병풀|시카|센텔라|마데카</code></li>
+<li><strong>배열 순서가 주 성분을 정한다.</strong> <code>징크 티타늄 선크림</code>은 먼저 선언된 성분에만 집계되고 <code>multi_ingredient=Y</code>로 남는다</li>
+</ul>
+</li>
+<li>시드는 사람이 고르지 않고 <code>seed_terms × seed_category_terms</code>로 만든다. 같은 발화에 같은 시드가 나와야 재현된다.</li>
+</ol>
+<pre><code class="language-bash">python3 scripts/ingredient_seeds.py build --dict ingredients.json -o seeds.json
+</code></pre>
+<p>시드 목록 첫 줄은 <strong>카테고리 기준선</strong>(<code>baseline</code>, 예: <code>선크림</code>)이다. 기준선은 확장하지 않고 STEP 6 추세 비교에만 쓴다.</p>
+<h3>STEP 1 · 시드 존재 검증 (<code>keyword_info</code> · <code>ads_metrics</code>)</h3>
+<pre><code class="language-python">keyword_info(keywords=seeds, gl=&quot;kr&quot;, data_type=&quot;ads_metrics&quot;)   # 1 × S  → seed_check.json
+</code></pre>
+<pre><code class="language-bash">python3 scripts/ingredient_seeds.py check seeds.json seed_check.json --dict ingredients.json -o seeds_live.json
+</code></pre>
+<ul>
+<li>응답 키워드는 요청 문자열과 다를 수 있다(<code>징크 선크림</code> 요청 → <code>징크선크림</code> 응답). <strong>문자열이 아니라 canonical로
+대조한다</strong> — 문자열 대조는 살아 있는 시드를 죽었다고 판정한다(계약 §1).</li>
+<li>결과는 세 갈래다. <strong>살아 있음</strong>(확장 대상) · <strong>볼륨 0</strong> · <strong>미반환</strong>(요청했는데 canonical이 같은 행이 없다 — 0이 아니다).
+볼륨 0과 미반환은 확장하지 않고 따로 <code>[데이터 공백]</code>으로 기록한다. 죽은 시드로 확장하면 호출당 30이 버려진다.</li>
+</ul>
+<h3>STEP 2 · 성분 표현 확장 (<code>intent_finder</code>)</h3>
+<pre><code class="language-python">intent_finder(
+  keywords=[seed], gl=&quot;kr&quot;,        # 성분 시드 1개씩 — 기준선은 확장하지 않는다
+  volume_threshold=10,             # 성분×선크림 조합은 긴 꼬리다 [가정]
+  limit=100,                       # 반환 1건당 2크레딧 — limit이 호출 상한을 정한다
+  sort=&quot;volume_total&quot;, order=&quot;desc&quot;,
+)   # 크레딧 = 30 + 2 × 반환  → intent_r1_&lt;시드 canonical&gt;.json (호출 1건 = 파일 1개)
+</code></pre>
+<ul>
+<li>반환은 <strong>키워드 문자열 배열</strong>이다. 볼륨은 STEP 4에서 붙인다.</li>
+<li><strong>호출 1건 = 파일 1개</strong>로 저장하고 호출마다 <strong>요청 limit과 반환 수</strong>를 기록한다. 반환 수가 limit에 딱 붙은
+호출은 <strong>절단</strong>이다 — API가 더 줄 수 있었는데 받지 않은 것이다. 이 기록이 STEP 3의 입력이다.</li>
+<li>반환에서 <strong>사전에 없는 성분 표현</strong>(예: <code>마이카</code>·<code>판테놀</code>)이 보이면 STEP 4 전에 사전에 추가한다.</li>
+</ul>
+<h3>STEP 3 · 수집 범위 판정 (절단 검사 · 논브랜드 곡선)</h3>
+<p>라운드마다 반환 전량에 <code>ads_metrics</code>를 붙여야 곡선이 계산된다 — 이 조회가 STEP 4의 N × 1이다.</p>
+<pre><code class="language-bash">python3 scripts/coverage_curve.py --metrics metrics_ads.json --rules ingredients.json --themes ingredients.json --round &quot;S1·시드=seeds_live.json&quot; --round &quot;R1·확장1=intent_r1_징크옥사이드선크림.json@100,intent_r1_병풀선크림.json@100&quot;
+</code></pre>
+<ul>
+<li><code>--round</code>는 <code>라벨=호출1.json@limit,호출2.json@limit,…</code> — <strong>호출마다 파일과 limit을 따로</strong> 적는다.</li>
+<li>라운드의 신규 발견 기여가 20% 미만이면 수렴, 이상이면 보완 라운드를 한 번 더 돈다.</li>
+<li><strong>절단된 호출(<code>반환 = limit</code>)이 있으면 수렴 판정을 보류</strong>한다. 보류면 limit을 올려 재호출하거나, 보류 상태 그대로
+STEP 6 <code>--coverage</code>로 넘겨 리포트 헤더에 적는다.</li>
+<li><code>--themes</code>로 브랜드 사전을 넘기면 <strong>논브랜드 곡선</strong>을 따로 낸다. 브랜드 검색(<code>마데카 선크림</code>)이 대부분이면 전체 곡선이
+닫혀도 성분 일반 관심 공간은 안 닫혔을 수 있다.</li>
+</ul>
+<h3>STEP 4 · 유니버스 조립</h3>
+<pre><code class="language-python">keyword_info(keywords=universe, gl=&quot;kr&quot;, data_type=&quot;ads_metrics&quot;)   # 1 × N  → metrics_ads.json
+</code></pre>
+<pre><code class="language-bash">python3 scripts/build_universe.py --metrics metrics_ads.json --themes ingredients.json --seeds seeds_live.json --round &quot;S1·시드=seeds_live.json&quot; --round &quot;R1·확장1=intent_r1_징크옥사이드선크림.json&quot; --round &quot;R1·확장1=intent_r1_병풀선크림.json&quot; -o keyword_universe.csv
+</code></pre>
+<ul>
+<li><code>build_universe.py</code>의 <code>--round</code>는 파일 하나씩 받는다 — 같은 라운드의 호출 파일은 같은 라벨로 반복한다(<code>@limit</code> 없이).</li>
+<li>API는 요청하지 않은 <strong>표기변형</strong>(<code>징크옥사이드 선크림</code>/<code>징크옥사이드선크림</code>, <code>썬크림</code>/<code>선크림</code>)을 함께 돌려준다.
+<code>canonical</code> 그룹키를 붙이고 행은 보존한다. 지표까지 같은 행(같은 검색의 중복 · 계약 T5 ①)은 <code>dup_of</code>에 대표를 적는다.</li>
+<li><code>brands</code>는 <strong>STEP 2 반환의 상위 볼륨 검색어에서 뽑아</strong> 채운다. 빠진 브랜드는 논브랜드로 집계돼 성분 일반 관심을 부풀린다.
+성분명과 겹치는 브랜드 라인(<code>마데카</code>)은 브랜드로 둔다 — 그 검색은 제품 지명이지 성분 탐색이 아니다.</li>
+</ul>
+<h3>STEP 5 · 2단 조회 대상 선정 + 시계열 (<code>keyword_info</code> · <code>all</code>)</h3>
+<p>M은 <strong>규칙으로</strong> 정한다. 그룹 = 집계 대상 canonical(카테고리어 있음 · 성분 분류됨 · 경계 밖 아님 · 중복 아님),
+대표 = 그룹 내 <code>volume_total</code> 최댓값 행.</p>
+<pre><code>B      = 카테고리 기준선 대표 (baseline) — 게이트와 무관하게 항상
+M_main = 그룹 대표 ∧ 그룹 하한 ≥ 12,000                  (12개월 합 · 기저 게이트의 연 환산 [가정])
+M_tail = 그룹 대표 ∧ 1,200 ≤ 그룹 하한 &lt; 12,000          [가정]
+         성분 × 브랜드 범위마다 볼륨 순 상위 5개 (--per-ingredient)
+크레딧 = 10 × (B + M_main + M_tail)                      (keyword_info · data_type=all)
+</code></pre>
+<pre><code class="language-bash">python3 scripts/ingredient_trend.py select --universe keyword_universe.csv --dict ingredients.json --category 선크림 -o pool_M.json
+</code></pre>
+<ul>
+<li><strong>성분 검색은 긴 꼬리다.</strong> 12,000 게이트만 쓰면 성분 대부분이 «시계열 없음»으로 남는다. <code>M_tail</code>로 작은 그룹을 사고,
+STEP 6이 <strong>성분 단위로 합산한 뒤</strong> 게이트를 건다.</li>
+<li>표기변형은 대표 하나만 조회한다 — 같은 수요에 10크레딧을 두 번 내지 않는다.</li>
+<li>기저가 작은 그룹의 성장률은 그룹 단위로 내지 않는다 — 월 20건이 60건이 되면 +200%로 1위에 올라온다.</li>
+</ul>
+<pre><code class="language-python">keyword_info(keywords=pool_M, gl=&quot;kr&quot;, data_type=&quot;all&quot;)   # 10 × M  → metrics_all.json
+</code></pre>
+<h3>STEP 5.5 · 데이터 기준월 확인 ⚠️ 생략 금지</h3>
+<pre><code class="language-bash">python3 scripts/check_refmonth.py metrics_all.json --queried-at 2026-09-30
+</code></pre>
+<ul>
+<li><code>monthly_volume</code>의 <code>month</code> 최댓값이 <strong>데이터 기준월</strong>이다. 응답에서 읽는다(관측 1개월 지연 — 계약 §2) — 고정값으로 쓰지 않는다.
+리포트 헤더에 <strong><code>데이터 기준월 / 조회일 / 지연</code></strong> 세 값을 적는다. 조회일과 구분한다.</li>
+<li>같은 명령이 <strong>마지막 달 완결성</strong>을 검사한다 — 최신 월 MoM이 실제로 하락했고 그 낙폭이 전년 같은 구간보다
+30%p 이상 나쁘면 미완결 의심이다.</li>
+<li><strong>선크림은 계절 카테고리다</strong>(여름 성수기). 조회일을 시점으로 읽거나 전월 대비로 말하면 «성수기가 끝나 빠지는 중»과
+«관심이 식는 중»이 뒤섞인다. 이 스킬이 <strong>전년 동기</strong>로만 추세를 말하는 이유다.</li>
+</ul>
+<h3>STEP 6 · 성분별 규모 + 전년 동기 추세</h3>
+<pre><code class="language-bash">python3 scripts/ingredient_trend.py report --universe keyword_universe.csv --monthly metrics_all.json --dict ingredients.json --category 선크림 --queried-at 2026-09-30 --coverage &quot;보류(R1 절단 · limit 100)&quot;
+</code></pre>
+<p><code>ingredient_trend.py report</code>가 하는 일:</p>
+<table>
+<thead>
+<tr>
+<th>처리</th>
+<th>방법</th>
+<th>함정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>성분 부여</td>
+<td><code>theme_primary</code>의 <code>성분:</code> 뒤를 성분으로. 복수 성분이면 <code>multi_ingredient=Y</code>, 걸린 성분 전부는 <code>facets</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>집계 범위</td>
+<td><code>category_terms</code>가 없으면 <code>카테고리어 없음</code>(예: <code>징크옥사이드 효능</code>) · <code>exclude</code>에 걸리면 <code>경계 밖</code> · 성분 없음은 <code>성분 미분류</code> — 모두 행은 보존하고 집계에서 뺀다</td>
+<td>—</td>
+</tr>
+<tr>
+<td>같은 검색 중복</td>
+<td><code>dup_of</code>가 있는 행은 집계에서 뺀다</td>
+<td>T5 ①</td>
+</tr>
+<tr>
+<td>표기변형</td>
+<td>canonical 그룹 볼륨을 <strong>하한(그룹 최댓값)과 상한(그룹 합)</strong> 둘 다 낸다. 비중은 각자의 분모로</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>하한/상한 판정</td>
+<td>순위는 하한 기준. 상한으로 다시 매겨 순위가 바뀌면 <code>flip_under_hi</code>에 <code>순위 2→1</code>처럼 적는다</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>브랜드 분리</td>
+<td><code>brand_scope</code>(전체 · 논브랜드 · 브랜드)별로 <strong>따로 집계·따로 순위</strong></td>
+<td>T8</td>
+</tr>
+<tr>
+<td>추세</td>
+<td><code>monthly_volume</code>에서 최근 3개월 합 ÷ 전년 같은 3개월 합 − 1(<code>yoy_3m</code>)과 12개월 합 비교(<code>yoy_12m</code>). <code>volume_trend</code>는 읽지도 싣지도 않는다</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>마지막 달</td>
+<td><strong>기본 제외</strong> — 창이 기준월 한 달 전에서 끝난다. <code>--include-last-month</code>로 포함하면 md에 명시된다</td>
+<td>T2</td>
+</tr>
+<tr>
+<td>결측 월</td>
+<td>비교 창에 <code>nv_code</code> 결측이 있으면 0으로 채우지 않고 <code>yoy_status=결측 월</code>로 남기고 합산에서 뺀다</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>기저 게이트</td>
+<td>그룹 추세는 전년 창 합이 <code>--gate</code>(기본 3,000) 미만이면 <code>게이트 미달</code>로 내지 않는다(합산에는 넣는다). 성분 합산 추세는 전년 창 합이 <code>--item-gate</code>(기본 1,000) 이상일 때만</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>커버리지</td>
+<td>추세가 잡힌 그룹이 성분 볼륨(하한)의 50% 미만이면 <code>trend_call=잠정</code></td>
+<td>T4·T6</td>
+</tr>
+<tr>
+<td>기준선</td>
+<td><code>baseline</code> 검색어의 전년 동기 <code>baseline_yoy</code>와 <code>yoy_rel_baseline = (1+성분)/(1+기준선) − 1</code> · <code>trend_call_rel</code>(±10%)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>헤더</td>
+<td>기준월·조회일·지연 · 비교 창 · 마지막 달 처리 · 미완결 의심 건수 · 게이트 · 수집 범위(<code>--coverage</code>) · 하한~상한 합 · 논브랜드 비중</td>
+<td>T1·T2·T7</td>
+</tr>
+</tbody></table>
+<p><strong>순위 = 브랜드 범위 안에서 12개월 검색량(하한) 순</strong>이다(동률이면 상한 → 성분명 순). 추세는 순위를 바꾸지 않고 옆 열(<code>trend_call</code>: 상승/보합/하락/잠정/계산 불가)로 붙인다.
+가중 합성 점수를 만들지 않는다 — 가중치를 정당화할 근거가 없다.</p>
+<h3>STEP 7 · 검토와 해석</h3>
+<ol>
+<li><strong>집계에서 뺀 검색어를 먼저 본다</strong>(md «집계에서 뺀 검색어»). <code>성분 미분류</code>에 성분 표현이 섞였으면 사전을 보강하고,
+<code>카테고리어 없음</code>에 선크림 계열어가 섞였으면 <code>category_terms</code>를 보강한 뒤 STEP 4부터 다시 돌린다(0크레딧).
+이미 2단 조회한 대상이 경계 밖으로 빠지면 그 크레딧은 회수되지 않으므로 이 점검은 STEP 5 전에 한 번 먼저 한다.</li>
+<li><strong>성분 추세는 기준선과 함께 읽는다.</strong> <code>trend_call=상승</code>이어도 <code>trend_call_rel=기준선과 같이 움직임</code>이면 선크림 검색 전체가
+늘어난 것이지 그 성분만의 상승이 아니다.</li>
+<li><strong>논브랜드 표를 먼저 인용한다.</strong> 브랜드 표는 그 브랜드 제품에 대한 관심이다(<code>마데카 선크림</code>은 병풀 관심이 아니라 제품 지명).</li>
+<li>상위 성분 몇 개를 키워드 단위로 재계산해 방향이 일치하는지 교차확인한다. <code>report</code>는 마지막 달을 뺀 창이 기본이므로
+<code>yoy_ex_last_month</code> 열과 비교한다.</li>
+</ol>
+<pre><code class="language-bash">python3 scripts/trend_yoy.py metrics_all.json -o trend.csv --gate 3000
+</code></pre>
+<ol start="5">
+<li>왜 그 성분이 뜨는지(제품 출시·방송·규제 이슈)는 이 스킬이 답하지 못한다. 상위 상승 성분은 SERP·이슈 탐지로 맥락을 따로 확인하고,
+인과로 단정하지 않는다.</li>
+</ol>
+<h2>산출물</h2>
+<p>아래 컬럼 목록은 <code>ingredient_trend.py report</code>의 실제 출력이다. 스크립트를 고치면 이 목록도 함께 고치고
+<code>selftest_ingredients.py</code>로 확인한다(문서와 CSV 헤더를 정확히 대조한다).</p>
+<pre><code>ingredient_keywords_{category}.csv
+  keyword, canonical, ingredient, facets, multi_ingredient, brand, brand_scope,
+  scope_status, volume_total, group_volume_lo, group_volume_hi, canonical_rep, dup_of,
+  group_yoy, yoy_status, label_ingredient, label_group_volume
+
+ingredient_trend_{category}.csv
+  brand_scope, ingredient, keywords, canonical_groups, volume_12m_lo, volume_12m_hi,
+  share_lo, share_hi, rank, rank_hi, flip_under_hi, yoy_window, yoy_3m, yoy_12m,
+  yoy_series_basis, yoy_groups, yoy_basis_prev_year, yoy_coverage_lo, yoy_status,
+  trend_call, baseline_yoy, yoy_rel_baseline, trend_call_rel, top_keywords, data_ref_month
+</code></pre>
+<p><code>ingredient_trend_{category}.md</code> — 헤더(데이터 기준월/조회일/지연 · 비교 창 · 마지막 달 처리 · 미완결 의심 건수 · 게이트 ·
+수집 범위 판정 · 기준선 · 성분 검색 12개월 합 «하한 X ~ 상한 Y» · 논브랜드 비중 하한/상한 · 뒤집힘 건수) ·
+브랜드 범위별 성분 표(순위 · 검색량 하한~상한 · 비중 · 전년 동기 3개월·12개월 · 판정 · 기준선 대비 · 상한 시 뒤집힘) ·
+집계에서 뺀 검색어 · 복수 성분 검색어 · 라벨 규약.</p>
+<ul>
+<li><code>scope_status</code>: <code>집계</code> / <code>기준선</code>(추세 비교용 · 성분 집계 제외) / <code>같은 검색 중복</code> / <code>경계 밖(패턴)</code> / <code>카테고리어 없음</code> / <code>성분 미분류</code>.</li>
+<li><code>group_yoy</code>·<code>yoy_status</code>(키워드 CSV)는 그룹 대표 행에만 채운다: <code>계산됨</code> / <code>게이트 미달</code> / <code>결측 월</code> / <code>시계열 없음</code>.</li>
+<li><code>yoy_status</code>(성분 CSV)는 <code>계산됨</code> 또는 <code>계산 불가: 결측 월 1 · 합산 게이트 미달 · 전년 창 540</code>처럼 사유별 그룹 수.</li>
+<li><code>yoy_3m</code>·<code>yoy_12m</code>은 그룹 <strong>대표 검색어</strong> 시계열의 합산이다(하한 기준 · <code>yoy_series_basis</code>). 상한 시계열은 만들지 않는다.</li>
+</ul>
+<h2>4-Label</h2>
+<table>
+<thead>
+<tr>
+<th>라벨</th>
+<th>이 스킬에서의 적용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[실제 데이터]</code></td>
+<td>검색어·<code>volume_total</code>·<code>monthly_volume</code> 원본과 대표 검색어의 전년 동기 직접 계산 · 데이터 기준월</td>
+</tr>
+<tr>
+<td><code>[추정]</code></td>
+<td>성분 분류(정규식 사전) · 브랜드 판정 · 같은 검색 중복 판정 · 그룹 하한·상한과 성분 합산 · 비중 · 논브랜드 비중 · 기준선 대비 · 마지막 달 미완결 의심</td>
+</tr>
+<tr>
+<td><code>[가정]</code></td>
+<td>게이트 3,000(그룹)·1,000(성분 합산)·12,000/1,200(2단 연 환산) · <code>volume_threshold</code> 10 · 추세 임계 ±20% · 기준선 대비 ±10% · 커버리지 50% 미만 잠정 · 마지막 달 제외 · 사전 배열 순서 · 카테고리 경계</td>
+</tr>
+<tr>
+<td><code>[데이터 공백]</code></td>
+<td>볼륨 0·미반환 시드 · 시계열 없음·결측 월·게이트 미달 · 기준선 시계열 없음 · 15개월 미만 신규 성분</td>
+</tr>
+</tbody></table>
+<p>수치를 인용하는 문장은 넷 중 하나를 단다. 순위 자체는 <code>[추정]</code>이다(분류가 추정이므로).</p>
+<h2>한계</h2>
+<ul>
+<li><strong>월 그레인 · 지연 있음</strong> — 기준월은 응답에서 읽는다(관측 1개월). 이번 달 출시·방송으로 뜬 성분은 아직 데이터에 없다</li>
+<li>검색은 <strong>관심 신호</strong>다. 성분 검색이 크다는 것이 그 성분이 효과가 좋다거나 많이 팔린다는 뜻이 아니다. 검색량 단위는 <strong>건</strong>이며 사람 수가 아니다</li>
+<li>성분명 없이 효과로 검색하는 관심(<code>백탁 없는 선크림</code>·<code>민감성 선크림</code>)은 성분으로 잡히지 않는다 — 속성 분석은 다른 스킬의 몫이다</li>
+<li><strong>분류는 사전이 정한다.</strong> 사전에 없는 성분 표현은 <code>성분 미분류</code>로 떨어지고, 부정 표현(<code>징크 없는 선크림</code>)을 문맥으로 이해하지 않는다</li>
+<li>복수 성분 검색어는 주 성분 하나에만 집계된다 — 성분 간 합이 전체보다 작게 보일 수 있다(<code>facets</code>로 확인)</li>
+<li>인구통계로 나누지 않는다. <code>demography</code>는 일부 국가만 반환하는 사양이며 이 스킬은 쓰지 않는다</li>
+<li>정책·시즌 영향은 인과로 단정하지 않고 상관·동향으로만 서술한다</li>
+</ul>
+</section>
+<section class="panel" id="p-t0" hidden data-table="0">
+ <div class="tools"><input type="search" placeholder="경로 검색"><span class="count"></span></div>
+ <div class="scroll"><table class="u"><thead><tr><th data-k="0">경로</th><th data-k="1">역할</th><th data-k="2" class="n">줄</th><th data-k="3" class="n">바이트</th></tr></thead><tbody></tbody></table></div>
+ <p class="foot"> 원본: files.csv</p>
+</section>
+<p class="foot">lm-skill-creator 스킬 산출물을 그대로 옮긴 페이지 — 수치는 스킬 스크립트와 응답 원장에서 나왔다. 동봉 파일: generated/track-sunscreen-ingredients/ (17개 파일)</p>
+</div>
+<script type="application/json" id="data">[{"rows":[["CHANGELOG.md","변경 이력 — v0.1 작성 완료·검증 전","13","1164"],["README.md","공개용 소개 — 산출물·설치·함정·크레딧·한계·기여 규칙","49","3007"],["SKILL.md","절차서 — 에이전트가 읽는 스킬 본문 (의무 선언 블록 포함)","327","25458"],["assets/ingredients.sunscreen-kr.example.json","성분 사전 예시 (선크림 · kr) — 고유 자산","21","2238"],["assets/themes.template.json","분류 사전 템플릿 — 공유 자산 사본","51","2178"],["evals/evals.json","실행 평가 케이스 2건 (작성만 · 미실행)","38","3137"],["references/lm-data-contract.md","데이터 계약 정본 사본 — 공유 자산","170","12118"],["references/themes-schema.md","사전 스키마 — 공유 자산 사본","44","2516"],["scripts/build_universe.py","유니버스 조립·canonical·중복 판정 (STEP 4) — 공유 자산 사본","128","6645"],["scripts/check_refmonth.py","기준월·지연·마지막 달 완결성 (STEP 5.5) — 공유 자산 사본","88","4079"],["scripts/coverage_curve.py","라운드 기여·절단 검사·논브랜드 곡선 (STEP 3) — 공유 자산 사본","148","8467"],["scripts/ingredient_seeds.py","시드 규칙 생성·canonical 시드 대조 (STEP 0·1) — 고유 스크립트","103","4832"],["scripts/ingredient_trend.py","2단 대상 선정·성분별 규모/추세 집계·md 리포트 (STEP 5·6) — 고유 스크립트","361","22021"],["scripts/selftest.py","공유 스크립트 계약 검증 — 공유 자산 사본","198","11205"],["scripts/selftest_ingredients.py","문서 예시 명령 실행·산출물 컬럼 대조 자가검증 — 고유 스크립트","197","13321"],["scripts/series_dedup.py","canonical·같은 검색 중복 판정 — 공유 자산 사본","150","6893"],["scripts/trend_yoy.py","키워드 단위 전년 동기 교차확인 (STEP 7) — 공유 자산 사본","125","6528"]],"types":["text","text","num","num"],"sort":2}]</script>
+<script>
+(function(){
+  var T=JSON.parse(document.getElementById("data").textContent);
+  var num=function(v){var x=parseFloat(v);return v===""||isNaN(x)?null:x};
+  function fmt(v,ty){var x=num(v);if(ty==="num")return x===null?v:x.toLocaleString("ko-KR");if(ty==="dec2")return x===null?v:x.toFixed(2);
+    if(ty==="pct")return x===null?(v||"—"):(x>0?"+":"")+Math.round(x*100)+"%";if(ty==="share")return x===null?(v||"—"):(x*100).toFixed(1)+"%";if(ty==="pct100")return x===null?(v||"—"):x+"%";return v}
+  document.querySelectorAll("[data-table]").forEach(function(sec){
+    var t=T[+sec.dataset.table], sortK=t.sort, desc=true, tb=sec.querySelector("tbody"), q=sec.querySelector("input"), sels=sec.querySelectorAll("select"), cnt=sec.querySelector(".count");
+    function render(){
+      var s=q.value.trim().toLowerCase();
+      var list=t.rows.filter(function(r){if(s&&String(r[0]).toLowerCase().indexOf(s)<0)return false;for(var i=0;i<sels.length;i++){var v=sels[i].value;if(v&&r[+sels[i].dataset.f]!==v)return false}return true});
+      list.sort(function(a,c){var x=num(a[sortK]),y=num(c[sortK]);if(x===null&&y===null){x=a[sortK];y=c[sortK]}else{x=x===null?-Infinity:x;y=y===null?-Infinity:y}return (x<y?-1:x>y?1:0)*(desc?-1:1)});
+      tb.textContent="";
+      list.slice(0,500).forEach(function(r){var tr=document.createElement("tr");
+        r.forEach(function(v,k){var ty=t.types[k],td=document.createElement("td");
+          if(ty==="tag"){if(v){var sp=document.createElement("span");sp.className="tag";sp.textContent=v;td.appendChild(sp)}}
+          else{td.textContent=fmt(v,ty);if(ty!=="text")td.className="n";if(ty==="pct"&&num(v)!==null)td.className+=num(v)>0?" up":" down"}
+          tr.appendChild(td)});tb.appendChild(tr)});
+      cnt.textContent=list.length.toLocaleString("ko-KR")+"행"+(list.length>500?" · 상위 500행 표시":"");
+    }
+    q.addEventListener("input",render);sels.forEach(function(el){el.addEventListener("input",render)});
+    sec.querySelectorAll("th[data-k]").forEach(function(h){h.addEventListener("click",function(){var k=+h.dataset.k;desc=sortK===k?!desc:true;sortK=k;render()})});
+    render();
+  });
+  document.querySelectorAll("[data-tab]").forEach(function(b){b.addEventListener("click",function(){
+    document.querySelectorAll("[data-tab]").forEach(function(x){x.setAttribute("aria-selected",String(x===b));document.getElementById("p-"+x.dataset.tab).hidden=x!==b});
+  })});
+})();
+</script></body></html>
