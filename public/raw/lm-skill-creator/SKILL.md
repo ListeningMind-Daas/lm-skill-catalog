@@ -16,7 +16,7 @@ description: |
   아니다. 이 스킬은 **단일 목적 태스크 스킬**만 만든다.
 license: MIT
 metadata:
-  version: "0.2.1"
+  version: "0.4.0"
 ---
 
 <!-- lm-skill: kind=meta -->
@@ -51,6 +51,12 @@ metadata:
 | `scripts/selftest.py` | 크리에이터 자가검증 — 골격 생성·감사기 동작 회귀 검사 |
 | `references/audit-rubric.md` | P0/P1/P2 분류 기준과 근거 |
 | `references/themes-schema.md` | `themes.json` 스키마 — 분류·정규화를 쓰는 스킬이 반드시 읽는다 |
+| `shared/references/report-contract.md` | **리포트 렌더링 계약 정본** — 문서 뼈대 · 첫 화면 경계 · 지표 표현 · 차트 메타 · 발견/실행 카드 · 숫자 추적 |
+| `shared/scripts/render_report.py` | **공통 리포트 렌더러** — report.json → 단독 HTML. 계약 위반이면 렌더하지 않는다 |
+| `shared/assets/report.sample.json` | 공유 견본 입력 — 렌더러 회귀 시험이 쓴다. 스킬에는 이 사본과 함께, 스킬이 고쳐 쓰는 `assets/report.example.json`이 배치된다 |
+| `shared/references/context-schema.md` | **맥락 파일 스키마** — 회사마다 다른 것(결정 · 국가 · 경계 · 브랜드 · 용어 · 가드레일)과 질문별 검증표를 `assets/`에 두는 규칙 · STEP 0 실행 기록 |
+| `shared/assets/context.template.json` · `validation-table.template.json` | 맥락 파일 · 검증표 견본 — `--context` 골격에 `assets/context.json` · `validation-table.json`으로 배치된다 |
+| `shared/scripts/selftest_render.py` | 렌더러 회귀 시험 — 경계 사례 렌더 · 계약 위반 거부 · 레이아웃 결함 재발을 본다(공유 selftest 가 함께 실행) |
 | `shared/lm-data-contract.md` | **데이터 계약 정본** |
 | `shared/scripts/*.py` | **재사용 스크립트 정본** — 골격 생성 시 복사된다 |
 | `shared/assets/themes.template.json` | 분류 사전 템플릿 |
@@ -74,12 +80,17 @@ metadata:
 | **시계열 사용 여부** | T1·T2·T3·T4·T6 처리 의무 발생 |
 | **반복 확장 여부** | T7(절단) 처리 의무 발생 |
 | **점유·기회 논의 여부** | T8(논브랜드) 처리 의무 발생 |
+| **HTML 리포트 여부** | 렌더링 계약 · 공통 렌더러 의무 발생 (`--report`) |
+| **우리 회사 맥락 여부** | 맥락 파일 · 검증표 · STEP 0 의무 발생 (`--context`) — 특정 회사의 브랜드 · 경쟁사 · 용어로 도는 스킬 |
+
+산출물 형식(무엇을 넣을지)은 각 스킬의 몫이다. 다만 **리포트를 내면 렌더링은 공통 자산을 쓴다** —
+스킬마다 렌더러를 새로 쓰면 증감률만 있는 표, 사실 목록을 거치지 않은 숫자, 메타 없는 차트가 검사 없이 나간다.
 
 ### STEP 1 · 골격 생성
 
 ```bash
 python3 skills/lm-skill-creator/scripts/new_skill.py <스킬명> --job "한 줄 정의" \
-    --connectors keyword_info,intent_finder --monthly --expand --share
+    --connectors keyword_info,intent_finder --monthly --expand --share [--report] [--context]
 ```
 
 계약 사본·재사용 스크립트·분류 템플릿·eval 스텁이 배치되고, **해당 함정이 ⬜로 SKILL.md에
@@ -106,6 +117,15 @@ python3 skills/lm-skill-creator/scripts/new_skill.py <스킬명> --job "한 줄 
 - `keyword_info`를 쓰면 **2단 조회**를 기본으로 — 전량 `ads_metrics`(1) → 게이트 통과분만 `all`(10).
   2단 대상 수가 총액을 지배한다.
 - **산출물 컬럼 목록 = 스크립트 실제 출력.** 어긋나면 문서를 믿은 쪽이 틀린 산출물을 만든다.
+- 리포트를 내면(`--report`) 리포트 섹션의 ⬜를 채운다 — 첫 화면 경계 문장 · 섹션별로 넣을 것 · 지표와 차트.
+  `report.json`의 사실 목록(`facts`)은 스크립트의 저장 계산 결과에서 만들고, 문구 숫자는 `{{ID}}`로만 쓴다.
+  호출 순서 · 호출 로그 · 비용 보고서(`provenance`)는 수집 원장에서 만든다 — 산출물마다 HTML 옆에 `calls.csv` · `cost.json`이 함께 나온다.
+  `assets/report.example.json`은 공유 견본 사본으로 시작하니 이 스킬의 결과 모양으로 바꾼다(그대로면 감사 P1).
+  규칙은 `references/report-contract.md`, 입력 형식은 `python3 scripts/render_report.py --schema`.
+- 우리 회사 맥락으로 돌면(`--context`) 회사 이름 · 브랜드 · 용어를 SKILL.md 에 적지 않고 `assets/context.json` ·
+  `validation-table.json` · `themes.json`에만 둔다. 실행 순서 맨 앞 STEP 0에서 이 셋을 읽고, 요청을 질문 ID에 대응시키고,
+  `work/<스킬>/<실행 ID>/request.json`을 남긴다(에이전트를 연 작업 공간 기준). 스키마는 `references/context-schema.md`.
+  만든 스킬은 API 키 · 연결이 있는 작업 공간의 `.claude/skills/`로 복사해 돌린다 — 스킬 안에 키 · 주소를 두지 않는다.
 - 함정 처리는 **어느 STEP에서 어떻게** 하는지까지 쓴다. 이름만 적는 것은 처리가 아니다
   (감사기는 의무 표를 빼고 본문만 본다).
 
@@ -116,6 +136,7 @@ cd <스킬폴더> && python3 scripts/selftest.py
 ```
 
 합성 픽스처로 **문서의 예시 명령을 실행**한다. API·크레딧 불필요.
+SKILL.md가 비었거나 골격 자리표시자(⬜와 `(트리거 발화 1)`·`| (결정식) |` 등)가 남아 있으면 스크립트가 돌아도 실패한다.
 셸 프로세스 치환 같은 우회로 대신 확인하지 않는다 — 그 우회가 실제로 결함을 놓친 적이 있다.
 
 ### STEP 4 · 정적 감사
@@ -127,6 +148,14 @@ python3 shared/verify_shared.py        # 계약·스크립트 사본이 정본�
 ```
 
 P0가 하나라도 있으면 배포하지 않는다. 분류 기준은 `references/audit-rubric.md`.
+
+감사기는 **이 스킬이 쓴 문서만** 본다 — 공유 문서 사본(`references/lm-data-contract.md`·`themes-schema.md`)과
+⬜가 남은 줄, SKILL.md 머리(frontmatter — description은 `--job` 문장이다)는 함정·크레딧·4-Label 판정에서 빠진다.
+크레딧은 «결정식»이라는 글자가 아니라 식(숫자에 곱하기가 붙은 항, 예: `1 × N + 10 × K`)이 본문에 있어야 센다. 표 칸 안의 ⬜도 미작성으로 센다. 4-Label은 라벨 이름이 아니라
+«이 스킬에서의 적용»이 적힌 줄이 있어야 센다.
+
+저장소 밖(`--out`을 다른 곳으로)에서 만든 스킬은 `verify_shared.py`가 찾지 못한다 — 그 검사는
+저장소 `skills/` 아래만 훑는다. 배포하려면 스킬 폴더를 저장소 `skills/`로 옮긴 뒤 두 명령을 돌린다.
 
 ### STEP 5 · 실행 평가 (크레딧 소모)
 
@@ -182,6 +211,8 @@ P0가 하나라도 있으면 배포하지 않는다. 분류 기준은 `reference
 - [ ] 계약 사본이 정본과 동일 해시
 - [ ] `license` MIT 확인 · 누출 검사 통과
 - [ ] 의무 선언 블록 존재
+- [ ] 리포트를 내면 `flags=report` 선언 · 공통 렌더러로 렌더 · 렌더링 계약 사본이 정본과 동일 해시
+- [ ] 우리 맥락으로 돌면 `flags=context` 선언 · 맥락 파일 · 검증표 채움 · STEP 0 · 회사 맥락이 든 스킬은 공개 키트에 올리지 않음
 
 ## 4. 카탈로그 재생성
 

@@ -22,7 +22,7 @@ description: |
   이 스킬(최고가 커넥터)을 쓰지 않는다.
 license: MIT
 metadata:
-  version: "0.2.1"
+  version: "0.3.1"
 ---
 
 <!-- lm-skill: kind=task; connectors=keyword_info,path_finder; flags=expand; traps=T5,T7 -->
@@ -97,6 +97,9 @@ STEP 3에서 `time_point`와 조회일을 따로 적는다. 점유·기회를 �
   (limit 35) `r`은 0.91~1.29였다 — 계획 3건 중 2건은 과대, 1건은 **과소 40**(`릴렉스체어` 계획 1,810 · 실측 1,850).
   파일럿 계획을 안전한 상한으로 믿지 않는다. 예산에 여유를 두고, 멈추는 기준은 누적 실측이다(STEP 3).
   참고로 limit 300 실측 2건에서 `r`은 0.56과 0.70이었다(2건 관측일 뿐 범위가 아니다).
+- 반대 방향 사례도 있다: 2026-09-30 실측(선크림 KR)에서 파일럿(`선크림` limit 20) `r` = 1.40, 본 호출
+  (`선스틱` limit 40) `r` = 1.00이었다 — 계획 2,290 · 실측 1,650으로 **과대 640**. 과대 1건·과소 1건이 모두
+  관측됐으므로 파일럿 `r`은 방향도 크기도 보장하지 않는 계획값이다(관측 2일치 · 범위가 아니다).
 
 **계산 예 (합성 — `selftest.py` 픽스처와 같은 값)**
 
@@ -114,8 +117,8 @@ limit을 고정한다(limit이 다르면 반환 규모와 비용이 함께 달�
 
 | 파일 | 하는 일 | 쓰는 곳 |
 |---|---|---|
-| `scripts/path_budget.py` | 요청↔응답 canonical 대조(합쳐짐·미반환 기록) + 볼륨 게이트 + 파일럿 비율 → 시드별 계획 비용·누적·호출/보류 판정 · 예산 안 최대 limit 제안 (이 스킬 고유) | STEP 2 |
-| `scripts/journey_paths.py` | 경로 → canonical 그룹 전이·노드·단계 집계(시드 제외 단계 표), 절단·비용 대조, 보류 후보, 요약 (이 스킬 고유) | STEP 4 |
+| `scripts/path_budget.py` | 요청↔응답 canonical 대조(합쳐짐·미반환 기록) + 볼륨 게이트 + 파일럿 비율 → 시드별 계획 비용·누적·호출/보류 판정 · 고정 시드(`--seeds`) · 파일럿 시드 재호출(`--recall-pilot`)·limit 맞추기 비용 · 예산 안 최대 limit 제안 · 파일럿 시드 표기 변경 경고 (이 스킬 고유) | STEP 2 |
+| `scripts/journey_paths.py` | 경로 → canonical 그룹 전이·노드·단계 집계(시드 제외 단계 표), 시드 표기 변경 검사(0경로면 멈춤), 공통 줄기 통계, 절단·비용 대조, 보류 후보(전체 계획 포함), 요약 (이 스킬 고유) | STEP 4 |
 | `scripts/series_dedup.py` | canonical 정규화(치환은 공백 제거 전) — 위 두 스크립트가 쓴다 (공유 정본 사본) | STEP 2 · 4 |
 | `scripts/selftest.py` | 문서의 예시 명령과 컬럼 목록이 스크립트와 일치하는지 검증 (이 스킬 고유 — 공유 사본 아님) | 스킬 수정 후 |
 | `assets/stages.camping-chair-kr.example.json` | 단계 사전 예시 (캠핑의자 KR) | STEP 4 |
@@ -176,7 +179,21 @@ keyword_info(keywords=candidates, gl="kr", data_type="ads_metrics")   # 1 × N
 
 ### STEP 2 · 파일럿과 예산 게이트
 
-게이트 통과 후보 중 볼륨 1위로 **작은 limit(예: 20) 파일럿**을 한 번 부른다.
+게이트 통과 후보 하나로 **작은 limit(예: 20) 파일럿**을 한 번 부른다.
+
+**파일럿 후보 고르기** — 파일럿 시드는 파일럿 limit만큼의 경로만 갖는다. 주 시드로 파일럿을 돌리면
+주 시드가 가장 작은 표본으로 남고 시드 간 limit이 어긋난다(2026-09-30: 주 시드 `선크림`이 limit 20 파일럿으로
+끝나고 `선스틱`만 limit 40). 그래서 다음 순서로 고른다:
+
+1. 사용자가 부를 시드를 정했고 그 밖에 게이트를 통과한 후보가 있으면, **정한 시드가 아닌 후보**로 파일럿을
+   돌린다 — 정한 시드는 모두 본 limit으로 부른다. 파일럿 경로는 요약에 싣되 limit이 다르다는 경고가 붙는다
+2. 후보가 정한 시드뿐이면 주 시드로 파일럿을 돌리고 `path_budget.py --recall-pilot`으로 **본 limit 재호출을
+   계획에 넣는다**(예산 안일 때만 — 넘으면 `pilot_done`으로 남고 note에 재호출 계획 비용이 적힌다)
+3. 재호출 예산이 없으면 limit 불일치를 받아들이고, 스크립트가 출력하는 «limit 맞추기» 추가 비용을
+   사용자에게 알린다 (2026-09-30: `선크림` limit 40 재호출 계획 2,290 > 남은 계획 예산 1,035)
+
+정한 시드가 아닌 후보로 파일럿을 돌려도 잃는 것은 크지 않다 — `r`은 시드마다 다르므로(위 예산 절) 주 시드로 잰
+`r`도 다른 시드의 비용을 보장하지 않는다. 멈추는 기준은 어느 쪽이든 누적 실측이다(STEP 3).
 
 ```python
 path_finder(keyword="캠핑의자", gl="kr", time_point="curr", limit=20)
@@ -189,12 +206,29 @@ python3 scripts/path_budget.py --metrics start_metrics.json --limit 50 --budget 
     --pilot resp_pilot.json -o path_plan.csv
 ```
 
+사용자가 부를 시드를 지정했으면 볼륨 순 선택에 맡기지 않고 고정한다 — 2026-09-30 실측에서 사용자가 정한
+`선스틱` 대신 볼륨 순으로 `선크림 추천`이 `call`로 잡혔다:
+
+```bash
+python3 scripts/path_budget.py --metrics start_metrics.json --limit 40 --budget 4500 \
+    --pilot resp_pilot.json --seeds 선크림,선스틱 --seeds-only -o path_plan.csv
+```
+
+- `--seeds a,b` — 지정 시드가 볼륨 순보다 **먼저** 예산을 배정받는다(지정 순서대로). 게이트·예산은 그대로
+  적용되고, 보류되면 note에 «고정 시드지만 …» 이유가 적힌다. 응답에 없는 지정 시드는 `hold_not_in_metrics`
+- `--seeds-only` — 지정 밖 후보는 `hold_not_selected` 행으로 **남긴다**. 후보를 지운 metrics 파일로 계획을
+  다시 세우지 않는다 — 그러면 보류 후보가 요약에서 사라진다(2026-09-30 요약이 «없음»으로 나온 원인)
+- `--recall-pilot` — 파일럿 limit ≠ 본 limit이면 파일럿 시드를 본 limit으로 다시 부르는 계획(`call`, note에
+  «재호출»)을 예산 안에서 세운다. 없으면 «limit 맞추기» 추가 비용만 출력한다
+
 `decision`이 `call`인 후보만 STEP 3에서 부른다. `pilot_done`은 파일럿으로 이미 부른 시드(행의 `limit`은
 **파일럿 limit**), `hold_budget`는 예산을 넘는 후보, `hold_volume`·`hold_no_volume`은 게이트 미달·볼륨 없음,
-`hold_merged`·`hold_not_returned`·`hold_unrequested`는 위 표기 대조 결과다. `hold_budget`가 있으면 스크립트가
+`hold_merged`·`hold_not_returned`·`hold_unrequested`는 위 표기 대조 결과, `hold_not_selected`·`hold_not_in_metrics`는
+위 고정 시드 결과다. `hold_budget`가 있으면 스크립트가
 «예산 안 최대 limit»을 시드 수별로 출력한다 — limit·시드 축소를 사용자에게 제안할 때 이 값을 쓴다.
-파일럿 limit이 본 limit과 다르면 경고가 나온다 — 파일럿 시드의 경로는 파일럿 limit 기준이므로 요약에서
-다른 시드와 비중을 나란히 비교하지 않는다. 파일럿 없이 돌리면 `r`은
+파일럿 limit이 본 limit과 다르면 경고와 «limit 맞추기» 비용이 나온다 — 파일럿 시드의 경로는 파일럿 limit
+기준이므로 요약에서 다른 시드와 비중을 나란히 비교하지 않는다. 파일럿 시드가 파일럿 경로 어디에도 없고 한 글자
+다른 표기만 있으면(STEP 3 표기 변경) 제안 규칙과 함께 경고한다 — STEP 4 단계 사전에 그 규칙을 넣는다. 파일럿 없이 돌리면 `r`은
 `--ratio`(기본 1.0, [가정])이고 출력에 `assumed`로 표시된다 — 이 경우 계획값을 사용자에게
 «가정 기반»으로 고지한다.
 
@@ -208,8 +242,13 @@ python3 scripts/path_budget.py --metrics start_metrics.json --limit 50 --budget 
 3. **절단 검사** — 반환 경로 수가 요청 limit과 같으면 절단이다. 이 시드의 경로가 limit보다 더
    있을 수 있으므로 «이 시드의 전체 여정»이라고 쓰지 않고 «반환분 기준»으로 쓴다. limit을 올려
    늘어나는지 보려면 비용을 다시 치러야 하므로, 사용자 결정 없이 올리지 않는다
-4. 빈 응답(`data: []`)은 `[데이터 공백]`이다 — 실패로 재시도하지 않는다. 다른 출발 후보로 간다
-5. 데이터 시점: 리포트 헤더에 `time_point`(기본 `curr`)와 **조회일을 따로** 적는다. `curr`는
+4. **시드 표기 변경** — `path_finder`도 시드를 다른 표기로 돌려줄 수 있다(2026-09-30 실측: `선크림` 요청 →
+   파일럿 20경로 전부 `썬크림`). `keyword_info`의 표기 변경(STEP 1)과 같은 현상이 경로 안에서 생긴다.
+   응답을 저장한 뒤 시드 문자열이 경로에 있는지 확인하고, 없으면 STEP 4 단계 사전 `rules.변형치환`에
+   규칙(예: `{"썬": "선"}`)을 넣는다. 넣지 않으면 시드가 0경로에서 발견되고 모든 인접이 `off_seed`가 된다
+   (`journey_paths.py`가 이 경우 멈춘다 — STEP 4)
+5. 빈 응답(`data: []`)은 `[데이터 공백]`이다 — 실패로 재시도하지 않는다. 다른 출발 후보로 간다
+6. 데이터 시점: 리포트 헤더에 `time_point`(기본 `curr`)와 **조회일을 따로** 적는다. `curr`는
    조회 시점의 최신 스냅샷이지 실시간이 아니며, LM 데이터는 월 그레인이다
 
 ### STEP 4 · 로컬 집계 (표기변형 정규화 포함)
@@ -219,6 +258,10 @@ python3 scripts/journey_paths.py --run "캠핑의자=resp_camping_chair.json@50"
     --stages stages.json --category camping-chair-kr --out-dir out \
     --queried-at 2026-09-28 --plan path_plan.csv
 ```
+
+후보를 좁힌 계획(일부 후보만 남긴 metrics로 세운 계획)으로 집계했다면 좁히기 전 계획을 `--plan-full 전체계획.csv`로
+함께 준다 — 좁힌 계획에서 빠진 후보가 `excluded_from_plan (전체 계획: …)`으로 보류 표에 실린다. 좁힌 계획만 주고
+보류 행이 없으면 «없음» 대신 «빠진 후보는 보이지 않는다»고 적는다.
 
 `--run`은 시드마다 반복한다(`시드=응답.json@limit`). `@limit`을 빼면 응답의
 `request_detail.limit`을 쓰고, 그것도 없으면 절단을 «판정 불가»로 남긴다. `--stages`는
@@ -235,6 +278,13 @@ python3 scripts/journey_paths.py --run "캠핑의자=resp_camping_chair.json@50"
 - **방향 판정** — 방향은 요청 파라미터가 아니다. 경로 안에서 시드(canonical 일치)의 첫 위치를
   찾아 그 앞 인접은 `pre_seed`, 뒤 인접은 `post_seed`, 시드가 없는 경로는 `off_seed`로 둔다.
   시드는 경로의 앞·중간·끝 어디에나 올 수 있다
+- **시드 표기 검사** — 시드가 0경로에서 발견되고, 시드와 한 글자만 다른 표기(같은 길이 · 치환 1 · 시드 3글자
+  이상)가 사용 경로 절반 이상에 있으면 **집계하지 않고 종료 코드 3으로 멈춘다**. 메시지에 변형 표기·경로 수·제안
+  규칙(`{"썬": "선"}`)이 나온다 — 규칙을 넣고 다시 돌린다(0크레딧). 정말 다른 검색이면 `--allow-seed-variant`로
+  진행하고 요약에 경고가 남는다. 일부 경로에만 변형이 있으면 요약에 경고만 한다
+- **공통 줄기** — 경로의 앞 `--stem-len`걸음(기본 3, [가정] · 연속 표기변형은 접는다)을 줄기로 보고, 시드마다
+  서로 다른 줄기 수와 가장 큰 줄기를 요약에 적는다. 전이·노드 CSV에는 그 인접·키워드가 나온 **서로 다른 줄기 수**
+  (`stem_count`·`stems_with_keyword`)를 붙인다
 - **단계 분류는 규칙이다** — 단계 사전의 정규식으로만 분류한다. 안 걸리면 `no_match` 라벨
   (`브랜드·제품명` / `미분류`). LLM 분류는 쓰지 않는다 — 재현되지 않는 분류로 비중을 내면
   같은 데이터에서 다른 퍼널이 나온다
@@ -252,7 +302,12 @@ python3 scripts/journey_paths.py --run "캠핑의자=resp_camping_chair.json@50"
 - "A 다음에 B를 검색한다"는 **집계된 인접 빈도**다. "사람들이 A를 거쳐 B로 이동해 구매한다"로
   쓰지 않는다. 경로의 끝은 이탈이 아니라 세션·데이터의 끝일 수 있으므로 «이탈률»을 계산하지 않는다
 - `off_seed` 비중이 크면 반환 경로 상당수가 시드를 지나지 않는다는 뜻이다 — 시드 전후 서술은
-  `pre_seed`·`post_seed` 행으로만 한다
+  `pre_seed`·`post_seed` 행으로만 한다. 단 `off_seed`가 전부라면 먼저 시드 표기 변경(STEP 3-4)을 의심한다
+- **`path_count`는 세션 빈도가 아닐 수 있다.** 반환 경로가 같은 앞 걸음을 공유하고 끝만 갈라지는 경우가 관측됐다
+  (2026-09-30: `선스틱` 40경로 중 13경로, `선크림` 20경로 중 4경로가 앞 3걸음 동일). 이러면 줄기 위의 인접
+  (`선스틱 → 선스틱 선크림 차이` 13)은 «13개 세션»이라기보다 «한 줄기 아래 13갈래»에 가깝다 — 그 인접의
+  `stem_count`는 1이다. 인접 순위를 말할 때 `path_count`와 `stem_count`를 함께 적고, `stem_count` = 1인 상위
+  인접을 «가장 흔한 다음 검색»으로 단정하지 않는다 [추정]
 - 여정 키워드에서 새 출발 후보가 보이면(예: 시드 앞에 자주 오는 상황어) 추가 호출은 **다시 STEP 2
   예산 게이트를 거친다**
 
@@ -269,21 +324,25 @@ path_plan.csv
 
 journey_edges_{category}.csv
   seed, from_canonical, to_canonical, from_example, to_example,
-  from_stage, to_stage, position, path_count, edge_share
+  from_stage, to_stage, position, path_count, edge_share, stem_count
 
 journey_nodes_{category}.csv
   seed, canonical, example, stage, stage_facets, is_brand,
-  paths_with_keyword, share_of_paths, pre_seed_paths, post_seed_paths
+  paths_with_keyword, share_of_paths, pre_seed_paths, post_seed_paths,
+  stems_with_keyword
 
 journey_summary_{category}.md
   헤더(조회일 · time_point 값 · 세션 인접 한계) · 호출과 크레딧 표(요청 limit · 반환/사용 경로 ·
-  절단 · 고유 키워드 · 실측 크레딧 · 식 재계산, 라벨 포함) · limit 불일치 경고 · 보류한 출발 후보 ·
-  시드별 단계 분포(시드 제외) · 단계 간 전이 상위(시드가 낀 인접 제외) · 시드 바로 다음/앞 검색 상위 · 라벨 규약
+  절단 · 고유 키워드 · 실측 크레딧 · 식 재계산, 라벨 포함) · limit 불일치 경고 · 시드 표기 경고 ·
+  보류한 출발 후보(`--plan-full`이면 좁힌 계획에서 빠진 후보 포함) · 시드별 공통 줄기 · 단계 분포(시드 제외) ·
+  단계 간 전이 상위(시드가 낀 인접 제외) · 시드 바로 다음/앞 검색 상위(서로 다른 줄기 수 포함) · 라벨 규약
 ```
 
 - `position`: 그 전이가 가장 많이 나온 위치(`pre_seed` / `post_seed` / `off_seed`)
 - `edge_share`: 시드별 전체 인접(표기변형 인접 제외) 중 비중
 - `share_of_paths`: 시드별 사용 경로 중 그 키워드(그룹)가 한 번 이상 나온 경로 비중
+- `stem_count`: 그 인접이 나온 경로들의 서로 다른 줄기(앞 `--stem-len`걸음) 수 · `stems_with_keyword`: 그 키워드가
+  나온 경로들의 서로 다른 줄기 수. `path_count`보다 작으면 같은 줄기의 갈래가 겹쳐 세어진 것이다
 - `requested_keyword`: 이 행에 대응하는 요청 표기(응답 표기와 다를 수 있다) · `note`: 합쳐짐·미반환·표기 변경·파일럿 limit 차이
 - `planned_cost`: `pilot_done` 행은 파일럿 실측 비용
 
@@ -291,9 +350,9 @@ journey_summary_{category}.md
 
 | 라벨 | 이 스킬에서의 적용 |
 |---|---|
-| `[실제 데이터]` | 경로 시퀀스 원본 · 인접 쌍 수 · 시드 앞/뒤 검색 · `cost_detail` · `volume_avg` |
+| `[실제 데이터]` | 경로 시퀀스 원본 · 인접 쌍 수 · 시드 앞/뒤 검색 · 공통 줄기 수·`stem_count` · `cost_detail` · `volume_avg` |
 | `[추정]` | 단계 분류(규칙) · 단계 분포 · 단계 간 전이 · 계획 비용(`planned_cost`) |
-| `[가정]` | 단계 정의와 순서 · 변형치환 규칙 · limit · 볼륨 게이트 1,000 · 파일럿 없을 때의 r |
+| `[가정]` | 단계 정의와 순서 · 변형치환 규칙 · limit · 볼륨 게이트 1,000 · 파일럿 없을 때의 r · 줄기 길이(앞 3걸음) |
 | `[데이터 공백]` | 빈 응답 · 2단계 미만 경로 · 방향별 인접 없음 · 볼륨 없는 후보 · 응답에서 합쳐진·빠진 후보 |
 
 ## 한계

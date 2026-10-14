@@ -19,7 +19,7 @@ description: |
   (검색 데이터에는 구매 기록이 없다).
 license: MIT
 metadata:
-  version: "1.2.1"
+  version: "1.3.2"
 ---
 
 <!-- lm-skill: kind=task; connectors=keyword_info; flags=share; traps=T5,T8 -->
@@ -108,6 +108,13 @@ keyword_info(keywords=keyword_set, gl="kr", data_type="ads_metrics")   # 1 × N
 응답을 `metrics.json`으로 저장한다. 응답에 요청하지 않은 표기변형이 섞여 올 수 있다 — 지우지 않는다
 (STEP 3에서 그룹으로 묶는다).
 
+**키워드가 1,000개를 넘으면 나눠 부른다.** `keyword_info`의 `keywords`는 요청당 최대 1,000개다. 1,000개 이하 덩어리로
+나눠 호출하고(2026-09-30 선크림: 1,484개 → 742 + 742), 합칠 때 ① `data` 배열을 이어 붙이고 ② `request_detail.keywords`도
+이어 붙이며 ③ `cost_detail.total_cost`를 더해 하나의 `metrics.json`으로 저장한다. `request_detail`을 합치기 번거로우면
+요청한 키워드 배열 전체(분할 전 목록)를 따로 저장해 STEP 4 `--requested`에 준다 — 한쪽 덩어리의 응답만 주면 다른 덩어리
+키워드가 전부 «미반환»으로 잡힌다. 과금은 덩어리마다 요청 수이고, 총액은 `1 × N` 그대로다. 한 덩어리 응답 안에서 같은 키워드·같은 지표의 행이
+반복돼도 손으로 지우지 않는다 — `build_universe.py`가 합치고 몇 행 합쳤는지 출력한다. 병합 형식은 `references/lm-data-contract.md` «keyword_info 1회 상한과 응답 병합».
+
 ### STEP 2 · 의도 사전 작성
 
 `assets/intent-themes.cordless-vacuum-kr.example.json`을 `intent_themes.json`으로 복사해
@@ -144,6 +151,18 @@ keyword_info(keywords=keyword_set, gl="kr", data_type="ads_metrics")   # 1 × N
 `미분류·헤드`나 논브랜드 거래 의도로 잡혀, **논브랜드 거래 의도가 부풀려진다.** 기억으로 쓰지 말고
 STEP 1 응답의 상위 볼륨 키워드를 훑어 채운다. STEP 4 리포트의 «미분류 상위» 목록에서 누락을
 역추적해 보강하고 다시 돌린다.
+
+**판매 채널명은 `brands`에 넣지 않는다 — 채널 지명 클래스에만 둔다.** 다른 스킬(map-your-market 등)의 사전을 가져오면
+`px`·`올리브영`·`쿠팡`·`다이소` 같은 판매처가 브랜드로 들어 있을 수 있다. 브랜드 사전에 채널명이 있으면 «px 선크림»이
+«브랜드 포함» 쪽으로 가서 **논브랜드 안 거래 의도에서 빠진다.** 2026-09-30 선크림(1건): map-your-market 사전의 `px`를
+채널로 옮기자 논브랜드 안 거래 의도가 하한 기준 10.5% → 11.8%(브랜드 18개 보강 사전 기준 · 같은 응답 재집계)로 바뀌었다.
+`buyer_share.py`는 브랜드 사전의 이름이 거래 티어(채널·가격) 마커에도 걸리면 경고하고 리포트 머리에 적는다 — 그 이름이
+정말 브랜드(자체 PB 등)면 그대로 두고 리포트에 `[가정]`으로 적는다.
+
+**브랜드 매칭은 두 스크립트가 다르다.** `build_universe.py`(공유)는 브랜드 canonical의 **부분일치**로 `brand` 열을 채우고,
+`buyer_share.py`는 `buyer_match.py` 규칙(ASCII 브랜드는 **토큰 단위** — `shark` ≠ `sharkninja`, 한글은 부분일치)으로
+다시 판정한다. 그래서 `universe.csv`의 `brand`와 `intent_class.csv`의 `brand`가 ASCII 브랜드에서 다를 수 있다.
+티어·3단 분포·거래 의도 비중은 **`buyer_share.py`의 판정만** 쓴다 — `universe.csv`의 `brand`·«논브랜드 볼륨 비중»은 참고용이다.
 
 ### STEP 3 · 그룹키와 클래스 부여 (T5)
 
@@ -244,6 +263,11 @@ python3 scripts/buyer_share.py universe.csv --themes intent_themes.json \
 - **2단 대상(미분류·충돌 그룹) 요약** — 대상 그룹 수·하한 볼륨과, 각 플래그가 1인 그룹 수·볼륨 몫(중복 가능)을
   적고 그룹별 `키워드 (티어 · 충돌) → LM 플래그`를 나열한다. LM이 «거래»로 읽는 미분류 헤드는 거래 마커 누락
   후보다 — 사전을 고친 뒤 STEP 3부터 다시 돌린다.
+  **단, 누락된 것이 거래 마커가 아니라 브랜드일 수 있다.** 2026-09-30 선크림(1건 관찰): «샤넬 선크림»은 사전에 샤넬이 없어
+  미분류 헤드였고 LM은 «거래» 플래그를 붙였다 — 거래 마커를 더할 일이 아니라 브랜드를 보강할 일이다(보강하면 브랜드 지명 티어로 간다).
+  또 «톤업 선크림»·«무기자차 선크림»처럼 제형·속성 헤드도 LM이 «거래»로 읽었다. 목록을 볼 때
+  ① 브랜드·라인명이 들었으면 `brands` 보강 ② 판매처·가격 표현이 들었으면 거래 마커 보강 ③ 수식어 없는 헤드면 **고치지 않는다**
+  (LM 플래그는 해석값이다 — 규칙에 «거래»로 넣으면 명시적 거래 표현 기준이 무너진다) 순으로 가른다.
 - **기준월은 응답에서 읽는다(관측 1개월).** `all` 응답의 `monthly_volume`에서 `total` 키가 있는 가장 최근 월을
   데이터 기준월로 헤더에 `기준월 / 조회일 / 지연`을 적는다. `nv_code`만 있는 결측 월은 기준월로 치지 않는다.
   지연 개월 수를 미리 가정하지 않는다.

@@ -20,7 +20,7 @@ description: |
   `spot-trends`로 보낸다. 이 스킬은 **이미 정한 브랜드들의 몫**만 잰다.
 license: MIT
 metadata:
-  version: "0.3.1"
+  version: "0.3.3"
 ---
 
 <!-- lm-skill: kind=task; connectors=keyword_info,intent_finder; flags=monthly,expand,share; traps=T1,T2,T3,T4,T5,T6,T7,T8 -->
@@ -152,7 +152,8 @@ python3 scripts/coverage_curve.py --metrics metrics.json --rules themes.json --t
 
 한 라운드의 시드별 호출은 **쉼표로 나열**하고 호출마다 `@limit`을 붙인다 — 절단은 라운드 합집합 길이가
 아니라 **호출 단위**로 검사한다. 어느 라운드든 잘린 호출이 있으면 «보류»이고, 이 판정은 `--round` 순서와
-무관하다. `--rules`는 인라인 JSON·치환 파일·`themes.json` 모두 받는다. `seeds.json`은 이번 라운드에 넣은
+무관하다. 호출을 `--round` 여러 개로 나눠 넘길 때는 라벨의 첫 `-` 앞을 같게(`R1-a`·`R1-b`) 두어야 한 판정 라운드로
+묶인다. `--rules`는 인라인 JSON·치환 파일·`themes.json` 모두 받는다. `seeds.json`은 이번 라운드에 넣은
 시드 문자열 배열이다. «보류»면 "표기변형을 다 모았다"고 쓰지 않는다.
 
 ### STEP 3 · 1단 조회와 12개월 점유 (ads_metrics)

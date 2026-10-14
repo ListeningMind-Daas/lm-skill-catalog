@@ -18,7 +18,7 @@ description: |
   공동검색 구조만 본다 — 카테고리 전체 지도가 아니다.
 license: MIT
 metadata:
-  version: "1.2.1"
+  version: "1.3.1"
 ---
 
 <!-- lm-skill: kind=task; connectors=cluster_finder,keyword_info; flags=monthly,expand,share; traps=T1,T2,T3,T4,T5,T6,T7,T8 -->
@@ -52,6 +52,7 @@ metadata:
 | 커넥터 | 용도 | 크레딧 결정식 |
 |---|---|---|
 | `keyword_info` (`all`) | STEP 1 시드 1개 — 존재 확인 + **데이터 기준월** | `10 × 1` |
+| `cluster_finder/keyword_list` | STEP 2 파일럿 — 본 호출과 같은 파라미터로 **노드 수 N만** 먼저 잰다(군집 구조 없음) | `30 + 2 × 반환 키워드` |
 | `cluster_finder` | 시드 주변 공동검색 군집(`communities`)과 관계(`rels`) | `150 + 고유 키워드(노드) × 50` |
 | `keyword_info` (`ads_metrics`) | 군집 전 키워드의 볼륨 | `1 × 요청 키워드` |
 | `keyword_info` (`all`) | 후보 군집 대표 키워드만 — `monthly_volume`으로 전년 동기 추세 | `10 × 키워드` |
@@ -72,6 +73,7 @@ N = cluster_finder 응답의 고유 키워드 수     (STEP 2가 출력한다)
 S = 2단 조회 대상 수                         (STEP 5가 고른다 · 후보 군집 수 × --pick)
 
 총액 = 10                    # STEP 1 시드 확인 + 기준월 (all)
+     + 30 + 2 × N            # STEP 2 파일럿 keyword_list (선택 — 아래)
      + 150 + 50 × N          # STEP 2 cluster_finder
      + 1 × N                 # STEP 3 ads_metrics 전량
      + 10 × S                # STEP 6 all — 게이트 통과 가능분만
@@ -80,9 +82,21 @@ S = 2단 조회 대상 수                         (STEP 5가 고른다 · 후�
 - **호출 전에는 N을 모른다.** `python3 scripts/submarkets.py budget --limit 500`이 두 상한을 함께 낸다:
   - **보수 상한** `N ≤ 2 × limit` — 관계 하나가 새 키워드를 최대 2개 더한다는 데서 나온다. 보장값이다.
     `limit=500`이면 `10 + 150 + 51 × 1,000 = 51,160 + 10 × S`.
-  - **관측 상한** `N ≤ limit + 1` `[가정]` — 2026-09-28 관측 4건에서 노드가 모두 limit+1 이하였다
-    (limit 50 → 노드 50·44·50). 관계 행이 한 허브에 몰리면 노드 ≈ 관계 수라서다. 보장이 아니므로
+  - **관측 상한** `N ≤ limit + 1` `[가정]` — 2026-09-28~30 관측 5건에서 노드가 모두 limit+1 이하였다
+    (limit 50 → 노드 50·44·50 · limit 90 → 89). 관계 행이 한 허브에 몰리면 노드 ≈ 관계 수라서다. 보장이 아니므로
     `limit=500`이면 `10 + 150 + 51 × 501 = 25,711 + 10 × S`를 «관측 기준 예상»으로, 보수 상한을 «최대»로 함께 알린다.
+- **파일럿으로 N을 먼저 잰다 (상한이 빠듯할 때).** `cluster_finder/keyword_list`는 같은 파라미터(시드·gl·time_point·
+  hop·limit·orientation · `data_type` 없음)로 노드 목록만 돌려주고 `30 + 2 × N`을 쓴다 — 본 호출(`150 + 50 × N`)의
+  약 1/25이다. 반환 개수를 넣으면 `budget`이 정확한 금액과 남는 S를 낸다:
+  ```bash
+  python3 scripts/submarkets.py budget --limit 90 --pilot-nodes 89 --cap 5500
+  # 파일럿 208 · cluster_finder 4,600 · ads_metrics 89 → 총 4,907 + 10 × S · 상한 안 S ≤ 59  (넘으면 종료 코드 1)
+  ```
+  실측(2026-09-30 선크림 · 상한 5,500): 보수 상한으로는 limit 52가 한계라 절단이 거의 확실했다. 파일럿(limit 90 → 89개 ·
+  208크레딧)으로 N을 잰 뒤 limit 90 본 호출을 했고 `cost_detail` 4,600(= 150 + 50 × 89)으로 일치했다. 파일럿 노드 집합과
+  본 호출 노드 집합도 89개 전부 같았다. 다만 **1건 관측**이므로 «파일럿 N = 본 호출 N»은 `[가정]`이다 — STEP 2에서
+  `nodes --pilot`으로 대조하고, 다르면 소진액은 `cost_detail`을 따른다. 상한이 넉넉해 보수 상한 안에서 원하는 limit을
+  쓸 수 있으면 파일럿은 생략한다(파일럿 자체도 크레딧이다).
 - **2단 조회가 핵심 절감 장치다.** `all`(10/kw)을 N 전량에 걸면 `10 × N`이 되지만, 이 스킬이
   추세를 볼 대상은 후보 군집의 대표 키워드뿐이다. S는 `후보 군집 수 × --pick(기본 3)`로 정해진다.
 - 계산 예시 [가정]: N = 350, 후보 군집 6개 → S = 18이면
@@ -94,7 +108,7 @@ S = 2단 조회 대상 수                         (STEP 5가 고른다 · 후�
 
 | 파일 | 하는 일 | 쓰는 곳 |
 |---|---|---|
-| `scripts/submarkets.py` | **이 스킬 고유** — `budget`: 사전 상한 / `nodes`: 고유 키워드·절단·별 모양 검사 / `score`: 군집 집계·하위 시장 판정·2단 대상 선정 | 사전 확인 · STEP 2 · 5 · 7 |
+| `scripts/submarkets.py` | **이 스킬 고유** — `budget`: 사전 상한·파일럿 반영 금액 / `nodes`: 고유 키워드·절단·별 모양·시드 대조·파일럿 대조 / `score`: 군집 집계·하위 시장 판정·2단 대상 선정 / `merge-all`: 시드 all + 2단 all 병합 | 사전 확인 · STEP 2 · 5 · 6 · 7 |
 | `scripts/build_universe.py` | 키워드별 지표 결합 + canonical + 브랜드·테마 부여 (공유 스크립트) | STEP 4 |
 | `scripts/check_refmonth.py` | 데이터 기준월·지연·마지막 달 완결성 (공유) | STEP 1 · STEP 6 |
 | `scripts/trend_yoy.py` | 전년 동기 비교 · 결측 월 안전 (공유) | STEP 6 |
@@ -118,7 +132,8 @@ S = 2단 조회 대상 수                         (STEP 5가 고른다 · 후�
                                            score가 «⚠️ 브랜드 시드»를 띄우면 대체 시드를 묻는다.
 3. 영어 시드는 소문자인가?              → API 호출 전 변환.
 4. 조회일을 적었는가?                   → STEP 6에서 기준월과의 지연을 계산한다.
-5. 예산 상한을 사용자에게 알렸는가?     → submarkets.py budget --limit … 의 보수·관측 상한 둘 다.
+5. 예산 상한을 사용자에게 알렸는가?     → submarkets.py budget --limit … [--cap 상한] 의 보수·관측 상한 둘 다.
+                                           보수 상한이 상한을 넘으면 파일럿(keyword_list)으로 N을 잴지 함께 묻는다.
                                            동의 전에는 호출하지 않는다.
 ```
 
@@ -144,11 +159,17 @@ python3 scripts/check_refmonth.py seed_all.json --queried-at 2026-09-28
 - **기준월은 여기서 확보한다.** 2단 조회 대상이 0개(S = 0)여도 리포트 헤더의 `데이터 기준월 / 조회일 / 지연`이
   비지 않게 하기 위해서다(실측 3건 중 2건이 S = 0이었다 — 여기서 확보하지 않으면 기준월이 빈칸이 된다).
   기준월은 응답의 `monthly_volume` 최신 월에서 읽는다 — 관측 지연은 1개월이었지만 고정값으로 쓰지 않는다.
-- 시드의 `monthly_volume`은 시드 코어 군집의 전년 동기 추세로도 쓸 수 있다(STEP 6 `trend_yoy.py`에 함께 넣는다).
+- 시드의 `monthly_volume`은 시드 코어 군집의 전년 동기 추세로도 쓸 수 있다. `trend_yoy.py`는 파일 **하나**만
+  받으므로 STEP 6에서 `submarkets.py merge-all`로 2단 응답과 합친 파일을 넣는다(STEP 6 참고).
+- 응답에 요청하지 않은 표기변형이 함께 올 수 있다(실측: `선크림` 요청 → `선크림`·`썬크림` 2행). 둘 다 병합본에 남는다.
 
 ### STEP 2 · 군집 호출 + 절단 검사
 
 ```python
+# (선택) 파일럿 — 같은 파라미터로 노드 수만. 30 + 2 × 반환 키워드
+cluster_finder_keyword_list(keyword="캠핑의자", gl="kr", time_point="curr",
+                            hop=2, limit=500, orientation="UNDIRECTED")          # → pilot_kwlist.json
+# budget --limit 500 --pilot-nodes <반환 개수> --cap <상한> 으로 금액 확인 후
 cluster_finder(keyword="캠핑의자", gl="kr", time_point="curr",
                hop=2, limit=500, orientation="UNDIRECTED", data_type="all")
 # 150 + 50 × 고유 키워드 수
@@ -157,11 +178,20 @@ cluster_finder(keyword="캠핑의자", gl="kr", time_point="curr",
 응답을 `cluster.json`으로 저장하고 바로 돌린다:
 
 ```bash
-python3 scripts/submarkets.py nodes cluster.json --limit 500 --seed 캠핑의자 -o nodes.json
+python3 scripts/submarkets.py nodes cluster.json --limit 500 --seed 캠핑의자 -o nodes.json \
+    [--pilot pilot_kwlist.json] [--rules themes.json]
 ```
 
 출력: 관계 행 수(무방향 고유 간선 수 · 역방향 중복 쌍 수) · 군집 수 · 고유 키워드 수 N ·
-결정식 대조(`cost_detail`과 다르면 경고) · 다음 단계 예상 크레딧. `nodes.json`은 STEP 3의 입력이다.
+결정식 대조(`cost_detail`과 다르면 경고) · 파일럿 노드 집합 대조(`--pilot`) · 시드 대조 결과 · 다음 단계 예상 크레딧.
+`nodes.json`은 STEP 3의 입력이다.
+
+**시드 대조.** `nodes`와 `score`는 같은 순서로 시드를 찾는다 — 원 표기 → 공백·대소문자 무시 → 변형치환 규칙
+(`rules.변형치환`, `--rules themes.json`). API는 시드를 다른 표기로 돌려주기도 한다(실측 2026-09-30: `선크림` 요청 →
+그래프에는 `썬크림`만). STEP 2 시점에는 `themes.json`이 아직 없으니 `nodes`가 `⚠️ 시드가 그래프에 없다`와 함께
+**한 글자 차이 후보**(`[추정]`)를 보여 준다. 같은 말이면 STEP 3에서 `rules.변형치환`에 쌍(`"썬": "선"`)을 넣고
+`nodes … --rules themes.json`으로 다시 확인한다 — «변형치환 규칙으로 «썬크림»에 대응한다»가 나오면 `score`도 같은 결과를 낸다.
+규칙으로만 대응한 경우 리포트 헤더에 대응 표기를 적는다(«시드 선크림 = 그래프 노드 썬크림»).
 
 **역방향 중복.** `rels`에는 같은 쌍이 방향만 바꿔 두 번 들어오는 경우가 있다(실측 3건 중 2건에서 1쌍).
 스크립트는 degree·허브·시드 거리를 **무방향 고유 간선**으로 센다. 절단 판정만은 반환 행 수 그대로 쓴다.
@@ -230,10 +260,21 @@ python3 scripts/submarkets.py score cluster.json --universe universe.csv --seed 
     -o submarkets.csv --keywords-out submarket_keywords.csv --pick-out stage2_keywords.json
 ```
 
-**입력 거부.** `--seed`가 비었거나 그래프에 없으면(공백·대소문자 무시, canonical 대조) 판정하지 않고
-종료 코드 2로 멈춘다. 시드 거리를 잴 수 없으면 모든 군집이 «연결 없음 = 숨은 후보»로 둔갑하기 때문이다.
+**입력 거부.** `--seed`가 비었거나 그래프에 없으면(원 표기 → 공백·대소문자 → canonical 대조 — universe의 `canonical`,
+universe에 없는 표기는 `--rules`의 변형치환) 판정하지 않고 종료 코드 2로 멈춘다. 어느 단계에서 대응했는지 출력한다(STEP 2와 같은 문구). 시드 거리를 잴 수 없으면 모든 군집이 «연결 없음 = 숨은 후보»로 둔갑하기 때문이다.
 **기준월.** `--seed-all`(STEP 1 응답)이나 `--trend`가 없으면 산출물은 쓰되 `⚠️ 데이터 기준월 없음`과
 함께 종료 코드 3을 낸다. 이 상태로 리포트를 쓰지 않는다.
+
+**종료 코드를 잃지 않는다.** `score`는 0(정상) · 2(입력 거부) · 3(기준월 없음), `nodes`는 0 · 2(빈 응답),
+`budget --pilot-nodes --cap`은 1(상한 초과)을 낸다. 출력을 `| tee score.txt`로 저장하면 셸이 **tee의 종료 코드(0)**를
+돌려줘 3·2가 사라진다(실측 2026-09-30 실행에서 이렇게 기록을 잃었다). 파이프를 쓰려면 먼저 `set -o pipefail`을 켜고,
+아니면 리다이렉트 후 바로 확인한다:
+
+```bash
+set -o pipefail; python3 scripts/submarkets.py score … | tee score_step5.txt; echo "exit=$?"
+# 또는
+python3 scripts/submarkets.py score … > score_step5.txt; echo "exit=$?" >> score_step5.txt
+```
 
 군집마다 아래를 계산하고, 위에서부터 처음 걸리는 유형 하나를 붙인다.
 
@@ -289,8 +330,14 @@ keyword_info(keywords=stage2_keywords, gl="kr", data_type="all")   # 10 × S  (S
 
 ```bash
 python3 scripts/check_refmonth.py all.json --queried-at 2026-09-28
-python3 scripts/trend_yoy.py all.json -o trend.csv --gate 3000
+python3 scripts/submarkets.py merge-all seed_all.json all.json -o all_plus_seed.json
+python3 scripts/trend_yoy.py all_plus_seed.json -o trend.csv --gate 3000
 ```
+
+- **병합 (`merge-all`)**: `trend_yoy.py`는 입력 파일 하나만 받는다. STEP 1 시드 응답과 2단 응답을 **키워드당 한 행**으로
+  합쳐 시드(와 그 표기변형)의 추세도 `trend.csv`에 들어가게 한다. 같은 키워드가 두 파일에 다 있으면 먼저 준 파일의 행을
+  남기고 `monthly_volume`이 다르면 경고한다. 파일마다 기준월이 다르면 경고한다 — 같은 조회 시점의 응답끼리만 합친다.
+  S = 0이면 `all.json` 없이 `merge-all seed_all.json`만으로 시드 코어 추세를 볼 수 있다.
 
 - **기준월 (T1)**: 리포트 헤더에 `데이터 기준월 / 조회일 / 지연` 세 값을 적는다. 기준월은 응답에서 읽는다
   (관측 1개월 — 2026-09-28 조회에서 2026-08). STEP 1에서 이미 읽었다면 같은 값인지 확인한다.
@@ -374,7 +421,7 @@ submarket_report_{seed}.md
 |---|---|
 | `[실제 데이터]` | `communities` · `rels` · `volume_total` · `monthly_volume`, 그리고 그로부터의 직접 집계(degree · 시드 거리 · 전년 동기 비교) |
 | `[추정]` | 군집 이름 · 하위 시장이라는 해석 · 테마 부여(정규식 규칙) · 표기변형 그룹을 거친 볼륨·비중 `*_lo`/`*_hi`와 같은 검색의 중복 판정(규칙 기반 집계 — 하한~상한 범위로만 인용) · 단일 키워드 군집이 절단 잔재라는 해석 |
-| `[가정]` | 게이트 4종(`size-gate` · `brand-max` · `min-groups` · `yoy-gate`) · 판정·순위를 하한 기준으로 두는 규칙 · limit 선택 · 별 모양 기준 80% · 관측 상한 `limit + 1` · 2단 대상 사전 게이트(`volume_avg × 3`) · 유통 채널명을 brands에 넣는 기본값 |
+| `[가정]` | 게이트 4종(`size-gate` · `brand-max` · `min-groups` · `yoy-gate`) · 판정·순위를 하한 기준으로 두는 규칙 · limit 선택 · 별 모양 기준 80% · 관측 상한 `limit + 1` · 파일럿 노드 수 = 본 호출 노드 수(1건 관측) · 2단 대상 사전 게이트(`volume_avg × 3`) · 유통 채널명을 brands에 넣는 기본값 |
 | `[데이터 공백]` | 빈 응답 · 지표 미반환 키워드(`missing_metrics`) · 결측 창으로 계산 불가한 추세 · 2단 조회를 하지 않은 군집의 추세 |
 
 ## 한계

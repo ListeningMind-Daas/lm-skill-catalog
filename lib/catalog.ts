@@ -79,6 +79,24 @@ export function summaryOf(desc: string, max = 150) {
   return first.length > max ? first.slice(0, max - 1) + "…" : first;
 }
 
+/**
+ * 상세 화면용 설명 — 빈 줄로 나뉜 문단 단위로, 문단 안의 줄바꿈(SKILL.md 의 고정 폭 줄바꿈)은 공백으로 잇는다.
+ * 각 문단은 글 조각과 코드 조각(`…`)의 배열이다.
+ */
+export function descriptionParagraphs(desc: string): { text: string; code: boolean }[][] {
+  return desc
+    .replace(/\*\*/g, "")
+    .split(/\n\s*\n/)
+    .map((p) => p.replace(/\s*\n\s*/g, " ").trim())
+    .filter(Boolean)
+    .map((p) => p.split(/(`[^`]+`)/).filter(Boolean).map((t) => (t.startsWith("`") && t.endsWith("`") && t.length > 2 ? { text: t.slice(1, -1), code: true } : { text: t, code: false })));
+}
+
+/** 카드용 설명 — 강조·코드 표기를 걷어낸 평문 */
+export function plainDescription(desc: string) {
+  return desc.replace(/\*\*/g, "").replace(/`([^`]+)`/g, "$1");
+}
+
 export function bandLabel(id: string | undefined) {
   return catalog.bands.find((b) => b.id === id)?.label ?? null;
 }
@@ -92,7 +110,7 @@ export function toCard(s: Skill): CardSkill {
     group: s.group,
     groupTitle: g?.title ?? s.group,
     repo: g?.source.repo ?? "",
-    description: s.description.replace(/\*\*/g, ""),
+    description: plainDescription(s.description),
     license: s.license,
     version: s.version,
     kitVersion: kitVersionOf(s),

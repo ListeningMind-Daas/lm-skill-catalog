@@ -20,7 +20,7 @@ description: |
   이 스킬은 **유니버스의 넓이와 그 경계**를 답하지, 구조나 순서를 답하지 않는다.
 license: MIT
 metadata:
-  version: "1.1"
+  version: "1.2.2"
 ---
 
 <!-- lm-skill: kind=task; connectors=keyword_info,intent_finder; flags=monthly,expand,share; traps=T1,T2,T3,T4,T5,T6,T7,T8 -->
@@ -152,7 +152,8 @@ metadata:
 - `rules.변형치환` — 표기변형 치환 쌍 (예: `"썬": "선"`). STEP 5의 canonical 키가 여기서 결정된다.
 - `themes` — 테마 이름과 정규식. 유니버스를 사람이 읽을 수 있는 덩어리로 나눈다.
 - `brands` — 이 카테고리의 브랜드·제품명 사전. **이 사전이 비면 T8이 무력화된다**(모든 것이
-  논브랜드로 잡혀 논브랜드 공간이 부풀려진다). STEP 5 이후 상위 볼륨 키워드를 훑어 사전을 보강한다.
+  논브랜드로 잡혀 논브랜드 공간이 부풀려진다). **템플릿의 브랜드(선크림 예시 5개)는 자리표시다** — 그대로 두고
+  진행하면 안 된다. STEP 5의 «브랜드 보강 게이트»를 통과해야 STEP 6으로 간다.
 
 ### STEP 1.5 · 데이터 기준월 확인 — 시계열을 쓰기 전에 반드시
 
@@ -203,6 +204,7 @@ python3 scripts/coverage_curve.py --metrics universe_metrics.json \
     --round "R1·확장1=intent_r1.json@300" \
     --round "R2·확장2=intent_r2.json@600"
 # 시드별 호출이 여러 건인 라운드: --round "R1·확장1=r1_seedA.json@300,r1_seedB.json@300"
+#   또는 첫 '-' 앞이 같은 라벨로 나눠 넘긴다(한 판정 라운드로 묶인다): --round "R1-A=r1_seedA.json@300" --round "R1-B=r1_seedB.json@300"
 # --rules 는 인라인 JSON · 치환 사전 파일 · themes.json(rules.변형치환) 모두 받는다 → --rules themes.json
 ```
 
@@ -279,6 +281,31 @@ python3 scripts/build_universe.py --metrics universe_metrics.json \
 같은 단계에서 테마(`theme_primary`·`facets`)와 브랜드(`brand`)가 붙는다. 이 두 컬럼은
 규칙 기반 분류이므로 `[추정]`이다(CSV의 `label_classification` 컬럼이 이를 명시한다).
 
+#### 브랜드 보강 게이트 ⚠️ 생략 금지 — 통과 전에는 STEP 6(2단 조회)·STEP 7로 가지 않는다
+
+논브랜드 비중은 이 지도의 결론(신규 진입 여지)이다. 그런데 그 값은 **브랜드 사전이 얼마나 찼느냐**로 정해진다.
+2026-09-30 선크림(1건): 템플릿 `themes.json`의 브랜드 5개로 돌리자 논브랜드 볼륨 비중이 **하한 기준 94.0% · 상한 기준 94.6%**였고,
+유니버스 상위 볼륨에서 브랜드를 115개로 보강하자 **46.3% · 48.8%**가 됐다 — 같은 응답인데 결론이 두 배 가까이 바뀐다.
+
+1. 첫 `build_universe.py` 실행 뒤 `keyword_universe.csv`에서 `brand`가 빈 행을 `volume_total` 내림차순으로 **상위 50개** `[가정]` 본다:
+
+   ```python
+   import csv
+   rows = [r for r in csv.DictReader(open("keyword_universe.csv", encoding="utf-8-sig")) if not r["brand"] and not r.get("dup_of")]
+   for r in sorted(rows, key=lambda r: -float(r["volume_total"] or 0))[:50]:
+       print(r["volume_total"], r["keyword"])
+   ```
+
+2. 그 안의 브랜드·제품 라인명을 `themes.json` `brands`에 넣는다(기억이 아니라 목록에서). **판매 채널명**(다이소·올리브영·쿠팡·px)은
+   브랜드가 아니다 — 채널을 따로 보려면 `themes`의 테마로 둔다(이 지도를 `separate-buyers-from-browsers`에 넘길 때 채널명이
+   브랜드 사전에 있으면 논브랜드 거래 의도가 줄어든다).
+3. `build_universe.py`를 다시 돌리고 1로 돌아간다. **상위 50개 논브랜드에 브랜드가 없을 때** 게이트를 통과한다.
+4. 리포트에 **보강 전후의 브랜드 수와 논브랜드 비중(두 기준)**을 함께 적는다(예: «브랜드 5 → 115 · 논브랜드 94.0% → 46.3% (하한 기준)»).
+   보강 전 값은 결론이 아니라 «사전이 비었을 때 얼마나 부푸는가»의 근거다.
+
+`brands`가 템플릿과 같거나(자리표시 그대로) 보강 전후 기록이 없으면 논브랜드 비중·기회 후보를 결론으로 쓰지 않는다 —
+«브랜드 사전 미보강 · 논브랜드 과대 가능 [데이터 공백]»으로 적는다.
+
 이 시점의 CSV는 추세 컬럼이 비어 있다. STEP 6 이후 `--trend`를 붙여 **한 번 더 실행**해
 최종본을 만든다.
 
@@ -334,8 +361,8 @@ python3 scripts/trend_yoy.py gated_all.json -o trend.csv --gate 3000 --ref-month
 - 테마별로 `논브랜드 볼륨` · `논브랜드 비중` · `논브랜드 YoY` · `평균 CPC/경쟁도`를 낸다.
   **기회 후보 = 논브랜드 볼륨이 크고 · 논브랜드 YoY가 플러스이고 · 경쟁도가 낮은 테마.**
 - 점유율은 `[추정]`이며 "검색량 기준 근사"로 표기한다. 검색은 구매가 아니라 관심 신호다.
-- 브랜드 사전 누락은 논브랜드를 부풀린다. 상위 볼륨 논브랜드 키워드 30건을 눈으로 훑어
-  브랜드가 섞여 있지 않은지 확인하고, 확인했다는 사실을 리포트에 적는다.
+- 브랜드 사전 누락은 논브랜드를 부풀린다. STEP 5 «브랜드 보강 게이트»(상위 50개 논브랜드에 브랜드 없음)를 통과했다는 사실과
+  보강 전후 브랜드 수·논브랜드 비중을 리포트에 적는다.
 
 **Blind Spot — «데이터가 없다»만 적지 않는다**
 

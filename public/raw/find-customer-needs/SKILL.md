@@ -18,7 +18,7 @@ description: |
   목적이면 `spot-trends`로 간다. 리뷰·설문·CS 로그 같은 내부 VOC 분석은 이 스킬의 범위가 아니다.
 license: MIT
 metadata:
-  version: "1.2.1"
+  version: "1.2.3"
 ---
 
 <!-- lm-skill: kind=task; connectors=keyword_info,intent_finder; flags=monthly,expand,share; traps=T1,T2,T3,T4,T5,T6,T7,T8 -->
@@ -188,7 +188,7 @@ python3 scripts/coverage_curve.py --metrics metrics_ads.json --rules axes.json -
    - 테마 이름은 `Pain:…` · `Feature:…` · `Attribute:…`. 이름 뒤가 **니즈 항목**이 된다
    - **Pain을 배열 맨 위에 둔다.** `충전 안됨`은 Feature `충전`에도 걸리는데, 먼저 선언된 테마가 주 축이 된다.
      여러 축에 걸린 검색어는 산출물 `multi_axis=Y`로 남으니 STEP 7에서 검토한다
-   - 패턴은 **canonical 문자열**(NFKC → 소문자 → 공백 제거 → 변형치환)에 맞춘다. `충전 안됨`이 아니라 `충전안됨`
+   - 패턴은 **canonical 문자열**(NFKC → 소문자 → 변형치환 → 공백 제거)에 맞춘다. `충전 안됨`이 아니라 `충전안됨`
    - `brands`는 STEP 2 반환의 **상위 볼륨 검색어에서 뽑아** 채운다. 빠진 브랜드는 논브랜드로 집계돼
      일반 니즈를 부풀린다
    - **`category_terms`**(카테고리어 목록)와 **`exclude`**(인접 카테고리 canonical 정규식)를 쓴다. `intent_finder`는

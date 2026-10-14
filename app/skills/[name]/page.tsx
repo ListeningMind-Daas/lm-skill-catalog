@@ -14,6 +14,7 @@ import {
   testRunOf,
   kitVersionOf,
   bandLabel,
+  descriptionParagraphs,
 } from "@/lib/catalog";
 import { renderSkillMarkdown, tocOf } from "@/lib/markdown";
 
@@ -55,7 +56,7 @@ export default function SkillPage({ params }: { params: { name: string } }) {
       )}
       <div className={`${s.landing ? "mt-2" : "mt-6"} flex flex-wrap items-start justify-between gap-3`}>
         <h1 className="break-all text-[26px] font-semibold leading-tight text-ink">{s.name}</h1>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {repoUrl && (
             <ButtonLink href={repoUrl} external icon="github" trailing="external">저장소</ButtonLink>
           )}
@@ -63,7 +64,19 @@ export default function SkillPage({ params }: { params: { name: string } }) {
           <CopyButton text={test.prompt} label="테스트 실행" variant="brand" title="Claude 앱에 붙여 넣는 실행 프롬프트를 복사합니다" fallbackTarget="test-run-prompt" />
         </div>
       </div>
-      <p className="mt-3 whitespace-pre-line text-base leading-7 text-ink-muted">{s.description.replace(/\*\*/g, "")}</p>
+      <div className="mt-3 space-y-3 text-base leading-7 text-ink-muted">
+        {descriptionParagraphs(s.description).map((parts, i) => (
+          <p key={i}>
+            {parts.map((t, j) =>
+              t.code ? (
+                <code key={j} className="rounded bg-surface-muted px-1 py-0.5 font-mono text-[0.9em] text-ink-soft">{t.text}</code>
+              ) : (
+                <span key={j}>{t.text}</span>
+              ),
+            )}
+          </p>
+        ))}
+      </div>
 
       <div className="mt-6">
         <MetaTable

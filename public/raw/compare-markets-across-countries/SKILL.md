@@ -18,7 +18,7 @@ description: |
   예측하지 않는다** — 그런 요청에는 현재 격차와 시즌 차이까지만 답하고 예측은 하지 않는다고 말한다.
 license: MIT
 metadata:
-  version: "1.2.1"
+  version: "1.3.2"
 ---
 
 <!-- lm-skill: kind=task; connectors=keyword_info; flags=monthly; traps=T1,T2,T3,T4,T5,T6 -->
@@ -54,7 +54,9 @@ metadata:
 | `keyword_info` `ads_metrics` | 1단 — 동의어 마스터 전량의 볼륨 확인(국가별 표현이 실제로 쓰이는지 검증) | `1 × N` |
 | `keyword_info` `all` | 2단 — 게이트 통과분만 `monthly_volume`·`demography` 확보 | `10 × P` |
 
-`N` = 모든 국가의 요청 키워드 수 합(동의어 + 기준어), `P` = 1단 게이트를 통과한 요청 원문 수 합(기준어는 항상 포함, `P ≤ N`).
+`N` = 모든 국가의 **요청 원문** 수 합(동의어 + 기준어 — 마스터에 적은 글자 그대로). 같은 canonical의 표기변형
+(«선크림»·«썬크림»)을 둘 다 적으면 둘 다 요청·과금되므로 canonical 수보다 크다(2026-09-30 선크림: canonical 17 · N 19).
+`select`가 두 수를 함께 출력한다. `P` = 1단 게이트를 통과한 canonical 그룹마다 요청 원문 1개의 합(기준어는 항상 포함, `P ≤ N`).
 
 ```
 총 크레딧 = 1 × N + 10 × P
@@ -120,6 +122,16 @@ kr 6 + us 5 + jp 7 = **N 18**이므로 1단은 18크레딧, 2단은 `10 × P`(P�
 STEP 4가 둘을 «같은 검색일 수도 있는» 표기변형으로 취급해 하한에서 하나를 버린다. 치환은 띄어쓰기·전각/반각·단복수처럼 **같은 검색어의 변형**에만 쓴다
 (띄어쓰기와 전각·반각 가나는 스크립트가 NFKC 정규화로 이미 처리한다).
 
+**외래어 표기 차이(썬크림/선크림 · 썬블록/선블록 · 케익/케이크)는 치환한다 — 단 두 표기를 모두 `anchor`·`terms`에 적는다.**
+외래어 표기법에 맞춘 표기(선크림)와 관용 표기(썬크림)는 같은 말의 표기 흔들림이라 치환 대상이다(같은 canonical → 한 그룹 → 하한·상한).
+그러나 두 표기는 검색 엔진에서 **따로 집계되는 서로 다른 검색**일 수 있고(2026-09-30 kr: 썬크림 583,810 · 선크림 557,310 —
+네이버 볼륨이 다르다), **추세가 반대로 갈릴 수 있다**(같은 실측: 썬크림 전년 동기 +17.5% · 선크림 −10.9%). 그래서
+① 치환으로 한 그룹에 묶고(번역어처럼 별개 그룹으로 **더하면** 같은 검색의 중복일 때 이중 계상된다)
+② 두 표기를 모두 요청해 하한(큰 쪽)·상한(합)을 함께 보고
+③ `compare`의 `variant_yoy_split` 경고가 나면 성장 방향을 단정하지 않고 표기별 값을 함께 적는다.
+한 표기만 요청하면 응답이 다른 표기를 자동으로 돌려주지 않는 한 상한이 사라진다. 어느 쪽이 «같은 검색»인지는 응답이 알려주지 않는다 `[추정]`.
+치환 규칙의 **앞쪽**(`"썬크림": "선크림"`)은 흔들리는 표기, **뒤쪽**은 기준 표기다 — 치환은 canonical만 바꾸고 요청 원문은 바꾸지 않는다.
+
 **약어·동의어도 `변형치환`이 아니다.** `fridge`↔`refrigerator`, `노캔`↔`노이즈캔슬링`처럼 줄임말·다른 단어는
 표기 흔들림이 아니라 다른 검색어다 — 각각 `terms`에 따로 적는다. 치환에 넣으면 단어 경계를 넘어 다른 키워드까지
 바뀌고(`kimchi fridge` 외의 `fridge` 포함 키워드), 하한에서 한쪽이 버려진다. 구글이 두 표현을 같은 검색으로
@@ -151,6 +163,11 @@ python3 scripts/cross_country.py select --concepts concepts.json \
 - 제외어(`exclude`)에 걸린 반환 행과 마스터에 없는 자동 반환 행은 2단에 넣지 않는다.
 - **2단 목록에는 마스터의 요청 원문만 들어간다.** 자동 반환된 표기변형(무선 청소기 등)을 함께 넣으면
   같은 수요에 10크레딧을 두 번 낸다 — `select`가 canonical 그룹으로 중복을 제거한다(T5).
+  같은 canonical에 원문이 여럿이면 **1단 응답에 실제로 있는 원문 중 마스터에 먼저 적은 것**을 쓴다(기준어·개념 같은 규칙).
+  응답에 없는 표기를 2단에 보내면 그 그룹의 시계열이 비거나 다른 표기로 바뀌어 온다(2026-09-30 선크림 jp: 요청 «日やけ止め» → 응답 日焼け止め).
+- **요청한 표기가 응답에 없고 같은 그룹의 다른 표기만 돌아오면** `screen_report.csv`에 «요청 표기 미반환(같은 그룹의
+  다른 표기만 반환)»으로 남고 출력에 경고가 난다 `[데이터 공백]` — 그 표기의 볼륨은 0이 아니라 미확인이며
+  하한·상한에 들어가지 않는다(2026-09-30 jp: «日やけ止め» 요청 → 응답은 日焼け止め·日開け止め).
 - 요청했는데 응답에 없거나 게이트에 걸린 동의어는 `screen_report.csv`에 사유와 함께 남는다.
   이것이 «그 나라에 이 표현이 거의 없다»는 근거이며 **[데이터 공백]**으로 보고한다. 통과한 그룹의 표기변형
   (같은 canonical — 예: 加湿機가 加湿器로 치환될 때)은 표현 부재 후보로 세지 않는다.
@@ -235,6 +252,9 @@ python3 scripts/trend_yoy.py all_us.json -o trend_us.csv
 
 - 개념 `yoy_3m`이 튀면 구성 키워드의 `yoy`·`yoy_ex_last_month`를 보고 한 키워드가 끌고 가는지 확인한다
   (`trend_yoy.py`는 국가별 자기 기준월 기준이라 공통 창과 한 달 어긋날 수 있다 — 방향만 대조한다)
+- **표기변형 추세 갈림**: `variant_yoy_split`이 비어 있지 않으면 같은 canonical 그룹 안에서 표기별 전년 동기 부호가 갈린 것이다
+  (예: `썬크림 +17.5% / 선크림 -10.9%`). `yoy_3m`은 12개월 합이 큰 대표 행 하나의 값이라 **부호가 대표 선택에 달려 있다** —
+  `bucket_warning`에 «표기변형 간 추세 부호 갈림»이 붙고 `yoy_label`은 `[추정]`이다. 성장 방향을 단정하지 말고 표기별 값을 함께 적는다.
 - **읽는 법**: `index_reading`이 «비중(≤1)»이면, `index_vs_anchor_lo`(와 `_hi`)가 kr보다 us에서 클 때 «미국에서 이 개념이
   청소기 검색 안에서 차지하는 비중이 더 크다»까지만 말한다. **«배율(지수>1)»이면 기준어가 개념을 포괄하지 않는다**
   (평가 사례: kr 무선청소기/청소기 1.216 · kr 가습기/가전제품 3.519) — 비중이 아니라 «기준어 대비 N배»로만 적고,
@@ -259,7 +279,7 @@ cross_country_{category}.csv   (compare · 개념 × 국가 1행, 기준어 행 
   volume_12m_lo, volume_12m_hi, anchor_volume_12m_lo, anchor_volume_12m_hi,
   index_vs_anchor_lo, index_vs_anchor_hi, index_reading,
   index_rank_lo, index_rank_hi, index_rank_flip,
-  yoy_3m, yoy_basis, yoy_status, yoy_label, bucket_warning,
+  yoy_3m, yoy_basis, yoy_status, yoy_label, bucket_warning, variant_yoy_split,
   window_share_12m, offseason_flag,
   prev_year_window_volume, missing_in_window, missing_in_12m, peak_month, peak_share,
   base_country, season_corr_vs_base, cpc_index, competition_index_avg,

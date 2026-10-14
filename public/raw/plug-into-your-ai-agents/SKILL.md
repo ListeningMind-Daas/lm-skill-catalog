@@ -23,7 +23,7 @@ description: |
   만들지, 분석 결론을 내지 않는다.
 license: MIT
 metadata:
-  version: "0.3.1"
+  version: "0.4.1"
 ---
 
 <!-- lm-skill: kind=task; connectors=keyword_info,intent_finder,cluster_finder,path_finder,serp,trend_finder; flags=monthly,expand; traps=T1,T2,T3,T4,T5,T6,T7 -->
@@ -95,7 +95,7 @@ metadata:
 | 엔드포인트 → 도구 | 용도 | 크레딧 결정식 | 단가 근거 |
 |---|---|---|---|
 | `keyword_info` → `lm_keyword_info` | 볼륨·광고지표(`ads_metrics`) / 시계열·의도(`all`) | `ads_metrics` **1 × 키워드** · `all` **10 × 키워드** | 명세 = 실측 |
-| `intent_finder/keyword_list` → `lm_intent_finder` | 연관 검색어 확장 (문자열만) | **30 × 입력 + 2 × 반환 키워드** | 명세 = 실측 |
+| `intent_finder/keyword_list` → `lm_intent_finder` | 연관 검색어 확장 (문자열만) | **30 × 입력 + 2 × 반환 키워드** | 명세 = 실측 (2026-09-30 호출 33건 전부 일치) |
 | `cluster_finder` → `lm_cluster_finder` | 군집·관계 | **150 + 50 × 고유 키워드(노드)** | 명세 = 실측 |
 | `cluster_finder/keyword_list` → `lm_cluster_keyword_list` | 같은 그래프의 키워드 목록만 | **30 + 2 × 반환 키워드** | 명세값 · **실측 대조 전** `[가정]` |
 | `path_finder` → `lm_path_finder` | 세션 인접 경로 | **50 + 40 × 경로 안 고유 키워드** | 명세 = 실측 |
@@ -161,7 +161,7 @@ cluster 500 · path 300 · trend 1,000이라 비워 보내면 추정을 넘는�
 | `scripts/selftest_tools.py` | `lm_tools.py` 계약 검증 — 문서 예시 명령·명세 추적(자동 추가·단가 변경·삭제)을 그대로 실행 | 스킬 수정 후 |
 | `scripts/series_dedup.py` | 같은 검색의 중복 판정·치환 규칙 (공유 사본 — `lm_tools.py`가 가져다 쓴다) | STEP 3 |
 | `assets/dryrun/scenario.sunscreen-kr.json` | dry-run 시나리오 13단계 (기대 결과 포함 · 도구 9종 전부) | STEP 4 |
-| `assets/dryrun/fixtures/*.json` | 도구별 모의 응답 — cluster·path는 실측 응답 원문, keyword_info·intent는 합성(429·마지막 달 급락·결측 월·저기저·절단), serp는 실측 구조에 합성 문장, keyword_list 2종은 같은 요청의 실측 응답에서 옮긴 합성, trend는 spot-trends 합성 픽스처, usage는 명세 모양의 합성 | STEP 4 |
+| `assets/dryrun/fixtures/*.json` | 도구별 모의 응답 — cluster·path는 실측 응답 원문, keyword_info·intent는 합성(429·마지막 달 급락·결측 월·저기저·절단 · keyword_info는 `echo_keywords`로 요청 키워드 이름을 따른다), serp는 실측 구조에 합성 문장, keyword_list 2종은 같은 요청의 실측 응답에서 옮긴 합성, trend는 spot-trends 합성 픽스처, usage는 명세 모양의 합성 | STEP 4 |
 | `assets/dryrun/real-shapes/*.json` | 실측 응답 원문 4건(cluster 기본·`all` 두 모양 · path · keyword_info 변형 동반) — 응답 파싱 회귀용 | 스킬 수정 후 |
 | `references/agent-wiring.md` | 에이전트 루프에 디스패처 끼우는 법 · 사용자 시나리오 픽스처 쓰는 법 · 명세 갱신 절차 | STEP 0·3·4 |
 
@@ -171,8 +171,11 @@ cluster 500 · path 300 · trend 1,000이라 비워 보내면 추정을 넘는�
 1. 에이전트 프레임워크 — Claude tool use / OpenAI function calling / 파이썬 함수를 받는 프레임워크
 2. 쓸 도구 — 검토된 9종 전부가 기본이지만 줄이는 것이 좋다. path_finder는 여정이 판단에 필요할 때만,
    구조가 필요 없으면 keyword_list 도구로. 검토 전(자동 추가) 도구는 사람이 응답을 본 뒤에만 연다
-3. 시장(gl) — 세션당 단일 값으로 확정 (명세상 kr · us · jp)
+3. 시장(gl) — 세션당 단일 값으로 확정 (명세상 kr · us · jp). 런타임에 `market`으로 잠근다
+   (`Runtime(market="kr")` · `--market kr` — 값을 모르면 `auto`: 처음 보낸 호출의 gl로 잠근다)
 4. 세션 예산(크레딧) — 숫자 하나. 없으면 묻는다. 모르면 dry-run 합계를 보고 정한다
+   + 호출 1건 상한(`per_call_cap` · `--per-call-cap`) — 기본은 꺼짐. **권장 1,000** `[가정]`: 기본 limit의
+   cluster(추정 5,200)·path(추정 2,450) 한 번이 세션 예산 대부분을 쓰지 않게 막는다
 5. 기저 게이트(--base-gate, 기본 3,000) · 경로 키워드 배수(--path-kw-mult, 기본 3) · cluster 노드 상한
    (--cluster-bound, 기본 observed) — 모두 [가정]
 6. 표기 치환 규칙(--rules) — 시장에 철자 변형이 있으면(예: 한국어 선/썬) 받는다. 없으면 공백 규칙만 쓴다
@@ -191,12 +194,17 @@ API 주소는 코드에 넣지 않는다. 저장소 README가 링크한 공개 A
 python3 scripts/lm_tools.py sync                       # $LM_API_BASE/openapi.json과 잠금 파일 대조
 python3 scripts/lm_tools.py sync --write               # 반영 — 새 엔드포인트는 도구로 자동 추가
 python3 scripts/lm_tools.py list                       # 도구 · 메서드 · 경로 · 검토 상태 · 단가
+python3 scripts/lm_tools.py sync --check-lock          # 네트워크 없이 잠금 파일만 점검 (0 정상 · 1 문제)
 ```
 
 `sync`는 명세 문서만 읽는다(데이터 엔드포인트를 부르지 않는다 — 크레딧 0 · 키 불필요). `--spec`으로 파일이나
 다른 주소를 줄 수 있다. 종료 코드: **0 같음 · 2 모양 변경**(엔드포인트 추가·삭제, 인자·기본값·열거값 변경) ·
 **3 단가 변경**. `--write`는 잠금 파일을 고치고 0을 낸다. 보고의 기호: `＋` 추가(자동 추가된 도구 이름과
 검토 상태) · `－` 삭제 · `＄` 단가 · `～` 인자 · `！` 판단 파일에만 있는 경로.
+
+운영 명세에 닿을 수 없을 때(오프라인 · 주소 없음)는 `sync --check-lock`으로 잠금 파일 자체만 본다 — 엔드포인트
+모양 · 필수 인자가 인자 목록에 있는지 · integer 경계가 정수인지 · 단가 숫자 · 판단 파일과의 짝. 운영 명세와
+같은지는 알 수 없으니 실연결 전에는 네트워크 `sync`를 한 번 돌린다.
 
 단가가 바뀌면(3) 도구 설명·호출 전 추정·결정식이 새 단가를 쓴다. 번들 픽스처의 `cost_detail`은 옛 단가라
 dry-run이 `formula_match` 불일치로 멈춘다 — 픽스처를 새 단가로 다시 만들고, 실연결이면 작은 호출 1회로
@@ -235,9 +243,10 @@ SERP는 스냅샷(수집 시각 병기), 트렌드 이슈는 검색량이 아님
 `references/agent-wiring.md`). 디스패처가 하는 일:
 
 1. **예산 가드** — 켜지 않은 도구면 `tool_not_enabled`, 스키마 밖 인자·열거값 밖 값이면 `invalid_args`,
-   추정할 수 없으면(검토 전 도구에 limit이 없음) `no_estimate`, 호출 전 추정이 남은 예산을 넘으면
-   `budget_guard`, 2단 조회 위반이면 `two_stage`로 막고, 에이전트에게 `remaining`을 돌려준다. 막힌
-   호출도 원장에 남는다. 생략된 `limit`·`data_type` 등은 **스키마 기본값으로 채워 보낸다** — 비우고
+   시장을 잠갔는데 다른 `gl`이면 `market_lock`, 추정할 수 없으면(검토 전 도구에 limit이 없음) `no_estimate`,
+   호출 전 추정이 호출 1건 상한을 넘으면 `per_call_cap`(켰을 때만 · `max_limit` = 상한 안에 드는 가장 큰 limit을
+   함께 준다), 남은 예산을 넘으면 `budget_guard`, 2단 조회 위반이면 `two_stage`로 막고, 에이전트에게
+   `remaining`을 돌려준다. 1회 상한과 예산 가드는 **같은 사전 추정**을 쓴다. 막힌 호출도 원장에 남는다. 생략된 `limit`·`data_type` 등은 **스키마 기본값으로 채워 보낸다** — 비우고
    보내면 API 기본값(cluster 500 · trend 1,000 등)이 적용돼 추정을 넘는다. 2단 허용 집합에는 스크리닝 요청 키워드와
    **그 응답에 함께 온 변형 행**이 들어간다(치환 규칙을 적용한 canonical 기준)
 2. **재시도** — 429는 1→2→4초… 최대 60초 간격으로 최대 5회, 5xx는 3회. 그 밖의 오류는
@@ -275,7 +284,9 @@ SERP는 스냅샷(수집 시각 병기), 트렌드 이슈는 검색량이 아님
    - `lm_serp`: `lm_meta.collected_at`(수집 시각) · `blocks` · `block_types` · `snapshot_note`(실시간 아님).
      수집 시각이 없으면 `[데이터 공백]`
    - `lm_trend_finder`: `matched_total`(`total`) · `period_days`. 반환 수가 limit에 닿거나 `total` > 반환 수면
-     절단. 빈 결과는 `empty_note`(«그 기간 매칭 없음» 실측 — 기간을 넓혀 재조회)이고 결정식은 0이다
+     절단이고, 원인을 `truncation_cause`(`limit` · `total` · `both`)와 `convergence` 문구로 가른다 — 반환이
+     limit 미만인데 매칭이 더 많으면 «limit에 닿음»이 아니라 «매칭 9건 중 7건만 반환 (limit 20 미만 …)»이다
+     (limit을 올려도 나머지가 온다는 보장이 없다). 빈 결과는 `empty_note`(«그 기간 매칭 없음» 실측 — 기간을 넓혀 재조회)이고 결정식은 0이다
      (빈 결과 무과금 — 실측 1건 · 환경마다 확인). `evidence_note` — 이슈는 검색량이 아니고 `summary`는 `[추정]`
    - `lm_usage_summary`: `scope_note` — 계정 전체 집계라 세션 소진이 아니고 `total_credits`는 잔여가 아니다
    - 검토 전 도구: `lm_meta.review`(해석 규칙 없음) · `returned` · `truncated`(limit 비교만)
@@ -298,6 +309,10 @@ python3 scripts/lm_tools.py dry-run --scenario my-scenario.json --fixtures my-fi
     --tools-json tools.claude.json --rules '{"썬": "선"}'
 ```
 
+1회 상한·시장 고정은 `--per-call-cap 1000 --market kr`로 주거나 시나리오 JSON의 `"config":
+{"per_call_cap": 1000, "market": "kr"}`에 적는다(CLI가 우선). 번들 시나리오는 두 가드를 끈 채 돈다 —
+켜면 13단계의 cluster(limit 20 · 추정 1,200)가 `budget_guard` 대신 `per_call_cap`으로 막힌다.
+
 모의 전송만 쓴다(네트워크 없음 · 크레딧 0). 시나리오의 각 단계가 기대 결과(`expect` ·
 `expect_reason`)대로 나오고, 원장 행 수 = 호출 수, 결정식 불일치 0, 예산 초과 시 정지까지
 확인되면 `dry-run 통과`를 출력한다. 번들 시나리오가 밟는 것: `two_stage` 차단 → 스크리닝 →
@@ -309,7 +324,10 @@ usage → 열거값 밖 serp `num`(`invalid_args`) → `budget_guard` 차단.
 시나리오·픽스처 쓰는 법은 `references/agent-wiring.md` «사용자 시나리오 픽스처». 요점: 픽스처 항목에
 `match`(요청 인자 부분집합)를 달면 호출 순서와 무관하게 골라지고, 응답에 `request_detail`을 넣으면
 결정식 대조가 그 요청 기준으로 된다 — 번들 픽스처를 다른 순서·키워드 수로 불러도 `formula_match`가
-깨지지 않는다. 가장 좋은 픽스처는 **저장해 둔 실측 응답 원문**이다.
+깨지지 않는다. 번들 keyword_info 합성 픽스처는 `echo_keywords`가 켜져 있어 **요청한 키워드 이름으로 행을
+돌려준다**(없는 이름은 남는 합성 행의 이름을 바꿔 채우고 `_mock_renamed_from`에 원래 이름을 적는다 · 비용도
+요청 수로 맞춘다). 수치는 합성값 그대로이고, 남는 행이 모자라면 `not_returned`로 비운다. 가장 좋은 픽스처는
+**저장해 둔 실측 응답 원문**이다.
 
 ### STEP 4.5 · 데이터 기준월 확인 ⚠️ 생략 금지
 
@@ -344,7 +362,8 @@ dry-run이 통과한 뒤에만 한다.
 
 ```python
 from lm_tools import make_runtime_from_env     # LM_API_BASE · LM_API_KEY 환경변수 필요
-rt = make_runtime_from_env(budget=1500, ledger_path="ledger.jsonl", raw_dir="raw")
+rt = make_runtime_from_env(budget=1500, ledger_path="ledger.jsonl", raw_dir="raw",
+                           per_call_cap=1000, market="kr")   # 1회 상한 권장값 [가정] · 세션 시장 고정
 ```
 
 그 전에 `sync`로 잠금 파일이 운영 명세와 같은지 본다(종료 코드 0). 첫 실호출은 `lm_keyword_info`
@@ -390,7 +409,7 @@ usage_{period}.md
 `variant_rules` · `not_returned` · `unrequested` · `base_gate` · `labels`(키워드 도구) /
 `requested_limit` · `returned` · `truncated`(true·false·null) · `convergence` · `unit` +
 `variant_groups` · `variant_groups_note`(intent) · `rel_rows` · `truncation_rule`(cluster) ·
-`unique_keywords`(path) · `matched_total` · `period_days` · `empty_note` · `evidence_note`(trend)(확장 도구) /
+`unique_keywords`(path) · `matched_total` · `truncation_cause` · `period_days` · `empty_note` · `evidence_note`(trend)(확장 도구) /
 `collected_at` · `blocks` · `block_types` · `snapshot_note`(serp) / `scope_note`(usage) / `review`(검토 전) /
 `call_cost` · `spent` · `remaining` · `tool_review`(공통).
 
@@ -420,13 +439,15 @@ variant_groups.<canonical>
 ## 한계
 
 - **단가는 명세값이다.** 명세의 `*Cost` 기본값을 결정식에 쓴다 — keyword_info·intent·cluster·path·serp·trend는
-  실측(2026-09-28~29 · 한 환경)과 일치를 확인했고, keyword_list 2종은 실측 대조 전이다. 명세에 적히지 않은 과금 규칙(trend 빈 결과 0)은
+  실측(2026-09-28~29 · 한 환경 · intent는 2026-09-30 호출 33건 추가)과 일치를 확인했고, keyword_list 2종은 실측 대조 전이다. 명세에 적히지 않은 과금 규칙(trend 빈 결과 0)은
   판단 파일에 실측 근거(1건 · 환경마다 확인)와 함께 적었다. 명세와 실제 과금이 다르면 원장 `formula_match=false`로만 드러난다
 - **자동 추가된 도구는 응답 해석이 없다.** 절단·중복·기준월 같은 함정 처리는 사람이 응답을 보고 판단 파일에
   규칙을 넣은 뒤에야 붙는다. 그 전에는 기본으로 꺼져 있고, 켜도 수치를 판정에 쓰지 않게 한다
 - `sync`는 명세 문서를 비교할 뿐이다. 응답 모양이 명세 없이 바뀌면 잡지 못한다 — 실측 응답 모양 회귀
   (`real-shapes/`)와 원장 `formula_match`가 그 몫이다
-- **dry-run은 연결을 검증하지 응답을 검증하지 않는다.** keyword_info·intent 모의 응답은 합성이고,
+- **dry-run은 연결을 검증하지 응답을 검증하지 않는다.** keyword_info·intent 모의 응답은 합성이고
+  (keyword_info는 요청 키워드 이름에 맞춰 주지만 수치는 다른 키워드의 합성값을 빌린 것이다 — 실측 응답의
+  «함께 온 변형 행»도 흉내 내지 않는다),
   cluster·path는 실측 응답 원문이지만 한 시드·한 시점이다 — 사용자 환경의 응답 모양은 첫 실호출 원장의
   `formula_match`로 확인한다
 - 예산 가드는 **호출 전 추정**으로 막는다. cluster·path 상한은 관측에 기댄 `[가정]`이라 실제가 넘을
@@ -436,6 +457,8 @@ variant_groups.<canonical>
   행이 limit보다 조금 적게 온 응답(limit 500에 475~499행)도 관측됐다 — 행 수가 limit 미만이라는 것만으로
   «그래프 전체»라고 단정하지 않는다 `[가정]`
 - T5 철자 변형(선/썬 등)은 치환 규칙이 있어야 묶인다 — 규칙 사전은 시장마다 사람이 준다
+- 1회 상한·시장 고정은 **런타임 인자**다(기본 꺼짐) — 켜지 않으면 기본 limit의 cluster 한 번이 추정 5,200을
+  예산에서 한꺼번에 가져갈 수 있다. 시장 고정은 `gl` 인자를 가진 도구만 본다(`lm_usage_summary`는 계정 집계라 제외)
 - 이 런타임은 세션 단위다. 여러 에이전트·프로세스가 같은 예산을 공유하면 원장을 합쳐야 한다
 - rate limit 수치·플랜 조건은 계약마다 다르다 — 이 스킬은 429를 받으면 물러설 뿐 한도를 모른다
 - 월 그레인 · 기준월은 응답에서 읽는다(관측 1개월 지연). 에이전트가 주간 조기경보를 약속하게 두지 않는다

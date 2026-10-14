@@ -17,7 +17,7 @@ description: |
   판매량 예측도, PMF 점수도 내지 않는다.
 license: MIT
 metadata:
-  version: "1.2.1"
+  version: "1.3.2"
 ---
 
 <!-- lm-skill: kind=task; connectors=keyword_info,intent_finder; flags=monthly,expand,share; traps=T1,T2,T3,T4,T5,T6,T7,T8 -->
@@ -51,7 +51,7 @@ metadata:
 |---|---|---|
 | `keyword_info` `ads_metrics` | 가설 키워드 존재 확인(1단) · 확장 유니버스 볼륨 | `1 × 키워드` |
 | `keyword_info` `all` | 게이트 통과분의 `monthly_volume` (전년 대비 계산) | `10 × 키워드` |
-| `intent_finder` | 살아 있는 가설 키워드 1개당 1회 확장 | 호출당 `30 + 2 × 반환` |
+| `intent_finder` (엔드포인트 `intent_finder/keyword_list`) | 살아 있는 가설 키워드 1개당 1회 확장 — `sort="volume_avg"`, `order="desc"` | 호출당 `30 + 2 × 반환` |
 
 인구통계(`demography`)는 쓰지 않는다 — gl=kr 외에는 반환되지 않고, 가설 검증의 판정에 필요하지도 않다.
 `cluster_finder`·`path_finder`도 쓰지 않는다. 여정·군집이 필요하면 다른 스킬로 넘긴다.
@@ -61,6 +61,7 @@ metadata:
 ```
 총액 = H × 1  +  (30 × S + 2 × R)  +  N × 1  +  M × 10
        1단 존재 확인   확장(시드당 1회)      유니버스 볼륨   2단 시계열
+       STEP 2         STEP 3               STEP 3 끝      STEP 5
 R ≤ S × limit ,  N ≤ R
 ```
 
@@ -82,7 +83,7 @@ R ≤ S × limit ,  N ≤ R
 | `scripts/trend_yoy.py` | 키워드별 전년 동기 비교 · 결측 월 · 마지막 달 의심 (공유 사본) | STEP 5.5 |
 | `scripts/build_universe.py` | 1단 지표 + 층 배정 + canonical 그룹키 + 브랜드 (공유 사본) | STEP 5.5 |
 | `scripts/coverage_curve.py` | 확장 호출별 신규 기여·절단 판정 (공유 사본) | STEP 3 |
-| `scripts/prepare_stages.py` | **죽은 시드 판정(`seeds`) · 확장 반환 검토 시트(`review`) · 2단 대상 선정(`stage2`)** (이 스킬 고유, 0크레딧) | STEP 2 · 3.5 · 5 |
+| `scripts/prepare_stages.py` | **죽은 시드 판정(`seeds`) · 유니버스 요청 목록(`universe`) · 1단 지표 병합(`merge`) · 확장 반환 검토 시트(`review`) · 2단 대상 선정(`stage2`)** (이 스킬 고유, 0크레딧) | STEP 2 · 3 · 3.5 · 5 |
 | `scripts/idea_signals.py` | **층별 수요 신호 집계 + 카드 작성** (이 스킬 고유) | STEP 6 |
 | `scripts/selftest.py` | 공유 스크립트 계약 검증 (공유 사본) | 스킬 수정 후 |
 | `scripts/selftest_ideas.py` | 위 selftest + 이 문서의 STEP 3~6 예시 명령 전체 검증 | 스킬 수정 후 |
@@ -147,11 +148,35 @@ python3 scripts/prepare_stages.py seeds --seeds seeds_by_layer.json \
 살아 있는 시드마다 **1회씩** 호출한다(호출별로 절단을 판정하기 위해서다).
 
 ```python
-intent_finder(keywords=[seed], gl="kr", volume_threshold=50, limit=50)
+# 엔드포인트 intent_finder/keyword_list (MCP 도구 이름은 환경마다 다를 수 있다 — 예: query_finder)
+intent_finder(keywords=[seed], gl="kr", volume_threshold=50, limit=50, sort="volume_avg", order="desc")
 # 호출당 크레딧 = 30 + 2 × len(반환)  → 응답을 if_<시드>.json 으로 저장
 ```
 
-- 반환은 **키워드 문자열뿐**이다. 볼륨은 STEP 5에서 붙인다 — 붙이지 않으면 층 집계가 안 나온다.
+- `sort="volume_avg"`·`order="desc"`를 **명시한다** — limit으로 자를 때 볼륨 큰 쪽이 남아야 절단 판정(«limit에 붙으면 하한»)이
+  성립한다. 정렬을 빼면 서버 기본 정렬에 따라 어떤 키워드가 잘리는지 달라진다.
+- 반환은 **키워드 문자열뿐**이다. 볼륨은 바로 아래 «유니버스 볼륨»에서 붙인다 — 붙이지 않으면 층 집계도 절단 판정도 안 나온다.
+
+**유니버스 볼륨 (`keyword_info` · `ads_metrics`, 1 × N) — 확장 직후, 절단 판정·검토 전에 한다.**
+`coverage_curve.py`(아래)·STEP 3.5 `review`·STEP 5 `build_universe.py`가 모두 `metrics_stage1.json`을 읽는다.
+`metrics_stage1.json` = **1단 시드 응답(`stage1_seeds.json`) + 유니버스 응답(`stage1_universe.json`)을 합친 것**이다.
+
+```bash
+python3 scripts/prepare_stages.py universe --seed-metrics stage1_seeds.json --layers layers.json \
+    --expansion if_저당아이스크림.json --expansion if_다이어트아이스크림.json -o universe_request.json
+```
+
+```python
+keyword_info(keywords=universe_request, gl="kr", data_type="ads_metrics")   # 1 × N → stage1_universe.json
+```
+
+```bash
+python3 scripts/prepare_stages.py merge stage1_seeds.json stage1_universe.json -o metrics_stage1.json
+```
+
+`universe`는 확장 반환 중 시드 응답에 이미 있는 키워드(canonical 대조)를 빼서 같은 키워드에 1크레딧을 두 번 내지 않는다.
+층 사전(`layers.json`)은 이 시점에 `rules.변형치환`만 있어도 된다 — 층·브랜드는 STEP 4에서 채운다.
+
 - 호출마다 `요청 limit`과 `반환 수`를 기록한다. 절단 판정은 아래 명령이 한다:
 
 ```bash
@@ -161,6 +186,9 @@ python3 scripts/coverage_curve.py --metrics metrics_stage1.json \
     --round "R1-b=if_다이어트아이스크림.json@50"
 ```
 
+- 라벨의 첫 `-` 앞이 같은 연속 라운드(`R1-a`·`R1-b`)는 **한 판정 라운드로 묶여** 판정된다 — 묶음 기여율은
+  호출 순서와 무관하다. 라벨을 시드마다 다르게(`무기자차`·`톤업`) 주면 마지막 호출 한 건으로 판정되어
+  순서에 따라 «도달»과 «한 라운드 더»가 갈린다(2026-09-30 선크림 실측). 스크립트는 시드 출처로 이를 감지하면 «보류»를 낸다.
 - 반환 수가 limit에 **붙은 호출**은 수렴이 아니라 잘린 것이다. 이때 해당 층 볼륨은 **하한**이며,
   «이 층의 수요는 이만큼»이라고 쓰지 않는다. limit을 올려 재확장할지 예산과 함께 사용자에게 묻는다.
 - 확장은 기본 1라운드다. 목표·문제 층의 논브랜드 기여가 임계 위로 남으면 그 층만 한 라운드 더 돈다.
@@ -199,15 +227,21 @@ python3 scripts/prepare_stages.py review --layers layers.json \
 - **표기변형(T5)**: `rules.변형치환`에 같은 수요가 두 표기로 갈리는 쌍을 넣는다(예: `슈가→슈거`).
   API가 요청하지 않은 변형을 함께 돌려주므로, 치환이 없으면 `제로슈가`·`제로슈거`가 서로 다른 그룹으로
   갈려 층 볼륨에 조용히 합산된다. 한 그룹으로 묶여야 STEP 6에서 하한·상한이 드러난다.
-- **브랜드 사전(T8)**: `brands`는 비워서 시작하고, STEP 5 1단 결과의 **상위 볼륨 키워드에서 뽑아**
+- **부정형 표현(«~없는»·«~프리»·«무~»)의 층** — «백탁 없는 선크림»·«눈시림 없는 선스틱»은 문제 단어(백탁·눈시림)를 담고 있지만
+  검색 의도는 **문제를 피한 해결책을 찾는 것**이다. 문제 층 패턴이 먼저 걸리면 해결책 검색이 문제 층 볼륨으로 들어간다.
+  ① 부정형 패턴(`백탁없는|눈시림없는|무향|프리`)을 해결책(또는 제품 탐색) 층에 **문제 층보다 먼저** 선언하거나
+  ② 문제 층 패턴에 부정 후방탐색(`백탁(?!없)`)을 건다. 어느 쪽인지 층 사전 `_설명`에 적는다 `[가정]`.
+  «무기자차»처럼 «무»로 시작하는 범주명은 부정형이 아니라 해결책 이름이다(층 판단은 표현 단위로 한다).
+- **브랜드 사전(T8)**: `brands`는 비워서 시작하고, STEP 3 끝 유니버스 볼륨(`metrics_stage1.json`)의 **상위 볼륨 키워드에서 뽑아**
   채운다. 비어 있으면 모든 키워드가 논브랜드로 잡혀 «브랜드에 안 잠긴 여지»가 부풀려진다
   — `idea_signals.py`가 경고를 낸다.
 
 ### STEP 5 · 유니버스 볼륨 + 2단 선정
 
+유니버스 볼륨(`metrics_stage1.json`)은 STEP 3 끝에서 이미 받았다. 여기서는 2단 대상을 고르고 `all`을 조회한다.
+
 ```python
-keyword_info(keywords=universe, gl="kr", data_type="ads_metrics")   # 1 × N  → metrics_stage1.json
-keyword_info(keywords=stage2,   gl="kr", data_type="all")           # 10 × M → metrics_stage2.json
+keyword_info(keywords=stage2, gl="kr", data_type="all")           # 10 × M → metrics_stage2.json
 ```
 
 **2단 대상(stage2) 선정 규칙** — 기저 게이트(T4)의 1차 적용이다. 스크립트가 한다:

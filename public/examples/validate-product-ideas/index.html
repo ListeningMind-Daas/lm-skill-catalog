@@ -34,7 +34,7 @@ table.u td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-nume
 <div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-tab="r0">검증 리포트</button><button role="tab" aria-selected="false" data-tab="t0">층별 신호 (4)</button><button role="tab" aria-selected="false" data-tab="t1">키워드 (49)</button></div>
 <section class="panel md" id="p-r0"><h1>수요 신호 카드 — «민감 피부용 무기자차 톤업 선스틱»</h1>
 <blockquote>
-<p>질의: «&quot;무기자차 톤업 선스틱&quot; 수요 있을까?» · 시장 gl=kr · 스킬 validate-product-ideas v1.2.1</p>
+<p>질의: «&quot;무기자차 톤업 선스틱&quot; 수요 있을까?» · 시장 gl=kr · 스킬 validate-product-ideas v1.2.1(수집) · 공유 스크립트 1.6.2로 0크레딧 재조립(2026-09-30)</p>
 </blockquote>
 <ul>
 <li><strong>데이터 기준월 2026-08 / 조회일 2026-09-30 / 지연 약 1개월</strong> — 기준월은 응답 <code>monthly_volume</code>의 최신 월에서 읽었다</li>
@@ -379,13 +379,13 @@ table.u td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-nume
 <ul>
 <li>조합어 직접 조회: «무기자차 톤업 선스틱»·«민감성 선스틱»·«순한 선스틱»을 1단(<code>ads_metrics</code>, 키워드당 1크레딧)으로 확인</li>
 <li>«눈시림 없는 선크림»을 목표 층으로 옮길지(층 사전 규칙 변경) — 바꾸면 처음부터 다시 돈다(STEP 0 규칙)</li>
-<li>확장하지 않은 살아 있는 시드 5개(선크림 트러블·선크림 백탁·저자극 선크림·무기자차 톤업 선크림·무기자차 선스틱 추천)의 확장 — 시드당 최대 130크레딧(limit 50)</li>
+<li><strong>확장 한 라운드 더</strong> — 커버리지 판정이 «한 라운드 더»(R1 기여율 37.4%)다. 층별 볼륨·논브랜드 비중은 아직 수렴 전 값으로 읽는다. 확장하지 않은 살아 있는 시드 5개(선크림 트러블·선크림 백탁·저자극 선크림·무기자차 톤업 선크림·무기자차 선스틱 추천)부터 확장 — 시드당 최대 130크레딧(limit 50)</li>
 <li>검색 밖 확인(리뷰·인터뷰)으로 «민감 피부 + 스틱 제형» 수요를 따로 본다 — 잠재 수요는 검색에 안 보인다</li>
 </ul>
 <h2>데이터 처리 기록</h2>
 <ul>
 <li>1단 존재 확인: 시드 12개 요청 → 살아 있음 11 · 죽음 1 (톤업 선스틱 추천 — 미반환) <code>[데이터 공백]</code></li>
-<li>확장 6회 반환 13·3·6·5·18·2 — limit 50에 붙은 호출 0건(T7). <code>coverage_curve.py</code> 판정: 마지막 라운드 기여율 0.0% &lt; 임계 20% → 커버리지 도달 — 시드별 호출을 순서대로 이은 라운드라 «마지막 라운드»가 호출 순서에 좌우된다. 수렴 근거가 아니라 참고값 <code>[가정]</code></li>
+<li>확장 6회 반환 13·3·6·5·18·2 — limit 50에 붙은 호출 0건(T7). <code>coverage_curve.py</code>는 시드별 호출 6건을 한 라운드(R1)로 묶어 판정한다 — R1 신규 38그룹 · 66,802건 → 마지막 판정 라운드 기여율 37.4% ≥ 임계 20% → 한 라운드 더 · 논브랜드 기여율 30.4% <code>[추정]</code>. 이전 조립본(공유 스크립트 1.6.1 이하)은 마지막 호출 한 건(새 키워드 0)으로 판정해 «도달 0.0%»로 적었다 — 호출 순서에 따라 결과가 바뀌는 결함이었다.</li>
 <li>STEP 3.5 검토: 확장 반환 전부 가설과 맞는 검색 — 제외(<code>exclude</code>) 0건 · 프록시 없음 · 미검토 프록시 0</li>
 <li>같은 검색의 중복 0행 · 어순 변형 1쌍(예: 무기자차 선스틱 / 선스틱 무기자차)은 시계열이 달라 별개 검색으로 셈 <code>[추정]</code></li>
 <li>마지막 달 미완결 의심 1행(저자극 선크림) — 기본 창이 마지막 달을 빼므로 판정에 영향 없음(T2)</li>
@@ -489,7 +489,7 @@ table.u td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-nume
 <li>월 그레인 · 지연 약 1개월 — 출시 타이밍을 주 단위로 말할 수 없다</li>
 <li>검색은 구매·사용이 아니라 관심 신호다. 이 카드는 출시 여부 판정도, 판매량 예측도, PMF 점수도 아니다</li>
 <li>층 배정은 규칙 사전(<code>layers.json</code>)의 품질에 달려 있다. <code>intent_finder</code> 확장은 시드 인접 키워드만 가져온다(volume_threshold 50)</li>
-<li>소형 가설 규모(H 12 · 확장 시드 6 · limit 50)로 돌렸다. 확장하지 않은 시드 쪽 인접 검색은 빠져 있다</li>
+<li>소형 가설 규모(H 12 · 확장 시드 6 · limit 50)로 돌렸다. 확장하지 않은 시드 쪽 인접 검색은 빠져 있다 — 커버리지가 아직 닫히지 않았다(R1 기여율 37.4% ≥ 임계 20%). 층 볼륨은 수집 범위 안의 하한으로 읽는다</li>
 </ul>
 <h2>라벨</h2>
 <ul>

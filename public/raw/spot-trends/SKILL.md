@@ -20,7 +20,7 @@ description: |
   주면 그것을 쓰고 `trend_finder`는 근거로만 붙인다. 카테고리 전체 유니버스가 필요하면 `map-your-market`.
 license: MIT
 metadata:
-  version: "1.5.2"
+  version: "1.6.2"
 ---
 
 <!-- lm-skill: kind=task; connectors=trend_finder,keyword_info; flags=monthly; traps=T1,T2,T3,T4,T5,T6 -->
@@ -190,7 +190,13 @@ python3 scripts/check_refmonth.py <응답.json> --queried-at YYYY-MM-DD
 **"몇 개월 빠른 신호"라는 주장 자체가 성립하지 않는다.** 지연이 N개월인데 그 위에서 6개월 앞을 말하면,
 실제로는 6 − N개월이다. 마지막 달 제외(기본)까지 더하면 계산 창은 기준월보다 한 달 더 이르다.
 
-같은 명령이 **마지막 달 완결성**도 검사한다. 의심 건수를 리포트에 적는다.
+같은 명령이 **마지막 달 완결성**도 검사한다. 의심 건수를 리포트에 적는다 — 출력을 파일로 남겨 STEP 8
+`write_alert.py --refmonth-check`에 넘기면 알림 헤더에 «N행 검사 중 의심 M행 — 키워드: 전월 → 최신 월»이 들어간다
+(넘기지 않으면 `write_alert.py`가 멈춘다):
+
+```bash
+python3 scripts/check_refmonth.py kw_all.json --queried-at 2026-09-30 > check_refmonth.txt   # 또는 --json > refmonth.json
+```
 
 ## STEP 5 · 4지표 스코어링
 
@@ -237,6 +243,10 @@ python3 scripts/trend_signals.py <응답.json> -o trend_signals.csv \
 
 ### 판정 풀이 작을 때 — 비수기 계절 품목
 
+**확산 폭은 작은 풀에서 의미가 없다.** 확산 폭은 판정 행 안에서 토큰을 공유하는 이웃의 상승 비율이라, 판정 행이
+몇 개뿐이면 0 · 0.5 · 1 같은 값만 나온다(2026-09-30 선크림: 판정 4행 전부 0.5). 알림은 작은 풀일 때 «확산 폭은 이번에
+의미가 없다»를 적는다 — 확산 폭으로 «무리 지어 오른다»를 말하지 않는다.
+
 3개월 창의 전년 볼륨이 작으면(겨울 품목을 여름에 보는 경우) 대부분이 게이트에 걸린다. 실측: 롱패딩 81행 중
 판정 9행(게이트 미달 70). 스크립트는 판정 행이 20행 또는 전체의 25% `[가정]`보다 적으면 `⚠️ 판정 풀이 작다`를
 띄우고(알림 헤더에도 같은 경고가 들어간다) **`--window 12`로 다시 계산하면 몇 행이 판정되는지**를 함께 출력한다(같은 응답 · 0크레딧 — 롱패딩은 77행).
@@ -247,7 +257,8 @@ python3 scripts/trend_signals.py <응답.json> -o trend_signals.csv \
 
 `trend_signals.py`는 **마지막 달을 빼고** 계산한다(`--include-last-month`로 주 모드를 뒤집을 수 있다).
 어느 쪽이든 스크립트는 **두 모드를 모두 계산**해, 등급이나 성장률 부호가 모드에 따라 달라지는 행에
-`provisional` = «잠정»을 달고 다른 모드의 등급을 `grade_other_mode`에 남긴다(수작업 비교 불필요).
+`provisional` = «잠정»을 달고 다른 모드의 등급을 `grade_other_mode`에, 다른 모드의 성장률을 `growth_other_mode`에 남긴다
+(수작업 비교 불필요). 알림 비고에 «잠정 (마지막 달 포함 모드: 등급 없음 · 성장률 +14.8%)»처럼 근거가 함께 적힌다.
 
 마지막 달은 집계가 아직 차는 중일 수 있고(관측 사례: 하루 뒤 27,100 → 65,800),
 **가속도와 지속성이 거기에 가장 민감하다.**
@@ -278,7 +289,9 @@ canonical을 쪼개면 한국어 키워드마다 토큰이 하나뿐이라, 같�
 쓴다 — 머리 토큰만으로 이으면 확산 폭이 «카테고리 전체 상승 비율» 하나로 뭉개진다.
 
 4지표와 등급은 **행 단위**다. 같은 그룹의 변형 행이 둘 다 등급을 받으면 리포트에서는 한 신호로
-묶어 적는다. 그룹 규모를 말할 때는 한 값을 쓰지 않는다 — 변형 행이 같은 검색의 중복인지 서로 다른
+묶어 적는다. **같은 그룹 안에서 성장률 부호가 갈리면**(2026-09-30 선크림: 썬크림 +17.5% · 선크림 −10.9%) 스크립트가
+`group_growth_split`에 표기별 값을 남기고 경고하며, 알림 헤더와 비고에도 실린다 — 한 표기의 등급(썬크림 B)을
+«선크림이 뜬다»로 일반화하지 않는다. 표기 이동(검색자가 쓰는 표기가 바뀜)일 수 있다 `[추정]`. 그룹 규모를 말할 때는 한 값을 쓰지 않는다 — 변형 행이 같은 검색의 중복인지 서로 다른
 검색인지 응답이 알려주지 않으므로(계약 T5 ②), 스크립트는 전년 동기 창 볼륨을 **그룹마다**
 `하한 X ~ 상한 Y`(하한 = 그룹 내 최댓값 · 상한 = 그룹 내 합, `[추정]` 규칙 기반 집계)로 출력하고
 CSV의 `group_prev_year_lo`·`group_prev_year_hi`에 남긴다. 같은 검색의 중복 행은 합에 한 번만 들어간다.
@@ -321,16 +334,29 @@ trend_finder가 잡은 후보(와 스크린에서 멈춘 시드·사용자 후�
 **재판정 날짜가 아니다**: 조회 기간이 14일이면 거의 모든 이슈가 «예»이고, 이슈 문자열이 검색어가 아닐 수 있어(사건명·인물명)
 다음 기준월에 판정된다는 보장도 없다. 알림은 이 뜻과 «예» 건수를 한 줄로 적는다.
 
+### 이슈 문자열 ≠ 실제 검색어 — 검색량을 말하기 전에 대응 검색어를 찾는다
+
+trend_finder의 이슈 문자열은 기사·콘텐츠의 표현이지 사람들이 치는 검색어가 아니다. 2026-09-30 선크림: 이슈
+«다이소 자외선 차단제»는 volume_avg 290(스크린 탈락)이었지만, 같은 수요를 사람들은 «다이소 선크림»(volume_avg 35,030 ·
+전년 동기 +48%)으로 검색했다(1건 관찰). «스크린 탈락»이나 «검색량 미반환»을 «관심 없음»으로 읽기 전에:
+
+1. 이슈 문자열의 **핵심 명사를 카테고리 관용어로 바꾼 표기**(자외선 차단제 → 선크림 · 썬크림)와 띄어쓰기 변형을 만든다
+2. 이미 있는 유니버스(map-your-market 등)가 있으면 그 안에서 먼저 찾는다(0크레딧). 없으면 후보 몇 개를 `ads_metrics`(1/kw)로 확인한다
+3. 찾은 검색어로 판정했다면 알림·리포트에 «이슈 문자열 X → 대응 검색어 Y [추정 — 대응은 사람이 정함]»으로 적는다.
+   대응 검색어의 성장은 그 이슈의 **결과**라고 단정하지 않는다 — 이슈 이전부터 오르던 검색어일 수 있다
+
 ## STEP 8 · 알림 작성
 
 ```bash
 python3 scripts/write_alert.py trend_signals.csv --category "KR 선스틱" --queried-at 2026-09-28 \
-    --gate 3000 [--include-last-month] [--note "가정: …"] -o trend_alert_sunstick.md \
-    [--issue-only trend_signals_issue_only.csv --issue-meta issue_meta.json]
+    --gate 3000 --refmonth-check check_refmonth.txt [--include-last-month] [--note "가정: …"] \
+    -o trend_alert_sunstick.md [--issue-only trend_signals_issue_only.csv --issue-meta issue_meta.json]
 ```
 
 CSV·`issue_meta.json` 값만 옮긴다(수기 수치 없음). 신호 CSV에 이슈 근거가 붙어 있는데 `--issue-only`·`--issue-meta`가
 없으면 멈춘다 — 미판정 이슈 후보와 수집 사실(절단·넓힘·크레딧 대조)이 알림에서 조용히 빠지지 않게 한다.
+`--refmonth-check`(STEP 4 `check_refmonth.py` 출력 — 텍스트 또는 `--json`)가 없어도 멈춘다. 점검 없이 쓰려면
+`--no-refmonth-check`를 주고, 헤더에 «미점검 [데이터 공백]»이 적힌다.
 판정 행은 **등급 유무와 관계없이 전부** 수치와 함께 싣는다(등급이 없으면 «하한 미달» 등 이유가 비고에 남는다). 헤더의 지연은 `data_ref_month`와 조회일의 차로 계산하고,
 `--include-last-month` 표시가 CSV의 창과 어긋나면 멈춘다.
 
@@ -338,7 +364,8 @@ CSV·`issue_meta.json` 값만 옮긴다(수기 수치 없음). 신호 CSV에 이
 
 아래 컬럼 목록은 스크립트의 실제 출력이다(`selftest_trends.py`·`selftest_issues.py`가 대조한다).
 스크립트를 고치면 이 목록도 함께 고친다. `issue_*` 5컬럼과 `volume_window`~`grade_basis` 4컬럼은
-끝에 붙은 확장 컬럼이다(앞 컬럼의 이름·순서는 바뀌지 않는다). `issue_*`는 `--evidence`가 없으면 빈칸이다.
+끝에 붙은 확장 컬럼이다(앞 컬럼의 이름·순서는 바뀌지 않는다). `growth_other_mode`(다른 모드 성장률 — «잠정» 근거)·
+`group_growth_split`(같은 표기 그룹 안 성장률 부호 갈림 — 표기별 값)은 스킬 v1.6.0에서 더한 확장 컬럼이다. `issue_*`는 `--evidence`가 없으면 빈칸이다.
 
 ```
 candidates.json   (issue_candidates.py)
@@ -363,7 +390,8 @@ trend_signals_{category}.csv
   signal_score, grade, grade_floor, grade_other_mode, provisional,
   gated_out, data_ref_month, window_end,
   issue_score, issue_n_dates, issue_summary_ai, issue_source_checked, issue_sources,
-  volume_window, volume_latest, first_active_month, grade_basis
+  volume_window, volume_latest, first_active_month, grade_basis,
+  growth_other_mode, group_growth_split
 
 trend_issue_only_{category}.csv
   keyword, canonical, reason, issue_score, issue_n_dates, index_date_last,
@@ -372,10 +400,11 @@ trend_issue_only_{category}.csv
 
 trend_alert_{category}.md   (write_alert.py)
   헤더(데이터 기준월/조회일/지연) · 마지막 달 처리 방식 · 게이트·하한 값 · 등급 기준(백분위 / 절대 기준) ·
-  건수 · 표기변형 그룹별 전년 동기 창 볼륨 하한~상한 · 두 모드 비교 · 작은 풀 경고 · 확산 폭 강도 ·
+  건수 · 표기변형 그룹별 전년 동기 창 볼륨 하한~상한 · 두 모드 비교 · 마지막 달 완결성 의심 건수(check_refmonth) ·
+  그룹 내 성장률 부호 갈림 · 작은 풀 경고 · 확산 폭 강도(작은 풀이면 «의미 없음») ·
   «수집 사실»(호출별 반환·범위 안·total·limit·cost_detail · 넓힘 · limit 절단 · 띄어쓴 시드 · 크레딧 대조 ·
   범위 밖 제외 목록 · 시드 포함 · 스크린 요약 · 표기변형 묶음·같은 검색 병합) ·
-  «판정 행 전체»(등급 유무와 관계없이 · 4지표 · 최근 창/전년 창 · 가속도 %p · 비고=하한 미달·잠정·등급 기준) ·
+  «판정 행 전체»(등급 유무와 관계없이 · 4지표 · 최근 창/전년 창 · 가속도 %p · 비고=하한 미달·잠정(다른 모드 등급·성장률)·그룹 내 부호 갈림·등급 기준) ·
   등급 신호의 이슈 근거 · «신생·저기저 급등 후보»(측정 볼륨 · 검색 시작 월 · 성장률 참고 · 등급 없음) ·
   «이슈 신호만 · 검색량 미확인»(사유별 건수 · 스크린 탈락은 volume_avg · 기준월 이후의 뜻) · 라벨 규약 · 한계
 ```
