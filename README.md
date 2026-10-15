@@ -7,7 +7,7 @@ ListeningMind 검색 데이터 분석 스킬 카탈로그 — 리포트형 스�
 
 | 묶음 | 스킬 | 출처 |
 |---|---|---|
-| 리포트형 | 4 | `lm-agent-plugins · LM Reports@036aac1` |
+| 리포트형 | 4 | `lm-agent-plugins · LM Reports@effc94f` |
 | 시장 분석 | 11 | `ListeningMind-Daas/lm-skills@8866756` |
 | 연동·개발 도구 | 2 | `ListeningMind-Daas/lm-skills@8866756` |
 
