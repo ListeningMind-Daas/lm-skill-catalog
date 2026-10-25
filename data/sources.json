@@ -17,6 +17,20 @@
     "licenseFrom": "packaging/manifests/internal-plugins.toml"
   },
   {
+    "id": "charts",
+    "title": "차트",
+    "sub": "데이터 한 파일을 표준 차트 25종 중 하나로 — 코드가 고르고 inline SVG 로 그리고 검사한다",
+    "kind": "local",
+    "path": ".claude/skills",
+    "skills": [
+      "lm-chart"
+    ],
+    "install": "/plugin install lm-chart@lm-agent-plugins",
+    "installNote": "lm-agent-plugins 마켓플레이스의 LM Chart 플러그인",
+    "sourceLabel": "lm-agent-plugins · LM Chart",
+    "licenseFrom": "packaging/manifests/internal-plugins.toml"
+  },
+  {
     "id": "market",
     "title": "시장 분석",
     "sub": "검색 데이터로 시장 규모·의도·여정·점유율·트렌드를 읽는 분석 스킬 (공개 스킬 모음 lm-skills · MIT)",

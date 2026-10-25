@@ -1,28 +1,34 @@
 {
   "package": "lm-skill-catalog",
-  "version": "0.1.9",
-  "dev_commit": "v0.1.9",
+  "version": "0.2.0",
+  "dev_commit": "v0.2.0",
   "suites": [
     "reports(4)",
+    "charts(1)",
     "market(11)",
     "tools(2)"
   ],
   "sources": {
     "reports": {
       "repo": "lm-agent-plugins · LM Reports",
-      "commit": "effc94f",
+      "commit": "c65dd1c",
+      "version": null
+    },
+    "charts": {
+      "repo": "lm-agent-plugins · LM Chart",
+      "commit": "c65dd1c",
       "version": null
     },
     "market": {
       "repo": "ListeningMind-Daas/lm-skills",
-      "commit": "8866756",
-      "version": "1.7.0"
+      "commit": "fc6ba01",
+      "version": "1.7.1"
     },
     "tools": {
       "repo": "ListeningMind-Daas/lm-skills",
-      "commit": "8866756",
-      "version": "1.7.0"
+      "commit": "fc6ba01",
+      "version": "1.7.1"
     }
   },
-  "catalog_generated_at": "2026-10-15T04:47:58+00:00"
+  "catalog_generated_at": "2026-10-25T06:37:08+00:00"
 }
