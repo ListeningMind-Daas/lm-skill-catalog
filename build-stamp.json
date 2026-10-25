@@ -11,12 +11,12 @@
   "sources": {
     "reports": {
       "repo": "lm-agent-plugins · LM Reports",
-      "commit": "b9dff44",
+      "commit": "a770b0d",
       "version": null
     },
     "charts": {
       "repo": "ListeningMind-Daas/lm-chart-skill",
-      "commit": "b9dff44",
+      "commit": "a770b0d",
       "version": null
     },
     "market": {
@@ -30,5 +30,5 @@
       "version": "1.7.1"
     }
   },
-  "catalog_generated_at": "2026-10-25T07:09:15+00:00"
+  "catalog_generated_at": "2026-10-25T07:10:48+00:00"
 }
