@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-25T07:05:34+00:00",
+ "generatedAt": "2026-10-25T07:09:15+00:00",
  "groups": [
   {
    "id": "reports",
@@ -15,7 +15,7 @@
    "source": {
     "kind": "local",
     "repo": "lm-agent-plugins · LM Reports",
-    "commit": "4b378e5",
+    "commit": "b9dff44",
     "version": null,
     "url": null,
     "private": null,
@@ -34,7 +34,7 @@
    "source": {
     "kind": "local",
     "repo": "ListeningMind-Daas/lm-chart-skill",
-    "commit": "4b378e5",
+    "commit": "b9dff44",
     "version": null,
     "url": null,
     "private": null,
