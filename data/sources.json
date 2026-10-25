@@ -25,10 +25,12 @@
     "skills": [
       "lm-chart"
     ],
-    "install": "/plugin install lm-chart@lm-agent-plugins",
-    "installNote": "lm-agent-plugins 마켓플레이스의 LM Chart 플러그인",
-    "sourceLabel": "lm-agent-plugins · LM Chart",
-    "licenseFrom": "packaging/manifests/internal-plugins.toml"
+    "install": [
+      "git clone https://github.com/ListeningMind-Daas/lm-chart-skill ~/.claude/skills/lm-chart"
+    ],
+    "installNote": "ListeningMind-Daas/lm-chart-skill 저장소 — 폴더 이름은 lm-chart",
+    "sourceLabel": "ListeningMind-Daas/lm-chart-skill",
+    "licenseFrom": "packaging/manifests/oss-lm-chart-skill.toml"
   },
   {
     "id": "market",
