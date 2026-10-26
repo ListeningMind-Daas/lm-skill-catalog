@@ -12,7 +12,7 @@ metadata:
   visibility: oss
   scope: common
   version: "0.2.2"
-  author: AscentKorea
+  author: Ascent AI
   category: output
   tags: 보고서, 통합 인사이트
 ---

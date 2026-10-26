@@ -9,7 +9,7 @@ description: >-
 metadata:
   visibility: oss
   scope: common
-  version: "0.2.1"
+  version: "0.2.2"
   author: Ascent AI
   category: rendering
   tags: 차트, 시각화, 보고용 HTML, 카탈로그 26종

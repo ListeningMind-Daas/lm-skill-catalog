@@ -226,7 +226,7 @@ export default function DesignPage() {
             { key: "License", value: "—" },
             { key: "Allowed tools", value: "Bash, Read, Write" },
             { key: "Version", value: "0.2.2", mono: true },
-            { key: "Author", value: "AscentKorea" },
+            { key: "제공", value: "Ascent AI" },
           ]}
         />
       </Block>
