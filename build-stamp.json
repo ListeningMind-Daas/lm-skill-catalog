@@ -1,7 +1,7 @@
 {
   "package": "lm-skill-catalog",
-  "version": "0.2.1",
-  "dev_commit": "v0.2.1",
+  "version": "0.2.2",
+  "dev_commit": "v0.2.2",
   "suites": [
     "reports(4)",
     "charts(1)",
@@ -11,12 +11,12 @@
   "sources": {
     "reports": {
       "repo": "lm-agent-plugins · LM Reports",
-      "commit": "a770b0d",
+      "commit": "73c6fb8",
       "version": null
     },
     "charts": {
       "repo": "ListeningMind-Daas/lm-chart-skill",
-      "commit": "a770b0d",
+      "commit": "73c6fb8",
       "version": null
     },
     "market": {
@@ -30,5 +30,5 @@
       "version": "1.7.1"
     }
   },
-  "catalog_generated_at": "2026-10-25T07:10:48+00:00"
+  "catalog_generated_at": "2026-10-26T01:47:59+00:00"
 }

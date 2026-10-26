@@ -21,6 +21,8 @@ export type Skill = {
   skillLines: number;
   files: Record<string, string[]>;
   body: string;
+  /** 스킬 폴더 README.md 본문(첫 제목·설치·라이선스 절 제외) — 사람용 소개. 없으면 null */
+  intro: string | null;
   updated: string | null;
   install: string;
   landing: LandingCard | null;
@@ -145,7 +147,9 @@ export function testRunOf(s: Skill): { request: string; prompt: string } {
     ...(hasExample ? [`이 스킬의 산출물 예시(${SITE_URL}/examples/${s.folder}/)도 브라우저 패널로 보여 줘.`] : []),
     `그다음 ${s.name} 스킬로 테스트 실행해 줘 — 요청: "${request}"`,
     "- 스킬이 설치돼 있지 않으면 이 페이지의 설치 명령부터 안내해 줘",
-    "- API 를 부르기 전에 예상 크레딧을 먼저 알려 주고 내 확인을 받아 줘",
+    ...(s.connectors.length > 0
+      ? ["- API 를 부르기 전에 예상 크레딧을 먼저 알려 주고 내 확인을 받아 줘"]
+      : ["- 이 스킬은 API 를 부르지 않아 크레딧이 들지 않아 — 바로 실행해 줘"]),
     "- 결과물이 HTML 이면 브라우저 패널로 열어 줘",
   ];
   return { request, prompt: lines.join("\n") };

@@ -19,7 +19,7 @@
   {
     "id": "charts",
     "title": "차트",
-    "sub": "데이터 한 파일을 표준 차트 25종 중 하나로 — 코드가 고르고 inline SVG 로 그리고 검사한다",
+    "sub": "데이터 파일 한 장을 보고용 차트 한 장으로 — 26종 중 데이터에 맞는 차트를 골라 그립니다 (API 호출 없음)",
     "kind": "local",
     "path": ".claude/skills",
     "skills": [

@@ -24,7 +24,26 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { name: string } }) {
   const s = skillByName(params.name);
-  return s ? { title: `${s.name} · LM Skills Catalog`, description: summaryOf(s.description, 160) } : {};
+  return s ? { title: `${s.name} · LM Skills Catalog`, description: summaryOf(s.intro ?? s.description, 160) } : {};
+}
+
+/** 설명문(SKILL.md description) 단락 — 에이전트가 언제 켤지 정하는 글. README 소개가 없을 때는 이것이 페이지 머리글이다. */
+function Description({ text, className }: { text: string; className?: string }) {
+  return (
+    <div className={className ?? "space-y-3 text-base leading-7 text-ink-muted"}>
+      {descriptionParagraphs(text).map((parts, i) => (
+        <p key={i}>
+          {parts.map((t, j) =>
+            t.code ? (
+              <code key={j} className="rounded bg-surface-muted px-1 py-0.5 font-mono text-[0.9em] text-ink-soft">{t.text}</code>
+            ) : (
+              <span key={j}>{t.text}</span>
+            ),
+          )}
+        </p>
+      ))}
+    </div>
+  );
 }
 
 export default function SkillPage({ params }: { params: { name: string } }) {
@@ -36,10 +55,13 @@ export default function SkillPage({ params }: { params: { name: string } }) {
   const kit = kitVersionOf(s);
   const version = s.version ? (kit ? `${s.version} (키트 v${kit})` : s.version) : kit ? `키트 v${kit} (스킬 판 표기 없음)` : "—";
   // 날짜의 뜻이 출처마다 다르다 — git 출처는 발행 저장소에 반영된 날, local 은 dev 저장소 마지막 커밋
-  const updatedKey = src?.kind === "git" ? "Published" : "Last commit";
+  const updatedKey = src?.kind === "git" ? "발행일" : "마지막 변경";
   const test = testRunOf(s);
+  const callsApi = s.connectors.length > 0;
+  // 사람용 소개(스킬 README)가 있으면 그것이 머리글이고, 에이전트용 SKILL.md 는 접어 둔다 (2026-10-26 — lm-chart 페이지가 지시서만 보여 읽히지 않았다)
+  const intro = s.intro ? renderSkillMarkdown(s.intro) : null;
   const html = renderSkillMarkdown(s.body);
-  const toc = tocOf(s.body);
+  const toc = tocOf(s.intro ?? s.body);
   const siblings = group ? group.skills.filter((n) => n !== s.folder) : [];
   const fileGroups = Object.entries(s.files).sort(([a], [b]) => (a === "." ? -1 : b === "." ? 1 : a.localeCompare(b)));
 
@@ -64,31 +86,23 @@ export default function SkillPage({ params }: { params: { name: string } }) {
           <CopyButton text={test.prompt} label="테스트 실행" variant="brand" title="Claude 앱에 붙여 넣는 실행 프롬프트를 복사합니다" fallbackTarget="test-run-prompt" />
         </div>
       </div>
-      <div className="mt-3 space-y-3 text-base leading-7 text-ink-muted">
-        {descriptionParagraphs(s.description).map((parts, i) => (
-          <p key={i}>
-            {parts.map((t, j) =>
-              t.code ? (
-                <code key={j} className="rounded bg-surface-muted px-1 py-0.5 font-mono text-[0.9em] text-ink-soft">{t.text}</code>
-              ) : (
-                <span key={j}>{t.text}</span>
-              ),
-            )}
-          </p>
-        ))}
-      </div>
+      {intro ? (
+        <div className="md mt-3 text-base leading-7 text-ink-muted" dangerouslySetInnerHTML={{ __html: intro }} />
+      ) : (
+        <Description text={s.description} className="mt-3 space-y-3 text-base leading-7 text-ink-muted" />
+      )}
 
       <div className="mt-6">
         <MetaTable
           rows={[
-            { key: "Collection", value: group?.title ?? "—" },
-            ...(s.landing ? [{ key: "Landing card", value: `${s.landing.no} · ${s.landing.title} (${bandLabel(s.landing.band) ?? s.landing.band})` }] : []),
-            { key: "License", value: s.license ?? "—" },
-            { key: "Allowed tools", value: s.allowedTools.length ? s.allowedTools.join(", ") : "—" },
-            { key: "Version", value: version, mono: true },
-            { key: "Author", value: s.author ?? "—" },
+            { key: "묶음", value: group?.title ?? "—" },
+            ...(s.landing ? [{ key: "랜딩 카드", value: `${s.landing.no} · ${s.landing.title} (${bandLabel(s.landing.band) ?? s.landing.band})` }] : []),
+            { key: "라이선스", value: s.license ?? "—" },
+            ...(s.allowedTools.length ? [{ key: "허용 도구", value: s.allowedTools.join(", ") }] : []),
+            { key: "판", value: version, mono: true },
+            { key: "제공", value: s.author ?? "—" },
             { key: updatedKey, value: s.updated ?? "—", mono: true },
-            { key: "Files", value: `${s.fileCount}개 · SKILL.md ${s.skillLines}줄` },
+            { key: "파일", value: `${s.fileCount}개 · SKILL.md ${s.skillLines}줄` },
           ]}
         />
       </div>
@@ -101,8 +115,10 @@ export default function SkillPage({ params }: { params: { name: string } }) {
             <SectionHeader title="테스트 실행" sub="Claude 앱에 붙여 넣으면 이 페이지를 오른쪽 브라우저 패널로 열고 스킬을 실행합니다" />
             <CodeLine id="test-run-prompt" action={<CopyButton text={test.prompt} fallbackTarget="test-run-prompt" />}>{test.prompt}</CodeLine>
             <p className="mt-2 text-[13px] leading-5 text-ink-muted">
-              웹 페이지는 앱의 브라우저 패널을 직접 열 수 없어 실행 지시문을 복사해 붙여 넣는 방식입니다. API 를 부르기 전에 예상 크레딧을 먼저 보여 주고
-              확인을 받습니다 — 실행하는 컴퓨터에 스킬 설치와 ListeningMind API 키가 필요합니다.
+              웹 페이지는 앱의 브라우저 패널을 직접 열 수 없어 실행 지시문을 복사해 붙여 넣는 방식입니다.{" "}
+              {callsApi
+                ? "API 를 부르기 전에 예상 크레딧을 먼저 보여 주고 확인을 받습니다 — 실행하는 컴퓨터에 스킬 설치와 ListeningMind API 키가 필요합니다."
+                : "이 스킬은 ListeningMind API 를 부르지 않습니다 — 크레딧이 들지 않고 API 키도 필요 없습니다. 실행하는 컴퓨터에 스킬 설치만 있으면 됩니다."}
             </p>
           </section>
 
@@ -128,10 +144,26 @@ export default function SkillPage({ params }: { params: { name: string } }) {
             </section>
           )}
 
-          <SectionHeader title="SKILL.md" sub="본문 · 변경 이력 제외" />
-          <div className="rounded-lg border border-line bg-surface px-5 py-2 sm:px-7">
-            <div className="md" dangerouslySetInnerHTML={{ __html: html }} />
-          </div>
+          {intro ? (
+            <details className="group rounded-lg border border-line bg-surface">
+              <summary className="flex cursor-pointer flex-wrap items-baseline justify-between gap-2 px-5 py-3 sm:px-7">
+                <span className="text-base font-semibold text-ink">에이전트용 설명서 (SKILL.md)</span>
+                <span className="text-xs text-ink-muted">에이전트가 따르는 절차와 옵션 — 펼쳐서 보기 · 변경 이력 제외</span>
+              </summary>
+              <div className="border-t border-line px-5 py-4 sm:px-7">
+                <p className="mb-1 text-xs uppercase tracking-[.3px] text-ink-muted">설명문 — 에이전트가 이 스킬을 켜는 조건</p>
+                <Description text={s.description} className="mb-6 space-y-2 text-[15px] leading-7 text-ink-muted" />
+                <div className="md" dangerouslySetInnerHTML={{ __html: html }} />
+              </div>
+            </details>
+          ) : (
+            <>
+              <SectionHeader title="SKILL.md" sub="본문 · 변경 이력 제외" />
+              <div className="rounded-lg border border-line bg-surface px-5 py-2 sm:px-7">
+                <div className="md" dangerouslySetInnerHTML={{ __html: html }} />
+              </div>
+            </>
+          )}
         </article>
 
         <aside className="flex flex-col gap-6 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:self-start lg:overflow-y-auto">
@@ -142,7 +174,7 @@ export default function SkillPage({ params }: { params: { name: string } }) {
                 {s.connectors.map((c) => <Tag key={c}>{CONNECTOR_LABEL[c] ?? c}</Tag>)}
               </div>
             ) : (
-              <p className="text-[13px] text-ink-soft">{s.kind === "meta" ? "API를 직접 부르지 않는 메타 스킬입니다." : "없음"}</p>
+              <p className="text-[13px] text-ink-soft">{s.kind === "meta" ? "API를 직접 부르지 않는 메타 스킬입니다." : "없음 — API 를 부르지 않습니다(크레딧 0)"}</p>
             )}
             <p className="mt-2 text-xs leading-5 text-ink-muted">
               {s.connectorsBasis === "declared"
