@@ -30,6 +30,9 @@
     ],
     "installNote": "ListeningMind-Daas/lm-chart-skill 저장소 — 폴더 이름은 lm-chart",
     "sourceLabel": "ListeningMind-Daas/lm-chart-skill",
+    "publicRepo": "ListeningMind-Daas/lm-chart-skill",
+    "publicLayout": "root",
+    "publicRepoNote": "공개 저장소 — 스킬 폴더가 곧 저장소 루트라 상세의 «저장소» 버튼은 /tree/v<스킬 VERSION> 으로 간다 (2026-10-26 버튼 누락 수정)",
     "licenseFrom": "packaging/manifests/oss-lm-chart-skill.toml"
   },
   {

@@ -51,7 +51,9 @@ export default function SkillPage({ params }: { params: { name: string } }) {
   if (!s) notFound();
   const group = groupOf(s);
   const src = group?.source;
-  const repoUrl = src?.url ? `${src.url}/tree/${src.tag ?? "main"}/skills/${s.folder}` : null;
+  const repoUrl = src?.url
+    ? `${src.url}/tree/${src.tag ?? "main"}${src.layout === "root" ? "" : `/skills/${s.folder}`}`
+    : null;
   const kit = kitVersionOf(s);
   const version = s.version ? (kit ? `${s.version} (키트 v${kit})` : s.version) : kit ? `키트 v${kit} (스킬 판 표기 없음)` : "—";
   // 날짜의 뜻이 출처마다 다르다 — git 출처는 발행 저장소에 반영된 날, local 은 dev 저장소 마지막 커밋

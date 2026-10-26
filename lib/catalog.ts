@@ -43,6 +43,8 @@ export type Group = {
     version: string | null;
     url: string | null;
     tag?: string;
+    /** 공개 저장소 안에서 스킬이 놓인 자리 — "root"(스킬 폴더가 곧 저장소 루트, lm-chart) 또는 "skills"(skills/<폴더>, lm-skills) */
+    layout?: "root" | "skills";
     private: boolean | null;
     stale: boolean;
     fallback: boolean;
