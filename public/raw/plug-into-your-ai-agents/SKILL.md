@@ -1,7 +1,7 @@
 ---
 name: plug-into-your-ai-agents
 description: |
-  ListeningMind DaaS API의 **운영 명세(openapi.json)에 있는 엔드포인트 전부**(현재 9개)를
+  ListeningMind DaaS API의 **운영 명세(openapi.json)에 있는 엔드포인트 전부**(현재 10개)를
   사용자의 AI 에이전트에 **도구 정의(function calling)**로 꽂고,
   호출 전 **예산 가드**와 `cost_detail` 기반 **크레딧 원장**을 붙인 뒤, 모의 응답 **dry-run을 통과**시킨다.
   도구 목록·인자·단가는 손으로 적지 않고 **명세에서 만든다** — `sync`가 운영 명세 변경(새 엔드포인트·
@@ -23,7 +23,7 @@ description: |
   만들지, 분석 결론을 내지 않는다.
 license: MIT
 metadata:
-  version: "0.4.2"
+  version: "0.4.3"
 ---
 
 <!-- lm-skill: kind=task; connectors=keyword_info,intent_finder,cluster_finder,path_finder,serp,trend_finder; flags=monthly,expand; traps=T1,T2,T3,T4,T5,T6,T7 -->
@@ -95,6 +95,7 @@ metadata:
 | 엔드포인트 → 도구 | 용도 | 크레딧 결정식 | 단가 근거 |
 |---|---|---|---|
 | `keyword_info` → `lm_keyword_info` | 볼륨·광고지표(`ads_metrics`) / 시계열·의도(`all`) | `ads_metrics` **1 × 키워드** · `all` **10 × 키워드** | 명세 = 실측 |
+| `keyword_info/monthly_volume` → `lm_keyword_info_monthly_volume` | 키워드 최대 1,000개의 월별 시계열만 · 기간 지정(`date_from`·`date_to`) | **1 × 반환된 행** (없는 키워드·출력 무과금 · 표기 변형 행은 과금 — 추정은 요청 키워드 수 기준이라 실제가 더 클 수 있다) | 명세 = 실측(없는 키워드 무과금 · 변형 행 과금 확인) |
 | `intent_finder/keyword_list` → `lm_intent_finder` | 연관 검색어 확장 (문자열만) | **30 × 입력 + 2 × 반환 키워드** | 명세 = 실측 |
 | `cluster_finder` → `lm_cluster_finder` | 군집·관계 | **150 + 50 × 고유 키워드(노드)** | 명세 = 실측 |
 | `cluster_finder/keyword_list` → `lm_cluster_keyword_list` | 같은 그래프의 키워드 목록만 | **30 + 2 × 반환 키워드** | 명세값 · **실측 대조 전** `[가정]` |
@@ -159,7 +160,7 @@ cluster 500 · path 300 · trend 1,000이라 비워 보내면 추정을 넘는�
 | `scripts/selftest.py` | 공유 스크립트 계약 검증 (공유 사본) | 스킬 수정 후 |
 | `scripts/selftest_tools.py` | `lm_tools.py` 계약 검증 — 문서 예시 명령·명세 추적(자동 추가·단가 변경·삭제)을 그대로 실행 | 스킬 수정 후 |
 | `scripts/series_dedup.py` | 같은 검색의 중복 판정·치환 규칙 (공유 사본 — `lm_tools.py`가 가져다 쓴다) | STEP 3 |
-| `assets/dryrun/scenario.sunscreen-kr.json` | dry-run 시나리오 13단계 (기대 결과 포함 · 도구 9종 전부) | STEP 4 |
+| `assets/dryrun/scenario.sunscreen-kr.json` | dry-run 시나리오 14단계 (기대 결과 포함 · 도구 10종 전부) | STEP 4 |
 | `assets/dryrun/fixtures/*.json` | 도구별 모의 응답 — cluster·path는 실측 응답 원문, keyword_info·intent는 합성(429·마지막 달 급락·결측 월·저기저·절단 · keyword_info는 `echo_keywords`로 요청 키워드 이름을 따른다), serp는 실측 구조에 합성 문장, keyword_list 2종은 같은 요청의 실측 응답에서 옮긴 합성, trend는 spot-trends 합성 픽스처, usage는 명세 모양의 합성 | STEP 4 |
 | `assets/dryrun/real-shapes/*.json` | 실측 응답 모양 4건(cluster 기본·`all` 두 모양 · path · keyword_info 변형 동반 — keyword_info 지표 수치는 가상값) — 응답 파싱 회귀용 | 스킬 수정 후 |
 | `references/agent-wiring.md` | 에이전트 루프에 디스패처 끼우는 법 · 사용자 시나리오 픽스처 쓰는 법 · 명세 갱신 절차 | STEP 0·3·4 |
@@ -168,7 +169,7 @@ cluster 500 · path 300 · trend 1,000이라 비워 보내면 추정을 넘는�
 
 ```
 1. 에이전트 프레임워크 — Claude tool use / OpenAI function calling / 파이썬 함수를 받는 프레임워크
-2. 쓸 도구 — 검토된 9종 전부가 기본이지만 줄이는 것이 좋다. path_finder는 여정이 판단에 필요할 때만,
+2. 쓸 도구 — 검토된 10종 전부가 기본이지만 줄이는 것이 좋다. path_finder는 여정이 판단에 필요할 때만,
    구조가 필요 없으면 keyword_list 도구로. 검토 전(자동 추가) 도구는 사람이 응답을 본 뒤에만 연다
 3. 시장(gl) — 세션당 단일 값으로 확정 (명세상 kr · us · jp). 런타임에 `market`으로 잠근다
    (`Runtime(market="kr")` · `--market kr` — 값을 모르면 `auto`: 처음 보낸 호출의 gl로 잠근다)
@@ -178,7 +179,8 @@ cluster 500 · path 300 · trend 1,000이라 비워 보내면 추정을 넘는�
 5. 기저 게이트(--base-gate, 기본 3,000) · 경로 키워드 배수(--path-kw-mult, 기본 3) · cluster 노드 상한
    (--cluster-bound, 기본 observed) — 모두 [가정]
 6. 표기 치환 규칙(--rules) — 시장에 철자 변형이 있으면(예: 한국어 선/썬) 받는다. 없으면 공백 규칙만 쓴다
-7. 환경변수 LM_API_BASE · LM_API_KEY — sync(명세만 · 키 불필요)와 실연결 단계(STEP 6)에서만 필요
+7. 환경변수 LM_API_BASE · LM_API_KEY — sync(명세만 · 키 불필요)와 실연결 단계(STEP 6)에서만 필요.
+   셸에 다른 서버의 주소가 남아 있을 수 있다 — 실연결 전에 `lm_tools.py host`로 키를 보낼 호스트를 보여 주고 사용자에게 확인받는다
 ```
 
 API 주소는 코드에 넣지 않는다. 저장소 README가 링크한 공개 API 문서에서 주소를 확인해
@@ -310,7 +312,7 @@ python3 scripts/lm_tools.py dry-run --scenario my-scenario.json --fixtures my-fi
 
 1회 상한·시장 고정은 `--per-call-cap 1000 --market kr`로 주거나 시나리오 JSON의 `"config":
 {"per_call_cap": 1000, "market": "kr"}`에 적는다(CLI가 우선). 번들 시나리오는 두 가드를 끈 채 돈다 —
-켜면 13단계의 cluster(limit 20 · 추정 1,200)가 `budget_guard` 대신 `per_call_cap`으로 막힌다.
+켜면 14단계의 cluster(limit 20 · 추정 1,200)가 `budget_guard` 대신 `per_call_cap`으로 막힌다.
 
 모의 전송만 쓴다(네트워크 없음 · 크레딧 0). 시나리오의 각 단계가 기대 결과(`expect` ·
 `expect_reason`)대로 나오고, 원장 행 수 = 호출 수, 결정식 불일치 0, 예산 초과 시 정지까지
@@ -359,11 +361,23 @@ python3 scripts/lm_tools.py summary ledger.jsonl -o usage_2026-09.md --period 20
 
 dry-run이 통과한 뒤에만 한다.
 
+```bash
+python3 scripts/lm_tools.py host                       # 키를 보낼 호스트와 읽은 곳(네트워크 없음 · 키는 출력하지 않는다)
+```
+
+나온 호스트를 사용자에게 보여 주고 **맞는지 확인받은 뒤** 그 값을 `expect_host`로 고정한다.
+
 ```python
 from lm_tools import make_runtime_from_env     # LM_API_BASE · LM_API_KEY 환경변수 필요
 rt = make_runtime_from_env(budget=1500, ledger_path="ledger.jsonl", raw_dir="raw",
-                           per_call_cap=1000, market="kr")   # 1회 상한 권장값 [가정] · 세션 시장 고정
+                           per_call_cap=1000, market="kr",   # 1회 상한 권장값 [가정] · 세션 시장 고정
+                           expect_host="<lm_tools.py host 로 확인한 호스트>")
 ```
+
+- **https 주소만 받는다.** `LM_API_BASE`가 https가 아니면 전송을 만들지 않는다 — 키가 암호화 없이 나가지 않게 한다.
+- **`expect_host`와 호스트가 다르면 만들지 않는다**(RuntimeError에 두 호스트가 적힌다). 셸에 다른 서버용 주소가 남아 있어도 키가 그쪽으로 가지 않는다.
+  다르면 어느 서버를 쓸지 사용자에게 묻고, 우회하지 않는다.
+- `expect_host` 없이 만들면 키를 보낼 호스트를 표준 오류에 한 번 알린다 — 그 경우에도 첫 호출 전에 사용자에게 확인받는다.
 
 그 전에 `sync`로 잠금 파일이 운영 명세와 같은지 본다(종료 코드 0). 첫 실호출은 `lm_keyword_info`
 `ads_metrics` 1키워드(**1크레딧**)로 키·주소를 확인한다. keyword_list 도구 두 개의 단가는 명세값이고 실측
@@ -379,7 +393,7 @@ rt = make_runtime_from_env(budget=1500, ledger_path="ledger.jsonl", raw_dir="raw
 
 ```
 tools.claude.json / tools.openai.json
-  검토된 도구 9종(또는 --tools로 고른 것) — name, description(명세 버전·단가 포함),
+  검토된 도구 10종(또는 --tools로 고른 것) — name, description(명세 버전·단가 포함),
   input_schema(Claude) 또는 function.parameters(OpenAI)
 
 ledger.jsonl
