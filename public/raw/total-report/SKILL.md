@@ -11,7 +11,7 @@ allowed-tools: Bash, Read, Write
 metadata:
   visibility: oss
   scope: common
-  version: "0.2.2"
+  version: "0.2.3"
   author: Ascent AI
   category: output
   tags: 보고서, 통합 인사이트
